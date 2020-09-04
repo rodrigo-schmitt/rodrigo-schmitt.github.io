@@ -1,2 +1,2 @@
-# rodrigo-schmitt.github.io
+# http://rodrigo-schmitt.github.io
 Rodrigo Schmitt's personal website
