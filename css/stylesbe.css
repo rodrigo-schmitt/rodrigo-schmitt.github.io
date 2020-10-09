@@ -1,0 +1,38 @@
+.squares {
+  display: flex;
+  justify-content: center;
+}
+.icon1,
+.icon2 {
+    width: 200px;
+    height: 200px;
+    opacity: 0.5;
+}
+
+.icon1 {
+    margin-right: 10%;
+    border-style: ridge;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}   
+
+.icon2 {
+    border-style: ridge;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.parent {
+    display: flex;
+    height: 300px;
+    text-align: center;
+}
+
+.child {
+    width: 500px;  
+    height: 500px; 
+    margin: auto;  
+    text-align: center;
+}
