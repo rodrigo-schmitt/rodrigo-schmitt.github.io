@@ -177,19 +177,35 @@
 							<div class="sqs-block horizontalrule-block sqs-block-horizontalrule" data-block-type="47" id="block-yui_3_17_2_1_1412717877460_193268"><div class="sqs-block-content"><hr /></div></div>
 							<div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1412717877460_193644"><div class="sqs-block-content"><h2 style="white-space:pre-wrap;">What, how and why?</h2>
 								<p class="" style="white-space:pre-wrap;">Modern aerospace systems are becoming increasingly complex and interconnected, which requires a holistic approach, starting from conceptual design through mission design, operations analysis, and sustainment.<br><br>Multiphysics Multiscale Modeling, then, has become an important design tool for the development of new materials and components in severe environments.  Unifying comprehensive 3D Multiphysics models of intricate geometries with 3D simulations of fluid flow, heat transfer in fluids and solids, and structural mechanics, should yield near realistic performance assessments of newly designed engineering components. </p>
-							</div></div></div>
+							</div></div></div></div>
 							<div class="sqs-block horizontalrule-block sqs-block-horizontalrule" data-block-type="47" id="block-yui_3_17_2_1_1412717877460_193268"><div class="sqs-block-content"><hr /></div></div>
 							<div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1412717877460_193644"><div class="sqs-block-content"><h2 style="white-space:pre-wrap;">Practical Experience</h2>
-								<p class="" style="white-space:pre-wrap;">My practical experience in the field of Computational Design & Optimization was a more hands-on approach than an academic one. I worked for 1 year as an Aerodynamics & Structures member in University of Sao Paulo's rocket team, Project Jupiter. After that, I spent a semester as a Structures member in University of Notre Dame's Rocket Team, and came back as the Coordinator of Structures for a year in Project Jupiter.</p>
-								<h3 style="white-space:pre-wrap;">Design</h3>
-								<p class="" style="white-space:pre-wrap;">The first step for designing anything is the definition of the requirements.</p>
+								<p class="" style="white-space:pre-wrap;">My practical experience in the area of Computational Design & Optimization was a more hands-on approach than an academic one. I worked for 1 year as an Aerodynamics & Structures member in University of Sao Paulo's rocket team, Project Jupiter. After that, I spent a semester as a Structures member in University of Notre Dame's Rocket Team, and came back as the Coordinator of Structures for another year in Project Jupiter, having the opportunity of working in four different rockets in total.</p>
+								<h2 style="font-size:18px; white-space:pre-wrap;">Preliminary Design</h2>
+								<p class="" style="white-space:pre-wrap;">The first step for designing anything is the definition of the requirements. This involves iterations over the design, of course, but most importantly, it requires a structured approach to connect all the systems involved.</p>
+								<p class="" style="white-space:pre-wrap;">I implemented a simple method of optimizing the dimensions of our rockets through a merit function that is maximized when a) the static margin (distance from Center of Mass to Center of Pressure) is close to the optimal value of 2; and b) the area of the rocket fins is minimal, in order to diminish drag.</p>
 								<div class="parent">
-									<img class="child" src="imperius.png" alt="Imperius.png" />
+									<img class="child" src="desmos.png" alt="Merit_Function.png" />
 								  </div>
-								<h3 style="white-space:pre-wrap;">Simulation</h3>
-								<p class="" style="white-space:pre-wrap;"></p>
-								<h3 style="white-space:pre-wrap;">Manufacturing</h3>
-								<p class="" style="white-space:pre-wrap;">The final step in the design process is Manufacturing. I've had the opportunity of developing a vacuum infusion, carbon fiber laminated structure for the following Project Jupiter's rockets: Imperius, Caldene and Callisto. The video below shows a few steps of the process: Epoxy resin and hardener mixing; Vacuum infusion; Unmold; and Final apply of resin.</p>
+								<p class="" style="white-space:pre-wrap;">This analysis was implemented in our own rocket trajectory simulator, <a href="https://github.com/giovaniceotto/RocketPy">RocketPy</a>, which also makes use of the aerodynamic equations to foresee many characteristics of the rocket path.</p>
+								  <div class="parent">
+									<img class="child" src="trajectory_rp.png" alt="RocketPy_trajectory_prediction.png" />
+								  </div>
+								<h2 style="font-size:18px; white-space:pre-wrap;">Computer Aided Design</h2>
+								<p class="" style="white-space:pre-wrap;">Parallel to preliminary design, it is also necessary to iterate over the project's CAD. After working extensively with extruding, inspecting, defining joints, etc in Fusion 360, I've grown very fond of creating a computer-aided design.</p>
+								<div class="parent">
+									<img class="child" src="drawing_imperius.PNG" alt="Rocket CAD.PNG" />
+								  </div>
+								<div class="parent">
+									<img class="child" src="imperius.png" alt="Rocket rendering.png" />
+								  </div>
+								<h2 style="font-size:18px; white-space:pre-wrap;">Simulation</h2>
+								<p class="" style="white-space:pre-wrap;">Solid mechanics and fluid mechanics are an essencial part of simulating an engineered design before actually manufacturing it. Here, I worked mainly with structural analysis of joints using ANSYS Mechanical, even though I have also worked in CFD simulations in ANSYS Fluent.</p>
+								<div class="parent">
+									<img class="child" src="disks.PNG" alt="Structural analysis.png" />
+								  </div>
+								<h2 style="font-size:18px; white-space:pre-wrap;">Manufacturing</h2>
+								<p class="" style="white-space:pre-wrap;">The final step in the design process is Manufacturing. I've had the opportunity of developing a vacuum infusion, carbon fiber laminated structure for three of Project Jupiter's rockets. The video below shows a few steps of the process: Epoxy resin and hardener mixing; Vacuum infusion; Unmold; and Final apply of resin.</p>
 								<div class="parent" style="height: 700px">
 								<video class="child" controls width="500">
 									<source src="/vacuum_infusion.mp4"
@@ -197,8 +213,8 @@
 									Sorry, your browser doesn't support embedded videos.
 								</video>
 								</div>
-								<p class="" style="white-space:pre-wrap;">This process was developed by us and used to build our rockets' tubes and fins. We also used external laminating for the rocket Callisto.</p>
-								<div class="parent" style="height: 1500px">
+								<p class="" style="white-space:pre-wrap;">This process was developed by us and used to build our rockets' tubes and fins. We also laminated the structure externally for our rocket Callisto.</p>
+								<div class="parent" style="height: 300px">
 									<img class="child" src="carbon-fiber-structure.jpg" alt="carbon-fiber-structure.jpg" />
 								  </div>
 							</div></div></div>
