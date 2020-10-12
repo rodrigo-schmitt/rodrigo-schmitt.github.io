@@ -46,7 +46,7 @@
       <li class="page-collection"><a href="/">About</a><span class="delimiter">/</span></li>
       <li class="page-collection active-link"><a href="research.html">Research</a><span class="delimiter">/</span></li>
       <li class="page-collection"><a href="publications-and-cv.html">Publications & CV</a><span class="delimiter">/</span></li>
-      <li class="page-collection"><a href="personal_interests.html">Personal Interests</a><span class="delimiter">/</span></li>
+      <li class="page-collection"><a href="personal_interests..html">Personal Interests</a><span class="delimiter">/</span></li>
       <li class="page-collection"><a href="grad-applications.html">Grad Applications 101</a><span class="delimiter">/</span></li>
     </ul>
   </nav>
@@ -78,7 +78,7 @@
     <li class="page-collection"><a href="/">About</a><span class="delimiter">/</span></li>
     <li class="page-collection active-link"><a href="research.html">Research</a><span class="delimiter">/</span></li>
     <li class="page-collection"><a href="publications-and-cv.html">Publications & CV</a><span class="delimiter">/</span></li>
-    <li class="page-collection"><a href="personal_interests.html">Personal Interests</a><span class="delimiter">/</span></li>
+    <li class="page-collection"><a href="personal_interests..html">Personal Interests</a><span class="delimiter">/</span></li>
     <li class="page-collection"><a href="grad-applications.html">Grad Applications 101</a><span class="delimiter">/</span></li>
   </ul>
 </nav>
@@ -139,7 +139,7 @@
     <li class="page-collection"><a href="/">About</a><span class="delimiter">/</span></li>
     <li class="page-collection active-link"><a href="research.html">Research</a><span class="delimiter">/</span></li>
     <li class="page-collection"><a href="publications-and-cv.html">Publications & CV</a><span class="delimiter">/</span></li>
-    <li class="page-collection"><a href="personal_interests.html">Personal Interests</a><span class="delimiter">/</span></li>
+    <li class="page-collection"><a href="personal_interests..html">Personal Interests</a><span class="delimiter">/</span></li>
     <li class="page-collection"><a href="grad-applications.html">Grad Applications 101</a><span class="delimiter">/</span></li>
   </ul>
 </nav>
@@ -175,16 +175,22 @@
 								<div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1412717877460_193644"><div class="sqs-block-content"><h2 style="white-space:pre-wrap;">Practical Experience</h2>
 									<p class="" style="white-space:pre-wrap;">I have worked with three excellent researchers in the field of Astrodynamics: Sylvio Ferraz-Mello, Helio K. Kuga and Antontio Bertachini Prado.</p>
 									<h2 style="font-size:18px; white-space:pre-wrap;">Orbit prediction for Brazilian satellites</h2>
-									<p class="" style="white-space:pre-wrap;">My project with Dr. Helio Kuga (National Institute for Space Research) aimed at coding methods of preliminary orbit determination in order to qualify them using real data from Brazilian satellites and analyze their numerical performance. I learnt a lot on the basics of Astrodynamics in the process and coded, in Fortran 90, the Gibbs and Gauss methods for orbit determination.</p>
+									<p class="" style="white-space:pre-wrap;">My project with Dr. Helio Kuga (National Institute for Space Research) aimed at coding methods of preliminary orbit determination in order to qualify them using real data from Brazilian satellites and analyze their numerical performance. I learnt a lot on the basics of Astrodynamics in the process and coded, in Fortran 90, the Gibbs and Gauss methods for orbit determination. These methods take, respectively, three and two position vectors of a spacecraft and use the time between their passage to predict the entire orbit.</p>
+									<div class="parent" style="height: 650px">
+										<img class="child" src="gibbs.png" alt="Gibbs.png" />
+									  </div>
+									  <p class="legend" style="font-size:13px;">Gibbs method illustration <a href="https://sites.google.com/site/asen5050kemble/gibbs-method-orbit-determination">(Source)</a>.</p>
 									<h2 style="font-size:18px; white-space:pre-wrap;">Low Thrust Orbit Optimization and Radiation Exposure</h2>
 									<p class="" style="white-space:pre-wrap;">The goal of my work with Dr. Antonio Prado (National Institute for Space Research) was to measure the amount of radiation a spacecraft receives once it leaves the sphere of influence of Earth in a Low Thrust Orbit (LTO). The spacecraft crosses the Van Allen belts many times during the transfer, in which particles such as protons and electrons can damage the onboard electronic equipment. I developed a mathematical model for the density of particles of the belt in space, as can be seen in the figure below, making it possible to integrate the flux of particles in time and compute the total dose of radiation absorbed by the spacecraft according to the chosen trajectory.</p>
 									<div class="parent" style="height: 650px">
 										<img class="child" src="belts.jpg" alt="belts.jpg" />
 									  </div>
-									  <p class="" style="white-space:pre-wrap;">Then, different trajectories were computed, varying in eccentricity and type of propulsion system, which gave the following final parameters of interest: mission duration, fuel consumption, time in Van Allen belts and fluence of protons and electrons absorbed. Using an optimization algorithm, thousands of trajectories were tested and the best ones with respect to the final parameters can be seen in the plots below.</p>
+									  <p class="legend" style="font-size:13px;">Contour map model for the flux of: a) protons, b) electrons in the Van Allen Belts; Re = 6378 km.</p>
+									  <p class="" style="white-space:pre-wrap;">Then, different trajectories were computed, varying in initial eccentricity, initial height, initial Moon orbit inclination and type of propulsion system, which gave the following final parameters of interest: mission duration, fuel consumption, time in Van Allen belts and fluence of protons and electrons absorbed. Using an optimization algorithm, thousands of trajectories were tested and the best ones with respect to the final parameters can be seen in the plots below.</p>
 									  <div class="parent" style="height: 250px">
-										<img class="child" src="txfel.jpg" alt="Fluences_of_electrons.jpg" />
+										<img class="child" src="fel_LEO.jpg" alt="Fluences_of_electrons.jpg" />
 									  </div>
+									  <p class="legend" style="font-size:13px;">Fluence of electrons as a function of mission time for a myriad of inclinations of the Moon in respect to the Earth's orbit.</p>
 								</div></div></div>
 								<div class="sqs-block horizontalrule-block sqs-block-horizontalrule" data-block-type="47" id="block-yui_3_17_2_1_1412717877460_193268"><div class="sqs-block-content"><hr /></div></div>
 								<div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1412717877460_193644"><div class="sqs-block-content"><h2 style="white-space:pre-wrap;">Academic Background</h2>
@@ -289,7 +295,7 @@
 		        
 		          
 		        
-		        <div class="sqs-layout sqs-grid-12 columns-12" data-layout-label="Footer Content" data-type="block-field" data-updated-on="1569606065871" id="footer-blocks"><div class="row sqs-row"><div class="col sqs-col-12 span-12"><div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-e740e5c6fd99e8867241"><div class="sqs-block-content"><p class="" style="white-space:pre-wrap;">rodrigo.schmitt@usp.br</p></div></div><div class="sqs-block spacer-block sqs-block-spacer sized vsize-1" data-block-type="21" id="block-yui_3_17_2_1_1412174290717_8323"><div class="sqs-block-content">&nbsp;</div></div></div></div></div>
+		        <div class="sqs-layout sqs-grid-12 columns-12" data-layout-label="Footer Content" data-type="block-field" data-updated-on="1569606065871" id="footer-blocks"><div class="row sqs-row"><div class="col sqs-col-12 span-12"><div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-e740e5c6fd99e8867241"><div class="sqs-block-content"><p class="" style="white-space:pre-wrap;"><i>“Exploration is in our nature. We began as wanderers, and we are wanderers still. We have lingered long enough on the shores of the cosmic ocean. We are ready at last to set sail for the stars.”</i> - Carl Sagan<br><br>rodrigo.schmitt@usp.br</p></div></div><div class="sqs-block spacer-block sqs-block-spacer sized vsize-1" data-block-type="21" id="block-yui_3_17_2_1_1412174290717_8323"><div class="sqs-block-content">&nbsp;</div></div></div></div></div>
 		      </div>
 		    </div><!-- page-footer-wrapper -->
 
