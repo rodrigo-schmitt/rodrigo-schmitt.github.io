@@ -181,21 +181,47 @@
 							</div></div></div></div>
 							<div class="sqs-block horizontalrule-block sqs-block-horizontalrule" data-block-type="47" id="block-yui_3_17_2_1_1412717877460_193268"><div class="sqs-block-content"><hr /></div></div>
 
-							<div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1412717877460_193644"><div class="sqs-block-content"><h2 style="white-space:pre-wrap;">LIDAR-Drone Mapping for Mars Entry, Descent and Landing</h2>
-								<p>As part of my research at the Mars Desert Research Station (MDRS), I developed and tested an innovative drone-based LIDAR system aimed at enhancing Entry, Descent, and Landing (EDL) procedures in planetary exploration. Traditional EDL protocols often rely on aerial or orbital observations, which provide limited resolution for landing site analysis. My project sought to improve upon this by using a drone equipped with a LIDAR scanner, GPS, and an Inertial Measurement Unit (IMU) to generate high-resolution terrain maps, enabling more precise landing site selection.</p>
-								<p>Throughout the mission, the drone system underwent iterative refinements based on field testing conducted during multiple EVAs. Early flights revealed mechanical instabilities in the LIDAR mount and electromagnetic interference affecting sensor readings. To address these issues, I redesigned the 3D-printed mounting system assembly and implemented additional shielding for the cables. The Raspberry Pi onboard computer played a key role in managing power distribution and data acquisition, running custom scripts for automated logging and remote SSH control.</p>
-								<p>Further tests conducted at various MDRS locations demonstrated the enhanced capabilities of the improved system. The combination of LIDAR data, IMU gyroscopic readings, and GPS coordinates allowed the generation of detailed 3D point clouds of the terrain. These high-resolution maps provide valuable insights into potential landing hazards and safe zones, paving the way for future autonomous drone scouts on Mars.</p>
-								<div class="parent" style="height: 300px; text-align: center;">
-									<img class="child" src="../images/lidar-drone.jpg" alt="LIDAR-Drone" style="height: 100%;">
-								</div>
-								<p class="legend" style="font-size:13px; text-align:center;">LIDAR-equipped drone used for terrain mapping at MDRS.</p>
-								<div class="parent" style="height: 300px; text-align: center;">
+							<div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1412717877460_193644"><div class="sqs-block-content"><h1 style="white-space:pre-wrap;">LIDAR-Drone Mapping for Mars Entry, Descent and Landing</h1>
+                        <p>As part of my research at the Mars Desert Research Station (MDRS), I led the development and test of an innovative drone-based LIDAR system aimed at enhancing Entry, Descent, and Landing (EDL) procedures in planetary exploration. Traditional EDL protocols often rely on aerial or orbital observations, which provide limited resolution for landing site analysis. My project sought to improve upon this by using a drone equipped with a LIDAR scanner, GPS, and an Inertial Measurement Unit (IMU) to generate high-resolution terrain maps, enabling more precise landing site selection.</p>
+
+                        <h2>Custom 3D-Printed Mount</h2>
+                        <p>The first step in this project was designing a custom 3D-printed mount for the LIDAR system. Using SolidWorks, my team and I created a lightweight yet durable mount tailored specifically for the DJI Mavic 2 Pro. The mount had to balance structural integrity with minimal weight to avoid exceeding the drone's payload capacity.</p>
+
+                        <h2>Hardware Integration</h2>
+                        <p>The LIDAR module was configured from scratch to ensure optimal data capture. This involved calibrating sensor parameters, adjusting scan frequencies, and implementing custom-made codes to obtain accurate point cloud mappings. Proper alignment of the LIDAR with the drone's center of gravity was also a critical consideration.</p>
+                        <p>To power the LIDAR and auxiliary systems, my team and I carefully integrated LiPo batteries and voltage converters, ensuring a stable power supply without exceeding the drone's 700g maximum payload limit. This was determined through iterative testing to find the optimal weight-power tradeoff.</p>
+
+						<div class="parent" style="height: 300px; text-align: center;">
+							<img class="child" src="../images/lidar-drone.jpg" alt="LIDAR-Drone" style="height: 100%;">
+						</div>
+						<p class="legend" style="font-size:13px; text-align:center;">(a) Drone assembly with LIDAR sensor and mount; (b) Drone full assembly during an EVA with battery and onboard computing via Raspberry Pi.</p>
+						
+                        <h2>Raspberry Pi & ROS2 Configuration</h2>
+                        <p>A Raspberry Pi was configured from scratch to serve as the central processing unit for data acquisition. I set up ROS2 (Robot Operating System 2) to handle real-time data streaming from the LIDAR, IMU, and GPS. The system was programmed to synchronize all data sources, enabling accurate mapping.</p>
+
+                        <h2>Remote SSH Access & Data Processing</h2>
+                        <p>At MDRS, my team and I developed a custom SSH protocol to allow remote access to the Raspberry Pi during extravehicular activities (EVAs). This enabled real-time monitoring and debugging without direct physical interaction. Additionally, Python scripts were written to automate data collection, perform preliminary filtering, and facilitate post-processing of the LIDAR data to generate 3D terrain maps.</p>
+                        
+						<p>Throughout the mission, the drone system underwent iterative refinements based on field testing conducted during multiple EVAs. Early flights revealed mechanical instabilities in the LIDAR mount and electromagnetic interference affecting sensor readings. To address these issues, I redesigned the 3D-printed mounting system and implemented additional shielding for the cables. The Raspberry Pi onboard computer played a key role in managing power distribution and data acquisition, running custom scripts for automated logging and remote SSH control.</p>
+                        <p>Further tests conducted at various MDRS locations demonstrated the enhanced capabilities of the improved system. The combination of LIDAR data, IMU gyroscopic readings, and GPS coordinates allowed the generation of detailed 3D point clouds of the terrain. These high-resolution maps provide valuable insights into potential landing hazards and safe zones, paving the way for future autonomous drone scouts on Mars.</p>
+                        
+						<div class="parent" style="height: 300px; text-align: center;">
 									<img class="child" src="../images/lidar_mappings.jpg" alt="LIDAR 3D map" style="height: 100%;">
 								</div>
 								<p class="legend" style="font-size:13px; text-align:center;">Point-cloud mapping of the LIDAR scan using the Raspberry Pi onboard computer.</p>
 
-								<h2>ACECam - Autonomous Space Vision System</h2>
-								<p>As a key member of Translunar, I am actively involved in the development of ACECam, a cutting-edge optical navigation system designed for spacecraft engaged in relative navigation and proximity operations. ACECam is a compact, embedded vision system leveraging advanced image processing algorithms and AI-driven analytics to determine the precise position and orientation of spacecraft in orbit.</p>
+								<div class="parent" style="height: 300px; text-align: center;">
+									<img class="child" src="../images/gyroscope.jpg" alt="Gyroscope data" style="height: 100%;">
+								</div>
+								<p class="legend" style="font-size:13px; text-align:center;">Gyroscope angular velocity readings during the mission.</p>
+
+								<div class="parent" style="height: 300px; text-align: center;">
+									<img class="child" src="../images/lidar_ranges.jpg" alt="LIDAR Scan Ranges" style="height: 100%;">
+								</div>
+								<p class="legend" style="font-size:13px; text-align:center;">Mean value ranges of the LIDAR scans.</p>
+
+								<h1>ACECam - Autonomous Space Vision System</h1>
+								<p>As the Chief Communications Officer of Translunar, I am actively involved in the development of ACECam, a cutting-edge optical navigation system designed for spacecraft engaged in relative navigation and proximity operations. ACECam is a compact, embedded vision system leveraging advanced image processing algorithms and AI-driven analytics to determine the precise position and orientation of spacecraft in orbit.</p>
 								<p>My contributions to this project focus on hardware integration, including assembling the system’s Raspberry Pi-based processing unit and calibrating the onboard camera for real-time image acquisition. The goal of ACECam is to enhance autonomy in space missions by enabling precise pose estimation and automated spacecraft docking. This technology is crucial for upcoming satellite servicing missions, constellation coordination, and in-space inspections.</p>
 								<p>With support from an Air Force STTR Phase I award, ACECam is currently undergoing rigorous testing to validate its capabilities. Future iterations will incorporate more robust AI models for improved object recognition and tracking, ensuring its effectiveness for commercial and military space applications.</p>
 								<div class="parent" style="height: 300px; text-align: center;">
