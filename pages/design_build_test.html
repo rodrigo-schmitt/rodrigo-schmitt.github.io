@@ -184,10 +184,8 @@
 							<div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1412717877460_193644"><div class="sqs-block-content"><h1 style="white-space:pre-wrap;">LIDAR-Drone Mapping for Mars Entry, Descent and Landing</h1>
                         <p>As part of my research at the Mars Desert Research Station (MDRS), I led the development and test of an innovative drone-based LIDAR system aimed at enhancing Entry, Descent, and Landing (EDL) procedures in planetary exploration. Traditional EDL protocols often rely on aerial or orbital observations, which provide limited resolution for landing site analysis. My project sought to improve upon this by using a drone equipped with a LIDAR scanner, GPS, and an Inertial Measurement Unit (IMU) to generate high-resolution terrain maps, enabling more precise landing site selection.</p>
 
-                        <h2>Custom 3D-Printed Mount</h2>
-                        <p>The first step in this project was designing a custom 3D-printed mount for the LIDAR system. Using SolidWorks, my team and I created a lightweight yet durable mount tailored specifically for the DJI Mavic 2 Pro. The mount had to balance structural integrity with minimal weight to avoid exceeding the drone's payload capacity.</p>
-
                         <h2>Hardware Integration</h2>
+                        <p>The first step in this project was designing a custom 3D-printed mount for the LIDAR system. Using SolidWorks, my team and I created a lightweight yet durable mount tailored specifically for the DJI Mavic 2 Pro. The mount had to balance structural integrity with minimal weight to avoid exceeding the drone's payload capacity.</p>
                         <p>The LIDAR module was configured from scratch to ensure optimal data capture. This involved calibrating sensor parameters, adjusting scan frequencies, and implementing custom-made codes to obtain accurate point cloud mappings. Proper alignment of the LIDAR with the drone's center of gravity was also a critical consideration.</p>
                         <p>To power the LIDAR and auxiliary systems, my team and I carefully integrated LiPo batteries and voltage converters, ensuring a stable power supply without exceeding the drone's 700g maximum payload limit. This was determined through iterative testing to find the optimal weight-power tradeoff.</p>
 
@@ -198,11 +196,10 @@
 						
                         <h2>Raspberry Pi & ROS2 Configuration</h2>
                         <p>A Raspberry Pi was configured from scratch to serve as the central processing unit for data acquisition. I set up ROS2 (Robot Operating System 2) to handle real-time data streaming from the LIDAR, IMU, and GPS. The system was programmed to synchronize all data sources, enabling accurate mapping.</p>
-
-                        <h2>Remote SSH Access & Data Processing</h2>
                         <p>At MDRS, my team and I developed a custom SSH protocol to allow remote access to the Raspberry Pi during extravehicular activities (EVAs). This enabled real-time monitoring and debugging without direct physical interaction. Additionally, Python scripts were written to automate data collection, perform preliminary filtering, and facilitate post-processing of the LIDAR data to generate 3D terrain maps.</p>
-                        
-						<p>Throughout the mission, the drone system underwent iterative refinements based on field testing conducted during multiple EVAs. Early flights revealed mechanical instabilities in the LIDAR mount and electromagnetic interference affecting sensor readings. To address these issues, I redesigned the 3D-printed mounting system and implemented additional shielding for the cables. The Raspberry Pi onboard computer played a key role in managing power distribution and data acquisition, running custom scripts for automated logging and remote SSH control.</p>
+
+                        <h2>Tests</h2>
+						<p>Throughout the mission, the drone system underwent iterative refinements based on field testing conducted during multiple EVAs. Early flights revealed mechanical instabilities in the LIDAR mount and electromagnetic interference affecting sensor readings. To address these issues, I reinforced the backup 3D-printed mount for safety and implemented additional radiation shielding for the cables. The Raspberry Pi onboard computer played a key role in managing power distribution and data acquisition, running custom scripts for automated logging and remote SSH control.</p>
                         <p>Further tests conducted at various MDRS locations demonstrated the enhanced capabilities of the improved system. The combination of LIDAR data, IMU gyroscopic readings, and GPS coordinates allowed the generation of detailed 3D point clouds of the terrain. These high-resolution maps provide valuable insights into potential landing hazards and safe zones, paving the way for future autonomous drone scouts on Mars.</p>
                         
 						<div class="parent" style="height: 300px; text-align: center;">
@@ -220,7 +217,7 @@
 								</div>
 								<p class="legend" style="font-size:13px; text-align:center;">Mean value ranges of the LIDAR scans.</p>
 
-								<h1>ACECam - Autonomous Space Vision System</h1>
+								<h1>ACECam - Autonomous Computer Vision Embedded Camera</h1>
 								<p>As the Chief Communications Officer of Translunar, I am actively involved in the development of ACECam, a cutting-edge optical navigation system designed for spacecraft engaged in relative navigation and proximity operations. ACECam is a compact, embedded vision system leveraging advanced image processing algorithms and AI-driven analytics to determine the precise position and orientation of spacecraft in orbit.</p>
 								<p>My contributions to this project focus on hardware integration, including assembling the system’s Raspberry Pi-based processing unit and calibrating the onboard camera for real-time image acquisition. The goal of ACECam is to enhance autonomy in space missions by enabling precise pose estimation and automated spacecraft docking. This technology is crucial for upcoming satellite servicing missions, constellation coordination, and in-space inspections.</p>
 								<p>With support from an Air Force STTR Phase I award, ACECam is currently undergoing rigorous testing to validate its capabilities. Future iterations will incorporate more robust AI models for improved object recognition and tracking, ensuring its effectiveness for commercial and military space applications.</p>
@@ -229,10 +226,15 @@
 								</div>
 								<p class="legend" style="font-size:13px; text-align:center;">ACECam subsystem designed for optical navigation and proximity operations.</p>
 								
+								<video class="child" controls width="500" style="height: 280px">
+									<source src="../images/acecam_video_v3.mp4"
+											type="video/mp4">
+									Sorry, your browser doesn't support embedded videos.
+								</video>
 
-							<div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1412717877460_193644"><div class="sqs-block-content"><h2 style="white-space:pre-wrap;">Rocketry</h2>
+								<h1>Rocketry</h1>
 								<p class="" style="white-space:pre-wrap;">I worked for 1 year as an Aerodynamics & Structures member in University of Sao Paulo's rocket team, Project Jupiter. After that, I spent a semester as a Structures member in University of Notre Dame's Rocket Team, and came back as the Coordinator of Structures for another year in Project Jupiter, having the opportunity of working in four different rockets in total.</p>
-								<h2 style="font-size:18px; white-space:pre-wrap;">Preliminary Design</h2>
+								<h2>Preliminary Design</h2>
 								<p class="" style="white-space:pre-wrap;">The first step for designing anything is the definition of the requirements. This involves iterations over the design, of course, but most importantly, it requires a structured approach to connect all the systems involved.</p>
 								<p class="" style="white-space:pre-wrap;">I implemented a simple method of optimizing the dimensions of our rockets, such as tail radius, nosecone length and fin parameters, through a merit function that is maximized when a) the static margin (distance from Center of Mass to Center of Pressure) is close to the optimal value of 2.0 and b) the area of the rocket fins is minimal, in order to diminish drag.</p>
 								<p class="" style="white-space:pre-wrap;">This analysis was implemented in our in-house 6 degree-of-freedom rocket trajectory simulator, <a href="https://github.com/giovaniceotto/RocketPy">RocketPy</a>, which also makes use of the aerodynamic equations to foresee many characteristics of the rocket path.</p>
@@ -240,7 +242,7 @@
 									<img class="child" src="../images/trajectory_rp.png" alt="RocketPy_trajectory_prediction.png" />
 								  </div>
 								  <p class="legend" style="font-size:13px;">Rocket trajectory prediction using RocketPy (Project Jupiter's rocket trajectory simulator).</p>
-								<h2 style="font-size:18px; white-space:pre-wrap;">Computer Aided Design</h2>
+								<h2>Computer Aided Design</h2>
 								<p class="" style="white-space:pre-wrap;">Parallel to preliminary design, it is also necessary to iterate over the project's CAD. After working extensively with extruding, inspecting, defining joints, etc in Fusion 360, I've grown very fond of creating computer-aided designs.</p>
 								<div class="parent" style="height: 200px">
 									<img class="child" src="../images/drawing_imperius.PNG" alt="Rocket CAD.PNG" />
@@ -250,7 +252,7 @@
 									<img class="child" src="../images/imperius.png" alt="Rocket rendering.png" />
 								  </div>
 								  <p class="legend" style="font-size:13px;">CAD 3D rendering for the rocket Imperius.</p>
-								<h2 style="font-size:18px; white-space:pre-wrap;">Simulation</h2>
+								<h2>Simulation</h2>
 								<p class="" style="white-space:pre-wrap;">Solid mechanics and fluid mechanics are an essencial part of simulating an engineered design before actually manufacturing it. Here, I worked mainly with structural analysis of joints using ANSYS Mechanical, even though I have also worked in CFD simulations in ANSYS Fluent.</p>
 								<div class="parent" style="height: 200px">
 									<img class="child" src="../images/disks2.PNG" alt="Disks CAD.png" />
@@ -260,7 +262,7 @@
 									<img class="child" src="../images/disks.PNG" alt="Structural analysis.png" />
 								</div>
 								<p class="legend" style="font-size:13px;">(Left) Von Mises Stress; (Right) Equivalent Strain.</p>
-								<h2 style="font-size:18px; white-space:pre-wrap;">Manufacturing</h2>
+								<h2>Manufacturing</h2>
 								<p class="" style="white-space:pre-wrap;">The final step in the design process is Manufacturing. I've had the opportunity of developing a vacuum infusion, carbon fiber laminated structure for three of Project Jupiter's rockets, through a technique that uses vacuum pressure to drive resin into a laminate. Materials are laid dry into the mold and the vacuum is applied before resin is introduced. Vacuum bagging greatly improves the fiber-to-resin ratio, and results in a stronger and lighter product.</p>
 								<div class="parent">
 								<video class="child" controls width="500" style="height: 280px">
@@ -291,8 +293,35 @@
 								<p style="font-size:13px;">
 									<b style="font-size:13px; color:#2b4b88">Autodesk (on Coursera) (~17 hours)</b><br>
 									<i>This course explores the design for manufacture workflow and shows how to validate models and create the G code, the programming language needed to instruct the CNC machine on how to move. We practice the basics of part and assembly design, and tools such as animation, rendering, and simulations using Autodesk Fusion 360. We learn the basics in each of these areas which are to be fully developed in later courses that apply these principles and Fusion 360 skills. After taking this course, you'll be able to: Explain the design to manufacturing process used to take a digital model to a physical part through CNC programming; Summarize the toolset available in Fusion 360; Demonstrate knowledge and skills in Fusion 360 applying design and manufacturing workflows to take digital parts to physical prototypes.</i></p>	
+								<li><p class="" style="white-space:pre-wrap;">AAE 539 - <a href="https://engineering.purdue.edu/online/courses/advanced-rocket-propulsion" target="_blank">Advanced Rocket Propulsion</a></p></li>
+								<p style="font-size:13px;">
+									<b style="font-size:13px; color:#2b4b88">Prof. Tim Pourpoint - Purdue University</b><br>
+									<i>AAE 53900, Advanced Rocket Propulsion, presents a graduate-level treatment of topics related to chemical rocket propulsion. Following a brief review of rocket fundamentals, the course provides a detailed discussion on thermochemistry and chemical equilibrium relating these concepts to the structure and operation of standard industry codes like the NASA Chemical Equilibrium with Applications (CEA) code. The next section of the course provides fundamentals of incompressible and compressible flows as applied to key elements of chemical propulsion systems such as propellant feed systems and nozzles. Before providing an in-depth look at solid, liquid, and hybrid propulsion systems, the course provides a review of fundamental heat transfer processes as applied to chemical rockets. The solid and hybrid rocket sections of the course include a review of ballistic models, burning rate theory, and erosive burning among other topics. The liquid rocket section of the course includes discussions on engine cycle analysis and turbopump design. In a typical semester, the course involves about seven homework assignments (including two in-depth homework assignments requiring more analyses and time than a traditional homework), and two exams (a midterm and a final).
+										Topics Covered:
+										Generalized internal compressible and incompressible flows. Thermochemistry and heat transfer in rocket applications. Advanced topics in solid rocket motor performance and internal ballistics, hybrid rockets, and thermal-nuclear engines. Liquid rocket engine cycle analysis and turbopump design.</i></p>	
+										<li><p class="" style="white-space:pre-wrap;">AAE 548 - <a href="https://engineering.purdue.edu/online/courses/mechanical-behavior-materials" target="_blank">Mechanical Behavior of Aerospace Materials</a></p></li>
+										<p style="font-size:13px;">
+											<b style="font-size:13px; color:#2b4b88">Prof. Michael Sangid - Purdue University</b><br>
+											<i>This course serves as an overview for materials behavior for students without a materials background, including seniors and entry-level graduate students. Materials are at the foundation for all of engineering, as evident by the latest products that we design, to the airplanes that we fly, to the latest smart phones. In fact breakthroughs with material research are often accompanied by rapid advancements in technology. Thus it is paramount for all engineers to have an understanding of the structure and behavior of materials.
+												In this class, we focus on the structure of materials, the microstructure connection to mechanical properties, and ultimately failure mechanisms. Materials play an important role in both design and manufacturing, which will be addressed in the context of components and extreme environments. Of specific interest will be defects within materials, defect formation/evolution, and their role in strengthening mechanisms.
+												Material anisotropy, micromechanisms, and elasto-plastic properties at the atomic, single-crystal/ constituent, and polycrystal/material levels and their use in explaining the deformation and failure characteristics in metals, polymers, and ceramics; failure mechanisms and toughening in composites; structure and behavior of aerospace materials: metal alloys, ceramic-matrix composites, and fiber-reinforced polymer composites. Particular topics will also include: elastic deformation, dislocation mechanics, plastic deformation and strengthening mechanisms, creep, and failure mechanisms; design criteria; special topics. We will attempt to have minimal overlap with AAE 554 Fatigue of Structures and Materials, therefore we will not cover fracture, fatigue, or stress concentrators.
+												Topics Covered:
+												- Indicial Notation
+												- Crystallography
+												- Elasticity
+												- Stress-Strain Relationships and Yielding
+												- Dislocation Mechanics
+												- Partial Dislocations and Stacking Faults
+												- Crystallographic Slip
+												- Twinning and Shape Memory Effects
+												- Strengthening Mechanisms
+												- Creep
+												- Two Bar Problems and Residual Stress
+												- Ceramics, Probability of Failure, and Statistical Variations
+												- Polymer Structure, Deformation, Fracture, and Viscoelasticity
+												- Composites</i></p>	
 								<li><p class="" style="white-space:pre-wrap;">AME 20241 - <a href="https://ame.nd.edu/undergrad-programs/courses/ame-20241-solid-mechanics" target="_blank">Solid Mechanics</a></p></li>
-							<p style="font-size:13px;">
+								<p style="font-size:13px;">
 								<b style="font-size:13px; color:#2b4b88">Prof. Pinar Zorlutuna - University of Notre Dame (45 hours)</b><br>
 								<i>Stresses, strains, loads, deformations and displacements in tension, compression, shear, torsion and bending;
 									Elasticity and inelasticity;
