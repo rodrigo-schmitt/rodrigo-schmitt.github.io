@@ -180,16 +180,36 @@
 								<p class="" style="white-space:pre-wrap;">Modern aerospace systems are becoming increasingly complex and interconnected, which requires a holistic approach, starting from conceptual design through mission design, operations analysis, and sustainment.<br><br>Multiphysics Multiscale Modeling, then, has become an important design tool for the development of new materials and components in severe environments.  Unifying comprehensive 3D Multiphysics models of intricate geometries with 3D simulations of fluid flow, heat transfer in fluids and solids, and structural mechanics, should yield near realistic performance assessments of newly designed engineering components. </p>
 							</div></div></div></div>
 							<div class="sqs-block horizontalrule-block sqs-block-horizontalrule" data-block-type="47" id="block-yui_3_17_2_1_1412717877460_193268"><div class="sqs-block-content"><hr /></div></div>
-							<div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1412717877460_193644"><div class="sqs-block-content"><h2 style="white-space:pre-wrap;">Practical Experience</h2>
-								<p class="" style="white-space:pre-wrap;">My practical experience in the area of Design, Build & Test was a more hands-on approach than an academic one. I worked for 1 year as an Aerodynamics & Structures member in University of Sao Paulo's rocket team, Project Jupiter. After that, I spent a semester as a Structures member in University of Notre Dame's Rocket Team, and came back as the Coordinator of Structures for another year in Project Jupiter, having the opportunity of working in four different rockets in total.</p>
+
+							<div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1412717877460_193644"><div class="sqs-block-content"><h2 style="white-space:pre-wrap;">LIDAR-Drone Mapping for Mars Entry, Descent and Landing</h2>
+								<p>As part of my research at the Mars Desert Research Station (MDRS), I developed and tested an innovative drone-based LIDAR system aimed at enhancing Entry, Descent, and Landing (EDL) procedures in planetary exploration. Traditional EDL protocols often rely on aerial or orbital observations, which provide limited resolution for landing site analysis. My project sought to improve upon this by using a drone equipped with a LIDAR scanner, GPS, and an Inertial Measurement Unit (IMU) to generate high-resolution terrain maps, enabling more precise landing site selection.</p>
+								<p>Throughout the mission, the drone system underwent iterative refinements based on field testing conducted during multiple EVAs. Early flights revealed mechanical instabilities in the LIDAR mount and electromagnetic interference affecting sensor readings. To address these issues, I redesigned the 3D-printed mounting system assembly and implemented additional shielding for the cables. The Raspberry Pi onboard computer played a key role in managing power distribution and data acquisition, running custom scripts for automated logging and remote SSH control.</p>
+								<p>Further tests conducted at various MDRS locations demonstrated the enhanced capabilities of the improved system. The combination of LIDAR data, IMU gyroscopic readings, and GPS coordinates allowed the generation of detailed 3D point clouds of the terrain. These high-resolution maps provide valuable insights into potential landing hazards and safe zones, paving the way for future autonomous drone scouts on Mars.</p>
+								<div class="parent" style="height: 300px; text-align: center;">
+									<img class="child" src="../images/lidar-drone.jpg" alt="LIDAR-Drone" style="height: 100%;">
+								</div>
+								<p class="legend" style="font-size:13px; text-align:center;">LIDAR-equipped drone used for terrain mapping at MDRS.</p>
+								<div class="parent" style="height: 300px; text-align: center;">
+									<img class="child" src="../images/lidar_mappings.jpg" alt="LIDAR 3D map" style="height: 100%;">
+								</div>
+								<p class="legend" style="font-size:13px; text-align:center;">Point-cloud mapping of the LIDAR scan using the Raspberry Pi onboard computer.</p>
+
+								<h2>ACECam - Autonomous Space Vision System</h2>
+								<p>As a key member of Translunar, I am actively involved in the development of ACECam, a cutting-edge optical navigation system designed for spacecraft engaged in relative navigation and proximity operations. ACECam is a compact, embedded vision system leveraging advanced image processing algorithms and AI-driven analytics to determine the precise position and orientation of spacecraft in orbit.</p>
+								<p>My contributions to this project focus on hardware integration, including assembling the system’s Raspberry Pi-based processing unit and calibrating the onboard camera for real-time image acquisition. The goal of ACECam is to enhance autonomy in space missions by enabling precise pose estimation and automated spacecraft docking. This technology is crucial for upcoming satellite servicing missions, constellation coordination, and in-space inspections.</p>
+								<p>With support from an Air Force STTR Phase I award, ACECam is currently undergoing rigorous testing to validate its capabilities. Future iterations will incorporate more robust AI models for improved object recognition and tracking, ensuring its effectiveness for commercial and military space applications.</p>
+								<div class="parent" style="height: 300px; text-align: center;">
+									<img class="child" src="../images/acecam.jpg" alt="ACECam System" style="height: 100%;">
+								</div>
+								<p class="legend" style="font-size:13px; text-align:center;">ACECam subsystem designed for optical navigation and proximity operations.</p>
+								
+
+							<div class="sqs-block html-block sqs-block-html" data-block-type="2" id="block-yui_3_17_2_1_1412717877460_193644"><div class="sqs-block-content"><h2 style="white-space:pre-wrap;">Rocketry</h2>
+								<p class="" style="white-space:pre-wrap;">I worked for 1 year as an Aerodynamics & Structures member in University of Sao Paulo's rocket team, Project Jupiter. After that, I spent a semester as a Structures member in University of Notre Dame's Rocket Team, and came back as the Coordinator of Structures for another year in Project Jupiter, having the opportunity of working in four different rockets in total.</p>
 								<h2 style="font-size:18px; white-space:pre-wrap;">Preliminary Design</h2>
 								<p class="" style="white-space:pre-wrap;">The first step for designing anything is the definition of the requirements. This involves iterations over the design, of course, but most importantly, it requires a structured approach to connect all the systems involved.</p>
 								<p class="" style="white-space:pre-wrap;">I implemented a simple method of optimizing the dimensions of our rockets, such as tail radius, nosecone length and fin parameters, through a merit function that is maximized when a) the static margin (distance from Center of Mass to Center of Pressure) is close to the optimal value of 2.0 and b) the area of the rocket fins is minimal, in order to diminish drag.</p>
-								<div class="parent" style="text-align: center; height: 417px;">
-									<img class="child" src="../images/desmos.PNG" alt="Merit_Function.png" style="width: 383px;">
-								 </div>
-								  <p class="legend" style="font-size:13px;">Merit function, static margin and fin area formulas used in the optimization of the rocket dimensions.</p>
-								<p class="" style="white-space:pre-wrap;">This analysis was implemented in our own 6 degree-of-freedom rocket trajectory simulator, <a href="https://github.com/giovaniceotto/RocketPy">RocketPy</a>, which also makes use of the aerodynamic equations to foresee many characteristics of the rocket path.</p>
+								<p class="" style="white-space:pre-wrap;">This analysis was implemented in our in-house 6 degree-of-freedom rocket trajectory simulator, <a href="https://github.com/giovaniceotto/RocketPy">RocketPy</a>, which also makes use of the aerodynamic equations to foresee many characteristics of the rocket path.</p>
 								  <div class="parent" style="height: 500px">
 									<img class="child" src="../images/trajectory_rp.png" alt="RocketPy_trajectory_prediction.png" />
 								  </div>
