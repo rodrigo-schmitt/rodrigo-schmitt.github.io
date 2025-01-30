@@ -186,39 +186,39 @@
 								<p class="" style="white-space:pre-wrap;">The first step for designing anything is the definition of the requirements. This involves iterations over the design, of course, but most importantly, it requires a structured approach to connect all the systems involved.</p>
 								<p class="" style="white-space:pre-wrap;">I implemented a simple method of optimizing the dimensions of our rockets, such as tail radius, nosecone length and fin parameters, through a merit function that is maximized when a) the static margin (distance from Center of Mass to Center of Pressure) is close to the optimal value of 2.0 and b) the area of the rocket fins is minimal, in order to diminish drag.</p>
 								<div class="parent" style="text-align: center; height: 417px;">
-									<img class="child" src="desmos.PNG" alt="Merit_Function.png" style="width: 383px;">
+									<img class="child" src="../images/desmos.PNG" alt="Merit_Function.png" style="width: 383px;">
 								 </div>
 								  <p class="legend" style="font-size:13px;">Merit function, static margin and fin area formulas used in the optimization of the rocket dimensions.</p>
 								<p class="" style="white-space:pre-wrap;">This analysis was implemented in our own 6 degree-of-freedom rocket trajectory simulator, <a href="https://github.com/giovaniceotto/RocketPy">RocketPy</a>, which also makes use of the aerodynamic equations to foresee many characteristics of the rocket path.</p>
 								  <div class="parent" style="height: 500px">
-									<img class="child" src="trajectory_rp.png" alt="RocketPy_trajectory_prediction.png" />
+									<img class="child" src="../images/trajectory_rp.png" alt="RocketPy_trajectory_prediction.png" />
 								  </div>
 								  <p class="legend" style="font-size:13px;">Rocket trajectory prediction using RocketPy (Project Jupiter's rocket trajectory simulator).</p>
 								<h2 style="font-size:18px; white-space:pre-wrap;">Computer Aided Design</h2>
 								<p class="" style="white-space:pre-wrap;">Parallel to preliminary design, it is also necessary to iterate over the project's CAD. After working extensively with extruding, inspecting, defining joints, etc in Fusion 360, I've grown very fond of creating computer-aided designs.</p>
 								<div class="parent" style="height: 200px">
-									<img class="child" src="drawing_imperius.PNG" alt="Rocket CAD.PNG" />
+									<img class="child" src="../images/drawing_imperius.PNG" alt="Rocket CAD.PNG" />
 								  </div>
 								  <p class="legend" style="font-size:13px;">CAD drawings for the rocket Imperius.</p>
 								<div class="parent">
-									<img class="child" src="imperius.png" alt="Rocket rendering.png" />
+									<img class="child" src="../images/imperius.png" alt="Rocket rendering.png" />
 								  </div>
 								  <p class="legend" style="font-size:13px;">CAD 3D rendering for the rocket Imperius.</p>
 								<h2 style="font-size:18px; white-space:pre-wrap;">Simulation</h2>
 								<p class="" style="white-space:pre-wrap;">Solid mechanics and fluid mechanics are an essencial part of simulating an engineered design before actually manufacturing it. Here, I worked mainly with structural analysis of joints using ANSYS Mechanical, even though I have also worked in CFD simulations in ANSYS Fluent.</p>
 								<div class="parent" style="height: 200px">
-									<img class="child" src="disks2.PNG" alt="Disks CAD.png" />
+									<img class="child" src="../images/disks2.PNG" alt="Disks CAD.png" />
 								  </div>
 								  <p class="legend" style="font-size:13px;">Exploiting symmetry and defining forces for the structural analysis.</p>
 								<div class="parent" style="height: 200px">
-									<img class="child" src="disks.PNG" alt="Structural analysis.png" />
+									<img class="child" src="../images/disks.PNG" alt="Structural analysis.png" />
 								</div>
 								<p class="legend" style="font-size:13px;">(Left) Von Mises Stress; (Right) Equivalent Strain.</p>
 								<h2 style="font-size:18px; white-space:pre-wrap;">Manufacturing</h2>
 								<p class="" style="white-space:pre-wrap;">The final step in the design process is Manufacturing. I've had the opportunity of developing a vacuum infusion, carbon fiber laminated structure for three of Project Jupiter's rockets, through a technique that uses vacuum pressure to drive resin into a laminate. Materials are laid dry into the mold and the vacuum is applied before resin is introduced. Vacuum bagging greatly improves the fiber-to-resin ratio, and results in a stronger and lighter product.</p>
 								<div class="parent">
 								<video class="child" controls width="500" style="height: 280px">
-									<source src="/vacuum_infusion.mp4"
+									<source src="../images/vacuum_infusion.mp4"
 											type="video/mp4">
 									Sorry, your browser doesn't support embedded videos.
 								</video>
@@ -226,11 +226,11 @@
 								<p class="legend" style="font-size:13px;">Vacuum infusion process: Epoxy resin and hardener mixing; Vacuum infusion; Unmold; Final touch of resin.</p>
 								<p class="" style="white-space:pre-wrap;">This process was developed by us and used to build our rockets' tubes and fins, using a carbon/kevlar reinforced hybrid composite for the fins. We also laminated the structure externally for our rocket Callisto, whose launched can be seen <a href="https://clips.twitch.tv/BlushingRoundLadiesOSkomodo", target="_blank">here</a>. Last but not least, for a few of our rockets we also 3D printed nosecones, using glass fiber reinforcement in the inside to make it more rigid.</p>
 								<div class="parent" style="height: 450px">
-									<img class="child" src="images/fins.jpg" alt="fins.jpg" />
+									<img class="child" src="../images/fins.jpg" alt="fins.jpg" />
 								  </div>
 								  <p class="legend" style="font-size:13px;">Fin vacuum infusion lamination: the dark part is resin spreading on the carbon fiber piece with the assistance of a vacuum pump, which prevents undesired bubbles.</p>
 								<div class="parent" style="height: 300px">
-									<img class="child" src="images/carbon-fiber-structure.jpg" alt="carbon-fiber-structure.jpg" />
+									<img class="child" src="../images/carbon-fiber-structure.jpg" alt="carbon-fiber-structure.jpg" />
 								  </div>
 								  <p class="legend" style="font-size:13px;">Final carbon fiber structure for the rocket Imperius: 5 carbon fiber tubes, glass fiber reinforced nosecone and 4 carbon fiber/kevlar fins.</p>
 							</div></div></div>
