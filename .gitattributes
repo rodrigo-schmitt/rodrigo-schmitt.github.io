@@ -1,0 +1,3 @@
+# Generated list pages are produced with CRLF; keep them that way.
+pages/book_list_.html eol=crlf
+pages/movie_list_.html eol=crlf
