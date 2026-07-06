@@ -551,3 +551,415 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   body { background: #fff; color: #000; }
   main { padding-top: 0; }
 }
+
+/* ==========================================================================
+   Planetary navigation system (§20+). Append-only from here: new sections
+   get new numbers; §27 (reduced motion) and §28 (print) must stay LAST so
+   their same-specificity overrides win the cascade.
+   ========================================================================== */
+
+/* ---------- 20. Planets: palettes + spheres ---------- */
+/* Each planet's tokens live on BOTH the icon class and the page body class,
+   so nav icons and per-page horizons share one palette definition. */
+.planet--earth,   body.planet-earth   { --p-glow: rgba(96, 165, 250, 0.40);  --p-horizon: 96, 165, 250;  --p-horizon-2: 62, 156, 110; }
+.planet--moon,    body.planet-moon    { --p-glow: rgba(200, 210, 225, 0.28); --p-horizon: 176, 184, 200; --p-horizon-2: 124, 132, 148; }
+.planet--mars,    body.planet-mars    { --p-glow: rgba(224, 122, 95, 0.35);  --p-horizon: 224, 122, 95;  --p-horizon-2: 138, 51, 36; }
+.planet--jupiter, body.planet-jupiter { --p-glow: rgba(217, 180, 143, 0.32); --p-horizon: 217, 180, 143; --p-horizon-2: 176, 123, 79; }
+.planet--saturn,  body.planet-saturn  { --p-glow: rgba(227, 199, 138, 0.32); --p-horizon: 227, 199, 138; --p-horizon-2: 205, 176, 122; }
+.planet--uranus,  body.planet-uranus  { --p-glow: rgba(155, 216, 222, 0.32); --p-horizon: 155, 216, 222; --p-horizon-2: 95, 183, 196; }
+
+.planet {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: var(--planet-size, 26px);
+  height: var(--planet-size, 26px);
+  position: relative;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.28), transparent 44%),
+    var(--p-surface);
+  box-shadow:
+    inset calc(var(--planet-size, 26px) / -5) calc(var(--planet-size, 26px) / -6) calc(var(--planet-size, 26px) / 2.5) rgba(3, 6, 15, 0.72),
+    0 0 calc(var(--planet-size, 26px) / 2) var(--p-glow);
+}
+
+.planet--earth {
+  --p-surface:
+    radial-gradient(circle at 68% 30%, rgba(240, 248, 255, 0.5) 0 8%, transparent 10%),
+    radial-gradient(circle at 62% 44%, #3E9C6E 0 13%, transparent 15%),
+    radial-gradient(circle at 30% 62%, #37875F 0 11%, transparent 13%),
+    radial-gradient(circle at 42% 38%, #4C8FD6, #1D3E6E 78%);
+}
+.planet--moon {
+  --p-surface:
+    radial-gradient(circle at 60% 55%, #7C8494 0 9%, transparent 11%),
+    radial-gradient(circle at 35% 40%, #848CA0 0 7%, transparent 9%),
+    radial-gradient(circle at 55% 25%, #8A92A6 0 5%, transparent 7%),
+    radial-gradient(circle at 42% 38%, #B9C1CF, #6B7385 80%);
+}
+.planet--mars {
+  --p-surface:
+    radial-gradient(circle at 55% 18%, rgba(245, 240, 235, 0.55) 0 9%, transparent 11%),
+    radial-gradient(circle at 62% 58%, #8A3324 0 12%, transparent 14%),
+    radial-gradient(circle at 42% 38%, #D2694A, #6E2617 80%);
+}
+.planet--jupiter {
+  --p-surface:
+    radial-gradient(circle at 64% 62%, #B3502F 0 9%, transparent 11%),
+    repeating-linear-gradient(-8deg, #C89B6D 0 14%, #E4C9A4 14% 30%, #B07B4F 30% 42%, #D9B48F 42% 58%),
+    radial-gradient(circle at 42% 38%, #E8CBA8, #7A4E2E 80%);
+}
+.planet--saturn {
+  --p-surface:
+    repeating-linear-gradient(-6deg, #D9BC80 0 22%, #E9D6A4 22% 46%, #CDA96E 46% 66%),
+    radial-gradient(circle at 42% 38%, #EEDCAC, #8A6B38 80%);
+}
+.planet--uranus {
+  --p-surface: radial-gradient(circle at 42% 38%, #C3E9EC, #3F8794 82%);
+}
+
+/* Rings (Saturn tilted, Uranus near-vertical) */
+.planet--saturn::after, .planet--uranus::after {
+  content: "";
+  position: absolute; left: 50%; top: 50%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.planet--saturn::after {
+  width: 190%; height: 60%;
+  transform: translate(-50%, -50%) rotate(-18deg);
+  border: solid rgba(205, 176, 122, 0.65);
+  border-width: 1px 3px;
+}
+.planet--uranus::after {
+  width: 170%; height: 46%;
+  transform: translate(-50%, -50%) rotate(78deg);
+  border: solid rgba(155, 216, 222, 0.5);
+  border-width: 1px 2px;
+}
+
+/* ---------- 21. Header planet strip ---------- */
+.site-header__brand::before {
+  content: "";
+  display: inline-block;
+  width: 10px; height: 10px;
+  margin-right: 0.5em;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #FFF3C4, #F59E0B 75%);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+  vertical-align: -1px;
+}
+
+.site-nav { --planet-size: 26px; position: relative; }
+.site-nav ul { align-items: center; }
+
+.planet-link {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0.5em;
+  border-radius: var(--radius-sm);
+  background-image: none;
+}
+.planet-link .planet { transition: transform 0.2s ease; }
+.planet-link:hover .planet,
+.planet-link:focus-visible .planet { transform: scale(1.18); }
+.planet-link[aria-current="page"] .planet {
+  outline: 2px solid rgba(94, 234, 212, 0.55);
+  outline-offset: 3px;
+}
+
+/* Desktop: label = pill tooltip hanging below the header bar */
+.site-nav .planet-link__label {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  white-space: nowrap;
+  color: var(--text-1);
+  background: var(--panel-solid);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.15em 0.7em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+}
+.site-nav .planet-link:hover .planet-link__label,
+.site-nav .planet-link:focus-visible .planet-link__label,
+.site-nav .planet-link[aria-current="page"] .planet-link__label { opacity: 1; }
+
+/* Mobile dropdown: planet icon + always-visible label rows */
+@media (max-width: 760px) {
+  .site-nav ul { align-items: flex-start; }
+  .site-nav .planet-link { justify-content: flex-start; gap: 0.7em; }
+  .site-nav .planet-link__label {
+    position: static; transform: none; opacity: 1;
+    background: none; border: 0; padding: 0;
+    font-size: var(--fs-sm);
+    pointer-events: auto;
+  }
+}
+
+/* Pointer-following glow (JS sets --mx/--my/--glow-on; inert without JS) */
+.site-nav::after,
+.solar-nav__field::after {
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(var(--glow-r, 180px) circle at var(--mx, 50%) var(--my, 50%),
+      rgba(94, 234, 212, 0.10), rgba(96, 165, 250, 0.05) 45%, transparent 70%);
+  opacity: var(--glow-on, 0);
+  transition: opacity 0.3s ease;
+}
+
+/* ---------- 22. Solar-system nav (homepage) ---------- */
+.solar-nav { margin: var(--space-4) 0 var(--space-5); }
+.solar-nav__field {
+  position: relative;
+  height: clamp(230px, 28vw, 320px);
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  --planet-base: clamp(38px, 5vw, 60px);
+  --glow-r: 300px;
+}
+
+.solar-nav__sun {
+  position: absolute; left: 0; top: 50%;
+  width: clamp(150px, 20vw, 240px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 62% 44%, #FFF7D6, #FFD27D 40%, #F59E0B 70%, rgba(245, 158, 11, 0) 72%);
+}
+.solar-nav__sun::after {
+  content: "";
+  position: absolute; inset: -50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.30), rgba(245, 158, 11, 0.10) 42%, transparent 70%);
+  animation: sun-pulse 7s ease-in-out infinite alternate;
+}
+@keyframes sun-pulse { from { opacity: 0.55; } to { opacity: 1; } }
+
+/* Orbit arcs: circles centered on the sun; each diameter = 2x its planet's
+   left %, so every arc passes exactly through its planet. */
+.solar-nav__orbits i {
+  position: absolute; left: 0; top: 50%;
+  transform: translate(-50%, -50%);
+  aspect-ratio: 1;
+  border: 1px solid rgba(148, 163, 184, 0.10);
+  border-radius: 50%;
+}
+.solar-nav__orbits i:nth-child(1) { width: 36%; }
+.solar-nav__orbits i:nth-child(2) { width: 62%; }
+.solar-nav__orbits i:nth-child(3) { width: 89%; }
+.solar-nav__orbits i:nth-child(4) { width: 117%; }
+.solar-nav__orbits i:nth-child(5) { width: 145%; }
+.solar-nav__orbits i:nth-child(6) { width: 174%; }
+
+.solar-nav__list { list-style: none; margin: 0; padding: 0; max-width: none; }
+.solar-nav__list li { position: absolute; top: 50%; margin: 0; }
+.solar-nav__list li:nth-child(1) { left: 18%;   --planet-size: calc(var(--planet-base) * 0.9); }
+.solar-nav__list li:nth-child(2) { left: 31%;   --planet-size: calc(var(--planet-base) * 0.55); }
+.solar-nav__list li:nth-child(3) { left: 44.5%; --planet-size: calc(var(--planet-base) * 0.75); }
+.solar-nav__list li:nth-child(4) { left: 58.5%; --planet-size: calc(var(--planet-base) * 1.35); }
+.solar-nav__list li:nth-child(5) { left: 72.5%; --planet-size: calc(var(--planet-base) * 1.15); }
+.solar-nav__list li:nth-child(6) { left: 87%;   --planet-size: calc(var(--planet-base) * 0.95); }
+
+.solar-nav .planet-link {
+  padding: 0.4em;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: bob 7s ease-in-out infinite alternate;
+}
+.solar-nav__list li:nth-child(2n) .planet-link { animation-duration: 9s; animation-delay: -3.5s; }
+.solar-nav__list li:nth-child(3n) .planet-link { animation-delay: -5s; }
+@keyframes bob {
+  from { transform: translate(-50%, calc(-50% - 4px)); }
+  to   { transform: translate(-50%, calc(-50% + 4px)); }
+}
+
+/* Labels always visible here: page name + planet name, over open starfield */
+.solar-nav .planet-link__label {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 10em;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text-1);
+  text-shadow: 0 1px 4px rgba(6, 9, 19, 0.9), 0 0 12px rgba(6, 9, 19, 0.8);
+}
+.planet-link__sub {
+  display: block;
+  font-weight: 500;
+  font-size: 0.85em;
+  color: var(--text-2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px) {
+  .solar-nav { display: none; }
+}
+
+/* ---------- 23. Warp transition + arrival ---------- */
+/* Outbound: content fades, starfield zooms, radial speed-lines, planet lunges */
+html.js body.is-warping main,
+html.js body.is-warping .site-footer {
+  animation: warp-fade 0.55s ease-in 0.2s forwards;
+}
+@keyframes warp-fade { to { opacity: 0; transform: scale(0.985); } }
+
+html.js body.is-warping .starfield {
+  animation: warp-zoom 0.8s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+}
+@keyframes warp-zoom { to { transform: scale(2.8); opacity: 0.35; } }
+
+html.js body.is-warping::before {
+  content: "";
+  position: fixed; inset: -60vmax;
+  z-index: 90;
+  pointer-events: none;
+  background: repeating-conic-gradient(from 0deg,
+      transparent 0deg 5deg, rgba(199, 210, 232, 0.05) 5deg 5.6deg);
+  animation: warp-spokes 0.8s cubic-bezier(0.6, 0, 1, 0.4) forwards;
+}
+@keyframes warp-spokes {
+  from { transform: scale(0.25) rotate(0deg); opacity: 0; }
+  to   { transform: scale(1.1) rotate(10deg); opacity: 1; }
+}
+
+.is-warp-origin .planet {
+  animation: warp-planet 0.8s cubic-bezier(0.45, 0, 0.85, 0.4) forwards;
+}
+@keyframes warp-planet { to { transform: scale(2.4) rotate(35deg); } }
+
+/* Arrival: page rises from the planet's horizon */
+html.js body.is-arriving main {
+  animation: arrive-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes arrive-rise { from { opacity: 0; transform: translateY(26px); } }
+html.js body.is-arriving::after {
+  animation: horizon-settle 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes horizon-settle { from { transform: translate(-50%, 82%); } }
+
+/* ---------- 24. Planet horizons (per-page surface) ---------- */
+body[class*="planet-"]::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  left: 50%; bottom: 0;
+  width: 240vw; height: 42vh;
+  transform: translate(-50%, 64%);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  background: radial-gradient(ellipse at 50% 0%,
+      rgba(var(--p-horizon), 0.14),
+      rgba(var(--p-horizon-2), 0.05) 45%,
+      transparent 70%);
+  box-shadow:
+    0 -1px 0 rgba(var(--p-horizon), 0.30),
+    0 -14px 40px rgba(var(--p-horizon), 0.10);
+}
+
+/* ---------- 25. Galaxies + aurora ---------- */
+/* Distant galaxies: static blurred elliptical blobs (nebula owns ::after) */
+.starfield::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 90px 34px at 18% 30%, rgba(199, 210, 232, 0.10), rgba(167, 139, 250, 0.05) 55%, transparent 75%),
+    radial-gradient(ellipse 60px 22px at 79% 62%, rgba(199, 210, 232, 0.08), rgba(94, 234, 212, 0.04) 55%, transparent 75%),
+    radial-gradient(ellipse 44px 18px at 55% 12%, rgba(199, 210, 232, 0.07), transparent 70%);
+  filter: blur(3px);
+}
+body.nebula-left .starfield::before { transform: translate(8vw, 12vh) scaleX(-1); }
+body.nebula-low  .starfield::before { transform: translateY(-8vh); }
+
+/* Aurora ribbons near the top of the viewport; animates whole-element
+   transform/opacity only. Static (not hidden) under reduced motion. */
+.aurora {
+  position: absolute;
+  left: -20%; top: -14%;
+  width: 140%; height: 46%;
+  background:
+    linear-gradient(100deg, transparent 22%, rgba(94, 234, 212, 0.05) 40%, rgba(167, 139, 250, 0.06) 56%, transparent 76%),
+    linear-gradient(80deg, transparent 30%, rgba(96, 165, 250, 0.04) 52%, transparent 72%);
+  filter: blur(28px);
+  transform: skewY(-6deg);
+  animation: aurora-drift 100s ease-in-out infinite alternate;
+}
+@keyframes aurora-drift {
+  from { transform: skewY(-6deg) translateX(-3%); opacity: 0.75; }
+  to   { transform: skewY(-5deg) translateX(3%); opacity: 1; }
+}
+
+/* ---------- 26. Astronaut scene (homepage) ---------- */
+.astro-scene {
+  position: relative;
+  height: clamp(200px, 26vw, 280px);
+  margin-top: var(--space-6);
+  overflow: hidden;
+}
+.astro-scene::after {
+  content: "";
+  position: absolute; left: 50%; bottom: 0;
+  width: 190%; height: 55%;
+  transform: translate(-50%, 55%);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  background: radial-gradient(ellipse at 50% 0%,
+      rgba(96, 165, 250, 0.22),
+      rgba(62, 156, 110, 0.08) 50%,
+      transparent 75%);
+  box-shadow:
+    0 -1px 0 rgba(147, 197, 253, 0.4),
+    0 -10px 30px rgba(96, 165, 250, 0.15);
+}
+.astro-scene__figure {
+  position: absolute;
+  left: 58%; bottom: 14%;
+  width: clamp(90px, 12vw, 130px);
+  height: auto;
+  z-index: 1;
+  animation: astro-sway 6s ease-in-out infinite alternate;
+}
+@keyframes astro-sway {
+  from { transform: rotate(-1deg) translateY(0); }
+  to   { transform: rotate(1deg) translateY(-3px); }
+}
+
+/* ---------- 27. Reduced motion (planetary additions — keep after §20-26) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .solar-nav__sun::after,
+  .solar-nav .planet-link,
+  .aurora,
+  .astro-scene__figure { animation: none; }
+  .planet-link .planet { transition: none; }
+  .planet-link:hover .planet,
+  .planet-link:focus-visible .planet { transform: none; }
+  .site-nav .planet-link__label { transition: none; }
+  .site-nav::after,
+  .solar-nav__field::after { transition: none; opacity: 0; }
+  html.js body.is-warping main,
+  html.js body.is-warping .site-footer,
+  html.js body.is-warping .starfield,
+  html.js body.is-arriving main,
+  .is-warp-origin .planet { animation: none; }
+  html.js body.is-warping::before { content: none; }
+  html.js body.is-arriving::after { animation: none; }
+}
+
+/* ---------- 28. Print (planetary additions) ---------- */
+@media print {
+  .solar-nav, .astro-scene, .aurora { display: none; }
+  body[class*="planet-"]::after { content: none; }
+}

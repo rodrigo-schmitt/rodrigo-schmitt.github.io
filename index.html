@@ -17,28 +17,29 @@
   <link rel="stylesheet" href="/css/site.css">
   <script src="/js/site.js" defer></script>
 </head>
-<body>
+<body class="planet-earth">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="progress-bar" aria-hidden="true"></div>
   <div class="starfield" aria-hidden="true">
     <div class="stars stars--s"></div>
     <div class="stars stars--m"></div>
     <div class="stars stars--l"></div>
+    <div class="aurora"></div>
   </div>
 
-  <!-- ===== SITE HEADER v1 ===== -->
+  <!-- ===== SITE HEADER v2 ===== -->
   <header class="site-header">
     <div class="container site-header__inner">
       <a class="site-header__brand" href="/">Rodrigo Schmitt</a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">☰</button>
       <nav class="site-nav" id="site-nav" aria-label="Main">
         <ul>
-          <li><a href="/">About</a></li>
-          <li><a href="/pages/projects_.html">Projects</a></li>
-          <li><a href="/pages/publications-and-cv_.html">Publications &amp; CV</a></li>
-          <li><a href="/pages/book_list_.html">Book List</a></li>
-          <li><a href="/pages/movie_list_.html">Movie List</a></li>
-          <li><a href="/pages/grad-applications_.html">Grad Applications 101</a></li>
+          <li><a class="planet-link" href="/" data-planet="earth"><span class="planet planet--earth" aria-hidden="true"></span><span class="planet-link__label">Home</span></a></li>
+          <li><a class="planet-link" href="/pages/projects_.html" data-planet="moon"><span class="planet planet--moon" aria-hidden="true"></span><span class="planet-link__label">Projects</span></a></li>
+          <li><a class="planet-link" href="/pages/book_list_.html" data-planet="mars"><span class="planet planet--mars" aria-hidden="true"></span><span class="planet-link__label">Book List</span></a></li>
+          <li><a class="planet-link" href="/pages/movie_list_.html" data-planet="jupiter"><span class="planet planet--jupiter" aria-hidden="true"></span><span class="planet-link__label">Movie List</span></a></li>
+          <li><a class="planet-link" href="/pages/publications-and-cv_.html" data-planet="saturn"><span class="planet planet--saturn" aria-hidden="true"></span><span class="planet-link__label">Publications &amp; CV</span></a></li>
+          <li><a class="planet-link" href="/pages/grad-applications_.html" data-planet="uranus"><span class="planet planet--uranus" aria-hidden="true"></span><span class="planet-link__label">Grad Applications 101</span></a></li>
         </ul>
       </nav>
     </div>
@@ -63,6 +64,21 @@
           <img class="hero__portrait reveal" src="/images/astrorod.jpg" alt="Rodrigo Schmitt in astronaut analog gear" width="165" height="200">
         </div>
       </section>
+
+      <nav class="solar-nav reveal" aria-label="Planetary navigation">
+        <div class="solar-nav__field">
+          <div class="solar-nav__sun" aria-hidden="true"></div>
+          <div class="solar-nav__orbits" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <ul class="solar-nav__list">
+            <li><a class="planet-link" href="/" data-planet="earth"><span class="planet planet--earth" aria-hidden="true"></span><span class="planet-link__label">Home<small class="planet-link__sub">Earth</small></span></a></li>
+            <li><a class="planet-link" href="/pages/projects_.html" data-planet="moon"><span class="planet planet--moon" aria-hidden="true"></span><span class="planet-link__label">Projects<small class="planet-link__sub">Moon</small></span></a></li>
+            <li><a class="planet-link" href="/pages/book_list_.html" data-planet="mars"><span class="planet planet--mars" aria-hidden="true"></span><span class="planet-link__label">Book List<small class="planet-link__sub">Mars</small></span></a></li>
+            <li><a class="planet-link" href="/pages/movie_list_.html" data-planet="jupiter"><span class="planet planet--jupiter" aria-hidden="true"></span><span class="planet-link__label">Movie List<small class="planet-link__sub">Jupiter</small></span></a></li>
+            <li><a class="planet-link" href="/pages/publications-and-cv_.html" data-planet="saturn"><span class="planet planet--saturn" aria-hidden="true"></span><span class="planet-link__label">Publications &amp; CV<small class="planet-link__sub">Saturn</small></span></a></li>
+            <li><a class="planet-link" href="/pages/grad-applications_.html" data-planet="uranus"><span class="planet planet--uranus" aria-hidden="true"></span><span class="planet-link__label">Grad Applications 101<small class="planet-link__sub">Uranus</small></span></a></li>
+          </ul>
+        </div>
+      </nav>
 
       <section class="highlights" data-reveal-group aria-label="Highlights">
         <div class="card highlight reveal">
@@ -110,6 +126,36 @@
             <ul class="chips"><li><span class="chip">RocketPy</span></li><li><span class="chip">LIDAR</span></li><li><span class="chip chip--cyan">Analog Astronaut</span></li></ul>
           </a>
         </div>
+      </section>
+
+      <section class="astro-scene" role="img" aria-label="Illustrated astronaut standing on Earth's curved horizon, gazing up at the planets">
+        <svg class="astro-scene__figure" viewBox="0 0 220 260" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="astro-visor" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#5EEAD4" stop-opacity="0.45"/>
+              <stop offset="1" stop-color="#60A5FA" stop-opacity="0.35"/>
+            </linearGradient>
+          </defs>
+          <g stroke="#C7D2E8" stroke-width="2.5" fill="rgba(14,20,40,0.85)" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="66" y="88" width="46" height="74" rx="10"/>
+            <rect x="-10" y="0" width="20" height="66" rx="10" transform="translate(100 168) rotate(8)"/>
+            <rect x="-10" y="0" width="20" height="66" rx="10" transform="translate(126 168) rotate(-8)"/>
+            <rect x="78" y="228" width="30" height="14" rx="7"/>
+            <rect x="118" y="228" width="30" height="14" rx="7"/>
+            <rect x="84" y="96" width="54" height="80" rx="18"/>
+            <rect x="-9" y="0" width="18" height="56" rx="9" transform="translate(88 106) rotate(22)"/>
+            <rect x="-9" y="0" width="18" height="56" rx="9" transform="translate(134 106) rotate(-24)"/>
+            <rect x="94" y="112" width="34" height="26" rx="6"/>
+            <circle cx="103" cy="125" r="2.6" fill="#5EEAD4" stroke="none"/>
+            <circle cx="111" cy="125" r="2.6" fill="#60A5FA" stroke="none"/>
+            <circle cx="119" cy="125" r="2.6" fill="#A78BFA" stroke="none"/>
+            <circle cx="111" cy="66" r="27"/>
+            <ellipse cx="104" cy="60" rx="17" ry="14" fill="url(#astro-visor)"/>
+            <path d="M92 52 q7 -8 17 -9" fill="none" stroke="rgba(230,234,242,0.9)" stroke-width="1.6"/>
+            <path d="M126 48 q6 6 7 14" fill="none" stroke="rgba(230,234,242,0.5)" stroke-width="1.6"/>
+            <circle cx="134" cy="70" r="3" fill="#5EEAD4" stroke="none"/>
+          </g>
+        </svg>
       </section>
 
     </div>
