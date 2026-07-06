@@ -17,28 +17,29 @@
   <link rel="stylesheet" href="/css/site.css">
   <script src="/js/site.js" defer></script>
 </head>
-<body class="nebula-left">
+<body class="nebula-left planet-moon">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="progress-bar" aria-hidden="true"></div>
   <div class="starfield" aria-hidden="true">
     <div class="stars stars--s"></div>
     <div class="stars stars--m"></div>
     <div class="stars stars--l"></div>
+    <div class="aurora"></div>
   </div>
 
-  <!-- ===== SITE HEADER v1 ===== -->
+  <!-- ===== SITE HEADER v2 ===== -->
   <header class="site-header">
     <div class="container site-header__inner">
       <a class="site-header__brand" href="/">Rodrigo Schmitt</a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">☰</button>
       <nav class="site-nav" id="site-nav" aria-label="Main">
         <ul>
-          <li><a href="/">About</a></li>
-          <li><a href="/pages/projects_.html">Projects</a></li>
-          <li><a href="/pages/publications-and-cv_.html">Publications &amp; CV</a></li>
-          <li><a href="/pages/book_list_.html">Book List</a></li>
-          <li><a href="/pages/movie_list_.html">Movie List</a></li>
-          <li><a href="/pages/grad-applications_.html">Grad Applications 101</a></li>
+          <li><a class="planet-link" href="/" data-planet="earth"><span class="planet planet--earth" aria-hidden="true"></span><span class="planet-link__label">Home</span></a></li>
+          <li><a class="planet-link" href="/pages/projects_.html" data-planet="moon"><span class="planet planet--moon" aria-hidden="true"></span><span class="planet-link__label">Projects</span></a></li>
+          <li><a class="planet-link" href="/pages/book_list_.html" data-planet="mars"><span class="planet planet--mars" aria-hidden="true"></span><span class="planet-link__label">Book List</span></a></li>
+          <li><a class="planet-link" href="/pages/movie_list_.html" data-planet="jupiter"><span class="planet planet--jupiter" aria-hidden="true"></span><span class="planet-link__label">Movie List</span></a></li>
+          <li><a class="planet-link" href="/pages/publications-and-cv_.html" data-planet="saturn"><span class="planet planet--saturn" aria-hidden="true"></span><span class="planet-link__label">Publications &amp; CV</span></a></li>
+          <li><a class="planet-link" href="/pages/grad-applications_.html" data-planet="uranus"><span class="planet planet--uranus" aria-hidden="true"></span><span class="planet-link__label">Grad Applications 101</span></a></li>
         </ul>
       </nav>
     </div>
