@@ -75,25 +75,24 @@
 
     </div>
 
-    <section class="descent descent--frames" data-descent="earth" data-frames="90" style="--descent-h:300vh">
-      <div class="descent__sticky">
-        <canvas class="descent__canvas" aria-hidden="true"></canvas>
-        <img class="descent__fallback"
-             src="/images/planets/earth_surface-1920.webp"
-             srcset="/images/planets/earth_surface-960.webp 960w, /images/planets/earth_surface-1920.webp 1920w"
-             sizes="100vw" loading="lazy"
-             alt="Night-side Earth from orbit with city lights tracing the continents">
-        <div class="descent__hud" aria-hidden="true">
-          <div><strong>&#9678; EARTH</strong></div>
-          <div>ALT <span data-hud="alt">412</span> KM</div>
-          <div>VEL <span data-hud="vel">7.66</span> KM/S</div>
-        </div>
-        <div class="descent__gauge" aria-hidden="true"><i>ORBIT</i><i>DESCENT</i><i>SURFACE</i></div>
-        <div class="descent__overlay">
-          <p class="descent__caption">Welcome home</p>
-          <p class="descent__title">Earth</p>
-        </div>
-        <div class="descent__cue" aria-hidden="true"></div>
+    <section class="descent descent--video" data-descent="earth">
+      <img class="descent__fallback"
+           src="/images/planets/earth_surface-1600.webp"
+           srcset="/images/planets/earth_surface-960.webp 960w, /images/planets/earth_surface-1600.webp 1600w, /images/planets/earth_surface-2560.webp 2560w"
+           sizes="100vw"
+           alt="Night-side Earth from orbit with city lights tracing the continents">
+      <video class="descent__video" muted playsinline preload="none"
+             poster="/images/planets/earth_surface-1600.webp"
+             src="/images/videos/earth_descent.mp4" aria-hidden="true"></video>
+      <div class="descent__hud" aria-hidden="true">
+        <div><strong>&#9678; EARTH</strong></div>
+        <div>ALT <span data-hud="alt">412</span> KM</div>
+        <div>VEL <span data-hud="vel">7.66</span> KM/S</div>
+      </div>
+      <div class="descent__gauge" aria-hidden="true"><i>ORBIT</i><i>DESCENT</i><i>SURFACE</i></div>
+      <div class="descent__overlay">
+        <p class="descent__caption">Welcome home</p>
+        <p class="descent__title">Earth</p>
       </div>
     </section>
 
