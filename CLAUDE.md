@@ -24,9 +24,9 @@ sanctioned Google Fonts exception for the cinematic descent heroes, see Hard rul
 | Grad Applications 101 | `pages/grad-applications_.html` | Uranus stills hero; long-form, sticky TOC |
 
 Image layout: `images/site/` (favicon, portrait, og/card art), `images/content/` (page
-figures + project videos — new content images go here), `images/planets/` (orbit/surface
-WebP stills), `images/descent/{planet}/` (frame sequences), `images/hero/` (astronaut).
-`sources/cinematic/` holds the uncommitted 4K masters (gitignored).
+figures + project videos — new content images go here), `images/planets/` (surface WebP
+covers + `nav/` circular planet sprites), `images/videos/` (web-encoded descent MP4s),
+`images/hero/` (astronaut). `sources/cinematic/` holds the uncommitted 4K masters (gitignored).
 
 ### Deep Space design system (all tokens in `css/site.css` `:root`)
 
@@ -46,43 +46,51 @@ WebP stills), `images/descent/{planet}/` (frame sequences), `images/hero/` (astr
 - **Pointer glow**: JS sets `--mx`/`--my`/`--glow-on` on `.site-nav` / `.solar-nav__field` (only when `(pointer: fine)` and motion allowed); CSS overlay `::after` renders the cursor-following highlight.
 - **CSS is append-only from §20**: new sections get new numbers and are inserted physically ABOVE §27; §27 (reduced-motion) and §28 (print) must stay the LAST two blocks so their same-specificity overrides win the cascade. Do not edit §18 for new animations — add to §27.
 
-### Cinematic descent heroes (§29–§32 of `site.css` + `js/descent.js`)
+### Cinematic descent heroes (§29–§33 of `site.css` + `js/descent.js`)
 
-- **Concept: every planet page opens with a descent from orbit to its surface.** Six hero
-  pages (Home, Projects, Book List, Movie List, Publications & CV, Grad 101) start with a
-  full-bleed `section.descent` — a sticky 100svh viewport scrubbed by scroll. Two modes:
-  - **Frames mode** (`.descent--frames`, Home/Earth, Projects/Moon, Book List/Mars): canvas
-    scrub of 90 WebP frames extracted from Higgsfield descent videos.
-    Frame path contract: `/images/descent/{planet}/{desktop|mobile}/frame-NNNN.webp` (1-based,
-    pad-4) + `manifest.json`. `data-frames` must equal the actual extracted count.
-  - **Stills mode** (`.descent--stills`, Movie List/Jupiter, Publications/Saturn, Grad/Uranus —
-    no source videos yet): CSS crossfade orbit→surface driven by the `--dp` custom property;
-    stills in `/images/planets/{planet}_{orbit|surface}-{1920|960}.webp`. Swap to frames mode
-    when real descent videos exist.
+- **Concept: every planet page opens with its planet's surface as a full-bleed hero;
+  on video pages the descent from orbit plays once and freezes there.** Six hero pages
+  (Home, Projects, Book List, Movie List, Publications & CV, Grad 101) start with a
+  `section.descent` — a plain 100svh block (92svh stills), **normal page scroll, no pinning**.
+  Two modes:
+  - **Video mode** (`.descent--video`, Home/Earth, Projects/Moon, Book List/Mars): native
+    `<video muted playsinline preload="none">` from `/images/videos/{planet}_descent.mp4`
+    (H.264 crf22 `+faststart`, no audio, <8 MB). `js/descent.js` plays it once when motion is
+    allowed; the last frame IS the surface cover. Telemetry HUD + gauge follow
+    `currentTime/duration` via `--dp`; on `ended` the section gets `.is-landed` and the title
+    letter-splits in. **No `autoplay` attribute** — JS-initiated only.
+  - **Still mode** (`.descent--still`, Movie List/Jupiter, Publications/Saturn, Grad/Uranus —
+    no source videos yet): the surface image, static, title visible immediately, HUD reads
+    "SURFACE CAM", no gauge, no `descent.js`. Swap to video mode when Higgsfield descent
+    videos exist for these planets.
+- **Surface covers**: `/images/planets/{planet}_surface-{960,1600,2560}.webp`
+  (`srcset`/`sizes=100vw`); the 1600w doubles as the video `poster`. The `.descent__fallback`
+  img carries the real `alt` and is the reduced-motion / no-JS cover.
 - **Markup contract** (see `pages/projects_.html` as reference): section carries
-  `data-descent="{planet}"`, optional `data-mode="stills"`, `data-frames`, inline
-  `--descent-h` (300vh frames / 180vh stills). Inside `.descent__sticky`: canvas or
-  `.descent__orbit` img, `.descent__fallback` surface img (the real-`alt` cover),
-  `.descent__hud` (telemetry), `.descent__gauge`, `.descent__overlay` (caption + the page
-  **`<h1 class="descent__title">`** — moved out of `.page-header`; home uses a `<p>` title to
-  keep its hero `<h1>`), `.descent__cue`. Hero pages add body class `has-descent` (kills
-  main's top padding; **not** on home, where the descent sits mid-page) and load
-  `/js/descent.js` + the Google Fonts `<link>`.
-- **Engine** (`js/descent.js`, IIFE like `site.js`): eases scroll with `p^1.6` (slow orbit →
-  accelerating dive), progressive frame loading (first+last+every 8th, then batches),
-  nearest-loaded-frame draw (no blank frames), DPR≤2, mobile frame set ≤760px, HUD ALT/VEL
-  lerp, `is-landed` at p>0.92 letter-splits the title (hysteresis at 0.84 for re-scrub).
-  **Bails entirely under `prefers-reduced-motion`** — zero frames downloaded; CSS §27 shows
-  the static surface cover with all text. No-JS gets the same via `html.js` gating.
-  §29 also disables the warp `is-arriving` rise on descent pages (`body:has(.descent)`) —
-  a transform on `main` would break the sticky canvas.
+  `data-descent="{planet}"`; children are `.descent__fallback` img, (video pages)
+  `.descent__video`, `.descent__hud`, (video pages) `.descent__gauge`, `.descent__overlay`
+  (caption + the page **`<h1 class="descent__title">`** — moved out of `.page-header`; home
+  uses a `<p>` title to keep its hero `<h1>`). Hero subpages add body class `has-descent`
+  (kills main's top padding; **not** on home, where the descent sits mid-page) and all six
+  load the Google Fonts `<link>`; only video pages load `/js/descent.js`.
+- **Reduced motion / no-JS**: `descent.js` bails (video never plays, **zero video bytes**);
+  §27 hides the video/HUD/gauge so the static surface cover + all text shows. Letter-split
+  spans only exist under JS+motion.
 - **Homepage astronaut** (§32): `.hero--cinematic` + full-bleed `.hero__scene` img
-  (pre-graded to the palette, mask-feathered into `#060913`), behind the name/tagline.
-- **Regenerating frames** (needs ffmpeg — `winget install Gyan.FFmpeg`):
-  `py -3 .claude/skills/animated_website/scripts/extract_frames.py --input sources/cinematic/{planet}_rotating.mp4 --output images/descent/{planet} --frames 90 --quality 75`
-  (add `--desktop-res 1280x720` for 720p sources). Budgets per page: desktop <10 MB,
-  mobile <5 MB (check `manifest.json`). 4K masters + source videos live in
-  `sources/cinematic/` — **gitignored**, regenerable only from this machine/OneDrive.
+  (pre-graded to the palette, mask-feathered into `#060913`), behind the name/tagline;
+  dimmed to 0.3 opacity ≤760px for tagline contrast. The hero eyebrow uses DM Sans 500
+  uppercase wide-tracked (the cinematic label style).
+- **Photoreal nav planets** (§33): the homepage `.solar-nav` uses circular cutouts from the
+  4K stills (`/images/planets/nav/{planet}.webp`, `img.planet.planet-photo.planet--{name}`;
+  Saturn keeps rings, sized by height with negative margins). **The header tab keeps the
+  pure-CSS spheres.** Header nav labels sit under their planet INSIDE the 60px bar
+  (absolutely positioned, opacity-gated on hover/current).
+- **Regenerating assets** (needs ffmpeg — `winget install Gyan.FFmpeg`; not on PATH in fresh
+  shells, prepend `%LOCALAPPDATA%\Microsoft\WinGet\Packages\Gyan.FFmpeg_*\...\bin`):
+  videos `ffmpeg -i sources/cinematic/{p}_rotating.mp4 -c:v libx264 -crf 22 -preset slow -an -movflags +faststart images/videos/{p}_descent.mp4`;
+  stills `ffmpeg -i sources/cinematic/{p}_surface.png -vf "scale={W}:-2:flags=lanczos" -c:v libwebp -quality {90|88|85} ...`;
+  nav sprites via the Pillow cutout script (see auto-memory). 4K masters + source videos
+  live in `sources/cinematic/` — **gitignored**, regenerable only from this machine/OneDrive.
 
 ## Hard rules
 
@@ -91,7 +99,7 @@ WebP stills), `images/descent/{planet}/` (frame sequences), `images/hero/` (astr
 3. **All new pages copy the fenced blocks** `<!-- ===== SITE HEADER v2 ===== -->` / `<!-- ===== SITE FOOTER v1 ===== -->` byte-identically from `index.html` (footer quote is the one per-page variation) and link `/css/site.css` + `/js/site.js` (root-absolute — this is a user Pages site). New pages also need a `planet-*` body class and the `.aurora` div in the starfield block. To change the nav site-wide, grep for the fence markers and apply the same edit to all 9 pages (bump the fence version when the block's content changes).
 4. **Respect `prefers-reduced-motion`**: any new animation must be disabled in the reduced-motion block of `site.css` and/or gated on the `reducedMotion` check in `site.js`. Reveal animations must stay gated on `html.js` so no-JS users see content.
 5. **Keep URLs/filenames stable** — existing links point at them.
-6. Every image needs real `alt`; videos are `controls preload="none" poster=…`, never autoplay; single `h1` per page; keep `#main` as the skip-link target.
+6. Every image needs real `alt`; **content** videos are `controls preload="none" poster=…`, never autoplay; single `h1` per page; keep `#main` as the skip-link target. Sole exception: the muted, decorative descent-hero videos (`.descent__video`, no audio track) are played once via `descent.js` — JS-initiated only (no `autoplay` attribute), never under reduced motion.
 
 ## Orchestration playbook (agents)
 
@@ -139,7 +147,7 @@ TMDB search API (user-supplied key, never committed); regenerate only the `<h2>`
 - Local preview checked at mobile (375px) and desktop (1440px).
 - No console errors.
 - No external requests beyond Goodreads/TMDB content images and, on the six descent-hero pages only, `fonts.googleapis.com`/`fonts.gstatic.com` (DevTools network tab or grep for `http` in changed files).
-- Descent pages: scrub forward AND backward smoothly; reduced-motion shows the static surface cover with **zero** `/images/descent/` requests; frame payloads within budget (`manifest.json`).
+- Descent pages: the video plays once and freezes on the surface (title letter-splits on landing); reduced-motion shows the static surface cover with **zero** `/images/videos/` requests; each hero MP4 stays <8 MB.
 - Text contrast ≥ 4.5:1 against its actual background (glass panel over starfield, not the raw token).
 - All internal links and images resolve (serve locally and click through, or run a link-check script).
 - Reduced-motion behavior verified: content visible, no parallax/reveal/drift.

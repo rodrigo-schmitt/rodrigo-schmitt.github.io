@@ -210,18 +210,21 @@ Paste this to the session that assembles the site once videos + images exist:
 
 ---
 
-## Asset checklist & naming (as built, July 2026)
+## Asset checklist & naming (as built, July 2026 — v2 video heroes)
 
 - 4K masters (gitignored inputs) → `sources/cinematic/{planet}.png`,
   `sources/cinematic/{planet}_surface.png`, `sources/cinematic/{planet}_rotating.mp4`,
   `sources/cinematic/astronaut_walking.png`
-- Web stills → `images/planets/{planet}_{orbit|surface}-{1920|960}.webp`
-  (orbit pairs exist for jupiter/saturn/uranus — the stills-mode pages)
-- Frame sequences → `images/descent/{earth,moon,mars}/{desktop,mobile}/frame-NNNN.webp` + `manifest.json`
+- Web descent videos → `images/videos/{earth,moon,mars}_descent.mp4`
+  (H.264 crf22 +faststart, no audio; play once and freeze on the surface —
+  the WebP frame-scrub pipeline is retired)
+- Surface covers → `images/planets/{planet}_surface-{960,1600,2560}.webp`
+- Photoreal solar-nav sprites → `images/planets/nav/{planet}.webp` (circular
+  cutouts from the 4K stills; Saturn keeps its rings)
 - Astronaut hero → `images/hero/astronaut_hero-{1920,960}.webp`
 - Still missing (generate when Higgsfield credits return): descent videos for
-  **jupiter / saturn / uranus** — then re-run frame extraction and flip those three pages
-  from `descent--stills` to `descent--frames` (see CLAUDE.md, "Cinematic descent heroes")
+  **jupiter / saturn / uranus** — encode the same way and flip those three pages
+  from `descent--still` to `descent--video` (see CLAUDE.md, "Cinematic descent heroes")
 
 ## Verification (post-generation, before merge)
 

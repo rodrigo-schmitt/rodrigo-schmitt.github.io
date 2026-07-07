@@ -19,12 +19,12 @@ pages/
   grad-applications_.html   Long-form advice article
 css/site.css                The entire design system (tokens, components, starfield)
 js/site.js                  Scroll-reveal, parallax, progress bar, nav (progressive enhancement)
-js/descent.js               Cinematic descent heroes (scroll-scrubbed frames / stills crossfade)
+js/descent.js               Cinematic descent heroes (video plays once, freezes on the surface)
 fonts/                      Self-hosted Space Grotesk (variable woff2)
 images/site/                Favicon, portrait, og/card art
 images/content/             Page-content figures + project videos
-images/planets/             Web-optimized orbit/surface stills (WebP)
-images/descent/{planet}/    Scroll-scrub WebP frame sequences + manifest.json
+images/planets/             Surface covers (WebP) + nav/ circular planet sprites
+images/videos/              Web-encoded descent MP4s (muted, no audio track)
 images/hero/                Astronaut homepage hero
 files/, sources/            PDFs and list-generation inputs (sources/cinematic/ = uncommitted 4K masters)
 ```
