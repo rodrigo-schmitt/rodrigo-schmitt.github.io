@@ -1132,6 +1132,10 @@ html.js .descent__gauge { display: block; }
   -webkit-mask-image: linear-gradient(180deg, transparent, #000 16% 80%, transparent);
   mask-image: linear-gradient(180deg, transparent, #000 16% 80%, transparent);
 }
+/* Mobile stacks the hero text over the astronaut — dim him for contrast */
+@media (max-width: 760px) {
+  .hero__scene { opacity: 0.3; }
+}
 
 /* ---------- 27. Reduced motion (planetary additions — keep after §20-26) ---------- */
 @media (prefers-reduced-motion: reduce) {
