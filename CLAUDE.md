@@ -51,16 +51,19 @@ covers + `nav/` circular planet sprites), `images/videos/` (web-encoded descent 
 - **Concept: every planet page opens with its planet's surface as a full-bleed hero;
   on video pages the descent from orbit plays once and freezes there.** Six hero pages
   (Home, Projects, Book List, Movie List, Publications & CV, Grad 101) start with a
-  `section.descent` — a plain 56svh band (50svh stills), **normal page scroll, no pinning**.
-  Two modes:
-  - **Video mode** (`.descent--video`, Home/Earth, Projects/Moon, Book List/Mars): native
-    `<video muted playsinline preload="none">` from `/images/videos/{planet}_descent.mp4`
-    (H.264 crf22 `+faststart`, no audio, <8 MB). `js/descent.js` plays it once when motion is
-    allowed AND the section's top has entered the top 40% of the viewport (immediate on
-    subpages; on first scroll for the homepage band); the video, HUD and gauge fade in over
-    the surface cover on `is-playing`, and the last frame IS the surface cover. Telemetry
-    follows `currentTime/duration` via `--dp`; on `ended` the section gets `.is-landed` and
-    the title letter-splits in. **No `autoplay` attribute** — JS-initiated only.
+  `section.descent`. Two modes:
+  - **Video mode** (`.descent--video`, Home/Earth, Projects/Moon, Book List/Mars): a
+    **pinned scroll-scrub** — the section is `--descent-h` (350vh) tall with a sticky
+    100svh `.descent__sticky` viewport; `js/descent.js` maps scroll progress to
+    `video.currentTime` (the video is NEVER played — paused seeks only). Encode is
+    **all-intra** (`-c:v libx264 -crf 21 -g 1 -bf 0`, no audio, `+faststart`; every frame a
+    keyframe or seeking is unusably janky) at `/images/videos/{planet}_descent.mp4`.
+    `.descent__text` snippets (`data-show`/`data-hide` fractions) fade in/out over the
+    footage; telemetry HUD + gauge track `--dp`; at p>0.92 the section gets `.is-landed` —
+    the title letter-splits in and the video crossfades to the 2560w surface still beneath
+    (its last frame matches, so the swap is seamless; scrubbing back reverses everything).
+    Loading is armed by IntersectionObserver (rootMargin 200%); `is-ready` gates
+    video/HUD/gauge visibility. Without JS the section is a static 56svh band.
   - **Still mode** (`.descent--still`, Movie List/Jupiter, Publications/Saturn, Grad/Uranus —
     no source videos yet): the surface image, static, title visible immediately, HUD reads
     "SURFACE CAM", no gauge, no `descent.js`. Swap to video mode when Higgsfield descent
@@ -101,7 +104,7 @@ covers + `nav/` circular planet sprites), `images/videos/` (web-encoded descent 
 3. **All new pages copy the fenced blocks** `<!-- ===== SITE HEADER v2 ===== -->` / `<!-- ===== SITE FOOTER v1 ===== -->` byte-identically from `index.html` (footer quote is the one per-page variation) and link `/css/site.css` + `/js/site.js` (root-absolute — this is a user Pages site). New pages also need a `planet-*` body class and the `.aurora` div in the starfield block. To change the nav site-wide, grep for the fence markers and apply the same edit to all 9 pages (bump the fence version when the block's content changes).
 4. **Respect `prefers-reduced-motion`**: any new animation must be disabled in the reduced-motion block of `site.css` and/or gated on the `reducedMotion` check in `site.js`. Reveal animations must stay gated on `html.js` so no-JS users see content.
 5. **Keep URLs/filenames stable** — existing links point at them.
-6. Every image needs real `alt`; **content** videos are `controls preload="none" poster=…`, never autoplay; single `h1` per page; keep `#main` as the skip-link target. Sole exception: the muted, decorative descent-hero videos (`.descent__video`, no audio track) are played once via `descent.js` — JS-initiated only (no `autoplay` attribute), never under reduced motion.
+6. Every image needs real `alt`; **content** videos are `controls preload="none" poster=…`, never autoplay; single `h1` per page; keep `#main` as the skip-link target. Sole exception: the muted, decorative descent-hero videos (`.descent__video`, no audio track) are scroll-scrubbed **paused** by `descent.js` (currentTime seeks only — they are never played at all), and never load under reduced motion.
 
 ## Orchestration playbook (agents)
 
@@ -134,8 +137,11 @@ TMDB search API (user-supplied key, never committed); regenerate only the `<h2>`
 `<ul class="lb-shelf">` blocks; no `<style>` block; preserve CRLF.
 
 ### Local preview
-`py -3 -m http.server 8000` from the repo root (root-absolute URLs require serving from root;
-`file://` will not work). Open http://localhost:8000/.
+`py -3 tools/serve.py 8000` from the repo root (root-absolute URLs require serving from
+root; `file://` will not work). Open http://localhost:8000/. **Do not use plain
+`py -3 -m http.server`** — it lacks HTTP Range support, so Chrome marks the descent videos
+non-seekable (`video.seekable` empty) and the scroll-scrub silently freezes on frame 0.
+GitHub Pages serves ranges in production; `tools/serve.py` matches that locally.
 
 ### Screenshot QA checklist
 - Desktop 1440px: headless Chrome works — `chrome --headless=new --screenshot=out.png --window-size=1440,2600 --hide-scrollbars --virtual-time-budget=5000 <url>`.
@@ -149,7 +155,7 @@ TMDB search API (user-supplied key, never committed); regenerate only the `<h2>`
 - Local preview checked at mobile (375px) and desktop (1440px).
 - No console errors.
 - No external requests beyond Goodreads/TMDB content images and, on the six descent-hero pages only, `fonts.googleapis.com`/`fonts.gstatic.com` (DevTools network tab or grep for `http` in changed files).
-- Descent pages: the video plays once and freezes on the surface (title letter-splits on landing); reduced-motion shows the static surface cover with **zero** `/images/videos/` requests; each hero MP4 stays <8 MB.
+- Descent pages: the scrub follows scroll smoothly forward AND backward (serve via `tools/serve.py` — see Local preview); text snippets appear at their ranges; landing crossfades to the crisp 2560 still; reduced-motion shows the static surface cover with **zero** `/images/videos/` requests; earth MP4 ≤15 MB, others ≤8 MB.
 - Text contrast ≥ 4.5:1 against its actual background (glass panel over starfield, not the raw token).
 - All internal links and images resolve (serve locally and click through, or run a link-check script).
 - Reduced-motion behavior verified: content visible, no parallax/reveal/drift.

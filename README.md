@@ -19,7 +19,8 @@ pages/
   grad-applications_.html   Long-form advice article
 css/site.css                The entire design system (tokens, components, starfield)
 js/site.js                  Scroll-reveal, parallax, progress bar, nav (progressive enhancement)
-js/descent.js               Cinematic descent heroes (video plays once, freezes on the surface)
+js/descent.js               Cinematic descent heroes (scroll-scrubbed video, text overlays)
+tools/serve.py              Local preview server with HTTP Range support (video seeking)
 fonts/                      Self-hosted Space Grotesk (variable woff2)
 images/site/                Favicon, portrait, og/card art
 images/content/             Page-content figures + project videos
@@ -31,10 +32,11 @@ files/, sources/            PDFs and list-generation inputs (sources/cinematic/ 
 
 ## Local preview
 
-Serve from the repo root (asset URLs are root-absolute):
+Serve from the repo root (asset URLs are root-absolute; this server supports HTTP ranges,
+which the scroll-scrubbed hero videos need for seeking):
 
 ```
-py -3 -m http.server 8000
+py -3 tools/serve.py 8000
 ```
 
 Then open http://localhost:8000/.

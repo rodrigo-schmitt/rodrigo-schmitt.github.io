@@ -53,24 +53,28 @@
 
   <main id="main">
 
-    <section class="descent descent--video" data-descent="moon">
-      <img class="descent__fallback"
-           src="/images/planets/moon_surface-1600.webp"
-           srcset="/images/planets/moon_surface-960.webp 960w, /images/planets/moon_surface-1600.webp 1600w, /images/planets/moon_surface-2560.webp 2560w"
-           sizes="100vw"
-           alt="The cratered lunar surface with Earth rising over the horizon">
-      <video class="descent__video" muted playsinline preload="none"
-             poster="/images/planets/moon_surface-1600.webp"
-             src="/images/videos/moon_descent.mp4" aria-hidden="true"></video>
-      <div class="descent__hud" aria-hidden="true">
-        <div><strong>&#9678; THE MOON</strong></div>
-        <div>ALT <span data-hud="alt">110</span> KM</div>
-        <div>VEL <span data-hud="vel">1.63</span> KM/S</div>
-      </div>
-      <div class="descent__gauge" aria-hidden="true"><i>ORBIT</i><i>DESCENT</i><i>SURFACE</i></div>
-      <div class="descent__overlay">
-        <p class="descent__caption">One small step, many systems</p>
-        <h1 class="descent__title">Projects</h1>
+    <section class="descent descent--video" data-descent="moon" style="--descent-h:350vh">
+      <div class="descent__sticky">
+        <img class="descent__fallback"
+             src="/images/planets/moon_surface-1600.webp"
+             srcset="/images/planets/moon_surface-960.webp 960w, /images/planets/moon_surface-1600.webp 1600w, /images/planets/moon_surface-2560.webp 2560w"
+             sizes="100vw"
+             alt="The cratered lunar surface with Earth rising over the horizon">
+        <video class="descent__video" muted playsinline preload="none"
+               poster="/images/planets/moon_surface-1600.webp"
+               src="/images/videos/moon_descent.mp4" aria-hidden="true"></video>
+        <div class="descent__text" data-show="0.08" data-hide="0.40"><p>Three pillars: Astrodynamics, Deep Learning &amp; AI, and Design&ndash;Build&ndash;Test.</p></div>
+        <div class="descent__text" data-show="0.48" data-hide="0.78"><p>Artemis-era mission design, computer-vision navigation, and hands-on hardware.</p></div>
+        <div class="descent__hud" aria-hidden="true">
+          <div><strong>&#9678; THE MOON</strong></div>
+          <div>ALT <span data-hud="alt">110</span> KM</div>
+          <div>VEL <span data-hud="vel">1.63</span> KM/S</div>
+        </div>
+        <div class="descent__gauge" aria-hidden="true"><i>ORBIT</i><i>DESCENT</i><i>SURFACE</i></div>
+        <div class="descent__overlay">
+          <p class="descent__caption">One small step, many systems</p>
+          <h1 class="descent__title">Projects</h1>
+        </div>
       </div>
     </section>
 

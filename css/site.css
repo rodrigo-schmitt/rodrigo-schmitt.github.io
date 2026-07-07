@@ -644,12 +644,12 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 .site-header__brand::before {
   content: "";
   display: inline-block;
-  width: 10px; height: 10px;
+  width: 17px; height: 17px;
   margin-right: 0.5em;
   border-radius: 50%;
   background: radial-gradient(circle at 40% 35%, #FFF3C4, #F59E0B 75%);
-  box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
-  vertical-align: -1px;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.55);
+  vertical-align: -3px;
 }
 
 .site-nav { --planet-size: 26px; position: relative; }
@@ -928,36 +928,74 @@ body.nebula-low  .starfield::before { transform: translateY(-8vh); }
   height: 56vh;
   height: 56svh;
   min-height: 420px;
-  overflow: hidden;
   background: var(--bg-0);
   margin-bottom: var(--space-5);
   --dp: 0;
   --font-cine-display: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-cine-body: "DM Sans", var(--font-body);
 }
-.descent--still { height: 50vh; height: 50svh; }
+.descent--still { height: 50vh; height: 50svh; overflow: hidden; }
+
+/* Video pages: pinned scroll-scrub — the sticky viewport holds the screen
+   while the ~350vh track scrolls; js/descent.js maps progress to
+   video.currentTime (all-intra encode = instant precise seeks). Without JS
+   the section stays a 56svh static band (height gated on html.js). */
+html.js .descent--video { height: var(--descent-h, 350vh); min-height: 0; }
+.descent__sticky { position: relative; height: 100%; overflow: hidden; }
+html.js .descent--video .descent__sticky {
+  position: sticky; top: 0;
+  height: 100vh; height: 100svh;
+}
 
 .descent__fallback {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
 }
-/* The video sits above the surface cover and fades in once it actually
-   plays — the hero dissolves from the surface still into the descent and
-   lands back on that same surface (no black flash, no hard cut). */
+/* The video sits above the 2560w surface still and is visible only while
+   descending: at landing it fades out to reveal the crisp still beneath
+   (the video's last frame matches it, so the crossfade is seamless);
+   scrubbing back up fades the video in again. */
 .descent__video {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.35s ease;
 }
-html.js .descent.is-playing .descent__video { opacity: 1; }
-/* Telemetry only makes sense while descending — fade it in with the video */
+html.js .descent--video.is-ready:not(.is-landed) .descent__video { opacity: 1; }
+/* Telemetry appears once the scrub is armed */
 html.js .descent--video .descent__hud,
 html.js .descent--video .descent__gauge { opacity: 0; transition: opacity 0.5s ease; }
-html.js .descent--video.is-playing .descent__hud,
-html.js .descent--video.is-playing .descent__gauge { opacity: 1; }
+html.js .descent--video.is-ready .descent__hud,
+html.js .descent--video.is-ready .descent__gauge { opacity: 1; }
+
+/* Scroll-text snippets: fade in/out at their data-show/data-hide ranges */
+.descent__text {
+  position: absolute;
+  left: clamp(1.2rem, 7vw, 6rem);
+  top: 50%;
+  z-index: 2;
+  max-width: 34ch;
+  opacity: 0;
+  transform: translateY(calc(-50% + 16px));
+  filter: blur(6px);
+  transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
+  pointer-events: none;
+  display: none;
+}
+html.js .descent__text { display: block; }
+.descent__text.visible { opacity: 1; transform: translateY(-50%); filter: blur(0); }
+.descent__text p {
+  font-family: var(--font-cine-body);
+  font-weight: 300;
+  font-size: clamp(1.15rem, 1rem + 1vw, 1.6rem);
+  line-height: 1.5;
+  color: var(--text-1);
+  margin: 0;
+  max-width: none;
+  text-shadow: 0 2px 18px rgba(6, 9, 19, 0.95), 0 0 44px rgba(6, 9, 19, 0.7);
+}
 
 .descent__overlay {
   position: absolute; left: 0; right: 0; bottom: 0;
@@ -1120,9 +1158,13 @@ html.js .descent__gauge { display: block; }
   .is-warp-origin .planet { animation: none; }
   html.js body.is-warping::before { content: none; }
   html.js body.is-arriving::after { animation: none; }
-  /* Descent hero (§29/§31): the video never plays (descent.js bails) and is
-     hidden so the static surface fallback is the cover; telemetry hidden. */
-  .descent__video, .descent__hud, .descent__gauge { display: none !important; }
+  /* Descent hero (§29/§31): the video never loads (descent.js bails), the
+     pinned scrub track collapses to a static band, and the surface fallback
+     is the cover; telemetry and scroll-text hidden. */
+  .descent__video, .descent__hud, .descent__gauge,
+  .descent__text { display: none !important; }
+  html.js .descent--video { height: 56vh; height: 56svh; }
+  html.js .descent--video .descent__sticky { position: relative; height: 100%; }
   html.js .descent__title .ls { opacity: 1; transform: none; transition: none; }
 }
 
@@ -1131,7 +1173,8 @@ html.js .descent__gauge { display: block; }
   .solar-nav, .aurora { display: none; }
   body[class*="planet-"]::after { content: none; }
   .descent { height: auto !important; }
-  .descent__video, .descent__fallback,
+  .descent__sticky { position: static !important; height: auto !important; }
+  .descent__video, .descent__fallback, .descent__text,
   .descent__hud, .descent__gauge, .hero__scene { display: none; }
   .descent__overlay { position: static; background: none; }
   .descent__title .ls { opacity: 1; transform: none; }

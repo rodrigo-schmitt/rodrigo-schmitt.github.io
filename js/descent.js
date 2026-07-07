@@ -1,15 +1,20 @@
-/* Cinematic descent hero — native video, plays once and freezes on the surface.
-   Progressive enhancement: with JS disabled or under reduced motion the video
-   never plays (and never downloads) — the surface poster/fallback is the cover.
+/* Cinematic descent hero — scroll-scrubbed native video.
+   The pinned 100svh viewport scrubs the all-intra descent MP4 with the scroll
+   position (video stays paused; currentTime follows an eased target). Text
+   snippets fade in/out at their data-show/data-hide ranges, telemetry tracks
+   the descent, and at landing the video crossfades to the 2560w surface still
+   (CSS) while the title letter-splits in.
+
+   Progressive enhancement: with JS disabled or under reduced motion the hero
+   is a static surface cover (pure CSS) and no video bytes are downloaded.
 
    Markup contract (video pages only; stills pages are pure CSS):
-     <section class="descent descent--video" data-descent="moon">
-       <img class="descent__fallback" ...>   (surface cover, real alt)
-       <video class="descent__video" muted playsinline preload="none"
-              poster="..." src="/images/videos/{planet}_descent.mp4"></video>
-       ... HUD / gauge / overlay (caption + title) ...
-   The 6s descent drives --dp (gauge fill) + the telemetry HUD; on ended the
-   section gets .is-landed and the title letter-splits in. */
+     <section class="descent descent--video" data-descent="moon" style="--descent-h:350vh">
+       <div class="descent__sticky">
+         <img class="descent__fallback" ...>   (surface cover, real alt)
+         <video class="descent__video" muted playsinline preload="none" ...>
+         <div class="descent__text" data-show="0.08" data-hide="0.40">...</div>
+         ... HUD / gauge / overlay (caption + title) ... */
 (function () {
   "use strict";
 
@@ -19,7 +24,7 @@
   if (!video) return;
 
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reducedMotion) return; /* CSS §27 hides the video; static surface cover */
+  if (reducedMotion) return; /* CSS §27 collapses the hero to a static cover */
 
   var planet = section.getAttribute("data-descent") || "earth";
 
@@ -35,6 +40,14 @@
   var tele = TELEMETRY[planet] || TELEMETRY.earth;
   var hudAlt = section.querySelector('[data-hud="alt"]');
   var hudVel = section.querySelector('[data-hud="vel"]');
+  var texts = [];
+  section.querySelectorAll(".descent__text").forEach(function (el) {
+    texts.push({
+      el: el,
+      show: parseFloat(el.getAttribute("data-show") || "0"),
+      hide: parseFloat(el.getAttribute("data-hide") || "1")
+    });
+  });
 
   /* ---- Letter-split the title (assembles on landing) ---- */
   var title = section.querySelector(".descent__title");
@@ -61,7 +74,17 @@
     title.appendChild(holder);
   }
 
+  function progress() {
+    var rect = section.getBoundingClientRect();
+    var track = rect.height - window.innerHeight;
+    if (track <= 0) return 1;
+    return Math.max(0, Math.min(1, -rect.top / track));
+  }
+
+  var lastDp = -1;
   function hud(p) {
+    if (Math.abs(p - lastDp) < 0.0005) return;
+    lastDp = p;
     section.style.setProperty("--dp", p.toFixed(4));
     if (hudAlt) {
       var alt = tele[0] * (1 - p);
@@ -73,53 +96,57 @@
     }
   }
 
-  var landed = false;
-  function land() {
-    if (landed) return;
-    landed = true;
-    hud(1);
-    section.classList.add("is-landed");
-  }
-
-  /* Telemetry follows video time while it plays */
-  var raf = 0;
-  function tick() {
-    var d = video.duration;
-    if (d) hud(Math.min(1, video.currentTime / d));
-    if (video.ended) { land(); return; }
-    raf = requestAnimationFrame(tick);
-  }
-  video.addEventListener("play", function () {
-    cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(tick);
-  });
-  video.addEventListener("ended", land);
-
-  /* Fade the video in only once real frames are rendering (CSS transitions
-     from the surface cover, so there is never a black flash) */
-  video.addEventListener("playing", function () {
-    section.classList.add("is-playing");
-  });
-
-  /* Start the descent once the hero is prominently in view: immediately on
-     subpages (hero sits at the top), on first scroll for the homepage
-     section. Muted + playsinline permits programmatic playback; if the
-     browser still blocks it, land so the title shows over the cover. */
-  var started = false;
-  function start() {
-    if (started) return;
-    started = true;
-    window.removeEventListener("scroll", check);
+  /* ---- Load the video once the hero approaches the viewport ---- */
+  var ready = false;
+  function arm() {
     video.preload = "auto";
-    var attempt = video.play();
-    if (attempt && attempt.catch) attempt.catch(land);
-    /* Safety: never leave the title hidden (stalled network/decode) */
-    setTimeout(land, 9500);
+    video.addEventListener("seeked", function onFirstSeek() {
+      video.removeEventListener("seeked", onFirstSeek);
+      ready = true;
+      section.classList.add("is-ready");
+    });
+    if (video.readyState >= 1) {
+      video.currentTime = 0.001;
+    } else {
+      video.addEventListener("loadedmetadata", function () {
+        video.currentTime = 0.001;
+      });
+    }
+    video.load();
   }
-  function check() {
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { arm(); io.disconnect(); }
+    }, { rootMargin: "200% 0px" });
+    io.observe(section);
+  } else {
+    arm();
+  }
+
+  /* ---- Scrub loop: scroll -> currentTime (video stays paused) ---- */
+  var landed = false;
+  var current = 0;
+  (function tick() {
     var rect = section.getBoundingClientRect();
-    if (rect.bottom > 0 && rect.top < window.innerHeight * 0.4) start();
-  }
-  window.addEventListener("scroll", check, { passive: true });
-  check();
+    var onScreen = rect.bottom > 0 && rect.top < window.innerHeight;
+    if (onScreen) {
+      var p = progress();
+      hud(p);
+      if (!landed && p > 0.92) { landed = true; section.classList.add("is-landed"); }
+      else if (landed && p < 0.84) { landed = false; section.classList.remove("is-landed"); }
+      for (var i = 0; i < texts.length; i++) {
+        var t = texts[i];
+        t.el.classList.toggle("visible", p >= t.show && p < t.hide);
+      }
+      if (ready && video.duration) {
+        var target = p * (video.duration - 0.05);
+        current += (target - current) * 0.2;
+        if (Math.abs(target - current) < 0.01) current = target;
+        if (!video.seeking && Math.abs(video.currentTime - current) > 0.02) {
+          video.currentTime = current;
+        }
+      }
+    }
+    requestAnimationFrame(tick);
+  })();
 })();

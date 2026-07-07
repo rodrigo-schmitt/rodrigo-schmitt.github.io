@@ -53,24 +53,28 @@
 
   <main id="main">
 
-    <section class="descent descent--video" data-descent="mars">
-      <img class="descent__fallback"
-           src="/images/planets/mars_surface-1600.webp"
-           srcset="/images/planets/mars_surface-960.webp 960w, /images/planets/mars_surface-1600.webp 1600w, /images/planets/mars_surface-2560.webp 2560w"
-           sizes="100vw"
-           alt="The rust-red Martian desert with mountain ranges fading into dusty haze">
-      <video class="descent__video" muted playsinline preload="none"
-             poster="/images/planets/mars_surface-1600.webp"
-             src="/images/videos/mars_descent.mp4" aria-hidden="true"></video>
-      <div class="descent__hud" aria-hidden="true">
-        <div><strong>&#9678; MARS</strong></div>
-        <div>ALT <span data-hud="alt">250</span> KM</div>
-        <div>VEL <span data-hud="vel">3.55</span> KM/S</div>
-      </div>
-      <div class="descent__gauge" aria-hidden="true"><i>ORBIT</i><i>DESCENT</i><i>SURFACE</i></div>
-      <div class="descent__overlay">
-        <p class="descent__caption">Field notes from the red planet</p>
-        <h1 class="descent__title">Book List</h1>
+    <section class="descent descent--video" data-descent="mars" style="--descent-h:350vh">
+      <div class="descent__sticky">
+        <img class="descent__fallback"
+             src="/images/planets/mars_surface-1600.webp"
+             srcset="/images/planets/mars_surface-960.webp 960w, /images/planets/mars_surface-1600.webp 1600w, /images/planets/mars_surface-2560.webp 2560w"
+             sizes="100vw"
+             alt="The rust-red Martian desert with mountain ranges fading into dusty haze">
+        <video class="descent__video" muted playsinline preload="none"
+               poster="/images/planets/mars_surface-1600.webp"
+               src="/images/videos/mars_descent.mp4" aria-hidden="true"></video>
+        <div class="descent__text" data-show="0.08" data-hide="0.40"><p>Reading three books on a subject makes you more knowledgeable than most.</p></div>
+        <div class="descent__text" data-show="0.48" data-hide="0.78"><p>Favorites from a lifetime of reading &mdash; grouped by theme.</p></div>
+        <div class="descent__hud" aria-hidden="true">
+          <div><strong>&#9678; MARS</strong></div>
+          <div>ALT <span data-hud="alt">250</span> KM</div>
+          <div>VEL <span data-hud="vel">3.55</span> KM/S</div>
+        </div>
+        <div class="descent__gauge" aria-hidden="true"><i>ORBIT</i><i>DESCENT</i><i>SURFACE</i></div>
+        <div class="descent__overlay">
+          <p class="descent__caption">Field notes from the red planet</p>
+          <h1 class="descent__title">Book List</h1>
+        </div>
       </div>
     </section>
 
