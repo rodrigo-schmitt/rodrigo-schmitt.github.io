@@ -987,14 +987,24 @@ html.js .descent--video.is-ready .descent__gauge { opacity: 1; }
 html.js .descent__text { display: block; }
 .descent__text.visible { opacity: 1; transform: translateY(-50%); filter: blur(0); }
 .descent__text p {
+  /* Bold white over moving footage (Portal-style) for readability */
   font-family: var(--font-cine-body);
-  font-weight: 300;
-  font-size: clamp(1.15rem, 1rem + 1vw, 1.6rem);
-  line-height: 1.5;
-  color: var(--text-1);
+  font-weight: 700;
+  font-size: clamp(1.2rem, 1rem + 1.1vw, 1.7rem);
+  line-height: 1.45;
+  color: #fff;
   margin: 0;
   max-width: none;
   text-shadow: 0 2px 18px rgba(6, 9, 19, 0.95), 0 0 44px rgba(6, 9, 19, 0.7);
+}
+.descent__text cite {
+  display: block;
+  margin-top: 0.6em;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.68em;
+  letter-spacing: 0.08em;
+  color: rgba(230, 234, 242, 0.8);
 }
 
 .descent__overlay {
