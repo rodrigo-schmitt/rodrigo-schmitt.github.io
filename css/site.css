@@ -261,9 +261,10 @@ main { display: block; padding: calc(var(--nav-height) + var(--space-5)) 0 var(-
 .hero__layout { display: flex; gap: var(--space-5); align-items: center; }
 .hero__text { flex: 1 1 auto; }
 .hero__eyebrow {
-  font-family: var(--font-display);
-  font-size: var(--fs-sm); font-weight: 500;
-  letter-spacing: 0.14em; text-transform: uppercase;
+  /* Cinematic overline per the animated-website label spec (DM Sans, wide tracking) */
+  font-family: "DM Sans", var(--font-body);
+  font-size: var(--fs-xs); font-weight: 500;
+  letter-spacing: 0.3em; text-transform: uppercase;
   color: var(--accent-cyan);
   margin-bottom: var(--space-2);
 }
@@ -657,7 +658,7 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 .planet-link {
   position: relative;
   display: flex; align-items: center; justify-content: center;
-  padding: 0.5em;
+  padding: 0.35em 0.5em 0.6em;
   border-radius: var(--radius-sm);
   background-image: none;
 }
@@ -669,20 +670,20 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
   outline-offset: 3px;
 }
 
-/* Desktop: label = pill tooltip hanging below the header bar */
+/* Desktop: label centered directly under its planet, INSIDE the header bar.
+   Absolutely positioned so it adds no width — links stay icon-sized. */
 .site-nav .planet-link__label {
   position: absolute;
-  top: calc(100% + 12px);
+  top: calc(100% - 5px);
   left: 50%;
   transform: translateX(-50%);
   font-family: var(--font-display);
-  font-size: var(--fs-xs);
+  font-size: 0.58rem;
+  line-height: 1;
+  letter-spacing: 0.05em;
   white-space: nowrap;
   color: var(--text-1);
-  background: var(--panel-solid);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 0.15em 0.7em;
+  text-shadow: 0 1px 4px rgba(6, 9, 19, 0.9);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.18s ease;
@@ -694,11 +695,13 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 /* Mobile dropdown: planet icon + always-visible label rows */
 @media (max-width: 760px) {
   .site-nav ul { align-items: flex-start; }
-  .site-nav .planet-link { justify-content: flex-start; gap: 0.7em; }
+  .site-nav .planet-link { justify-content: flex-start; gap: 0.7em; padding: 0.6em 0.7em; }
   .site-nav .planet-link__label {
     position: static; transform: none; opacity: 1;
-    background: none; border: 0; padding: 0;
     font-size: var(--fs-sm);
+    line-height: 1.4;
+    letter-spacing: normal;
+    text-shadow: none;
     pointer-events: auto;
   }
 }
@@ -904,39 +907,9 @@ body.nebula-low  .starfield::before { transform: translateY(-8vh); }
   to   { transform: skewY(-5deg) translateX(3%); opacity: 1; }
 }
 
-/* ---------- 26. Astronaut scene (homepage) ---------- */
-.astro-scene {
-  position: relative;
-  height: clamp(200px, 26vw, 280px);
-  margin-top: var(--space-6);
-  overflow: hidden;
-}
-.astro-scene::after {
-  content: "";
-  position: absolute; left: 50%; bottom: 0;
-  width: 190%; height: 55%;
-  transform: translate(-50%, 55%);
-  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-  background: radial-gradient(ellipse at 50% 0%,
-      rgba(96, 165, 250, 0.22),
-      rgba(62, 156, 110, 0.08) 50%,
-      transparent 75%);
-  box-shadow:
-    0 -1px 0 rgba(147, 197, 253, 0.4),
-    0 -10px 30px rgba(96, 165, 250, 0.15);
-}
-.astro-scene__figure {
-  position: absolute;
-  left: 58%; bottom: 14%;
-  width: clamp(90px, 12vw, 130px);
-  height: auto;
-  z-index: 1;
-  animation: astro-sway 6s ease-in-out infinite alternate;
-}
-@keyframes astro-sway {
-  from { transform: rotate(-1deg) translateY(0); }
-  to   { transform: rotate(1deg) translateY(-3px); }
-}
+/* ---------- 26. (retired July 2026) ---------- */
+/* Was the illustrated SVG astronaut scene at the bottom of the homepage;
+   removed when the photographic astronaut hero (§32) took over. */
 
 /* ---------- 29. Cinematic descent hero (video + still modes) ---------- */
 /* Full-bleed hero at the top of hero pages — normal page scroll, no pinning.
@@ -1098,12 +1071,30 @@ html.js .descent__gauge { display: block; }
   .hero__scene { opacity: 0.3; }
 }
 
+/* ---------- 33. Photoreal planets (homepage solar-nav) ---------- */
+/* Circular cutouts from the 4K stills (images/planets/nav/) replace the CSS
+   gradient spheres in the big solar-nav only; the header keeps CSS spheres. */
+.planet-photo {
+  background: none;
+  box-shadow: none;
+  object-fit: contain;
+  filter: drop-shadow(0 0 calc(var(--planet-size, 26px) / 2.5) var(--p-glow));
+}
+/* Saturn's rings: natural aspect, sized by height, negative margins keep the
+   link's layout box the same as its round siblings (no radius: rings must
+   not be clipped, and the aria-current outline hugs the wide box) */
+.planet-photo.planet--saturn {
+  width: auto;
+  height: calc(var(--planet-size, 26px) * 1.5);
+  margin: calc(var(--planet-size, 26px) * -0.25) calc(var(--planet-size, 26px) * -0.6);
+  border-radius: 0;
+}
+
 /* ---------- 27. Reduced motion (planetary additions — keep after §20-26) ---------- */
 @media (prefers-reduced-motion: reduce) {
   .solar-nav__sun::after,
   .solar-nav .planet-link,
-  .aurora,
-  .astro-scene__figure { animation: none; }
+  .aurora { animation: none; }
   .planet-link .planet { transition: none; }
   .planet-link:hover .planet,
   .planet-link:focus-visible .planet { transform: none; }
@@ -1125,7 +1116,7 @@ html.js .descent__gauge { display: block; }
 
 /* ---------- 28. Print (planetary additions) ---------- */
 @media print {
-  .solar-nav, .astro-scene, .aurora { display: none; }
+  .solar-nav, .aurora { display: none; }
   body[class*="planet-"]::after { content: none; }
   .descent { height: auto !important; }
   .descent__video, .descent__fallback,
