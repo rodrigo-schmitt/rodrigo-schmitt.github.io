@@ -95,11 +95,31 @@
   });
   video.addEventListener("ended", land);
 
-  /* Start the descent (muted + playsinline permits autoplay). If the browser
-     still blocks it, land immediately so the title shows over the poster. */
-  video.preload = "auto";
-  var attempt = video.play();
-  if (attempt && attempt.catch) attempt.catch(land);
-  /* Safety: never leave the title hidden (slow network, stalled decode) */
-  setTimeout(land, 9500);
+  /* Fade the video in only once real frames are rendering (CSS transitions
+     from the surface cover, so there is never a black flash) */
+  video.addEventListener("playing", function () {
+    section.classList.add("is-playing");
+  });
+
+  /* Start the descent once the hero is prominently in view: immediately on
+     subpages (hero sits at the top), on first scroll for the homepage
+     section. Muted + playsinline permits programmatic playback; if the
+     browser still blocks it, land so the title shows over the cover. */
+  var started = false;
+  function start() {
+    if (started) return;
+    started = true;
+    window.removeEventListener("scroll", check);
+    video.preload = "auto";
+    var attempt = video.play();
+    if (attempt && attempt.catch) attempt.catch(land);
+    /* Safety: never leave the title hidden (stalled network/decode) */
+    setTimeout(land, 9500);
+  }
+  function check() {
+    var rect = section.getBoundingClientRect();
+    if (rect.bottom > 0 && rect.top < window.innerHeight * 0.4) start();
+  }
+  window.addEventListener("scroll", check, { passive: true });
+  check();
 })();

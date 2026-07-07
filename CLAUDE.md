@@ -51,14 +51,16 @@ covers + `nav/` circular planet sprites), `images/videos/` (web-encoded descent 
 - **Concept: every planet page opens with its planet's surface as a full-bleed hero;
   on video pages the descent from orbit plays once and freezes there.** Six hero pages
   (Home, Projects, Book List, Movie List, Publications & CV, Grad 101) start with a
-  `section.descent` — a plain 100svh block (92svh stills), **normal page scroll, no pinning**.
+  `section.descent` — a plain 56svh band (50svh stills), **normal page scroll, no pinning**.
   Two modes:
   - **Video mode** (`.descent--video`, Home/Earth, Projects/Moon, Book List/Mars): native
     `<video muted playsinline preload="none">` from `/images/videos/{planet}_descent.mp4`
     (H.264 crf22 `+faststart`, no audio, <8 MB). `js/descent.js` plays it once when motion is
-    allowed; the last frame IS the surface cover. Telemetry HUD + gauge follow
-    `currentTime/duration` via `--dp`; on `ended` the section gets `.is-landed` and the title
-    letter-splits in. **No `autoplay` attribute** — JS-initiated only.
+    allowed AND the section's top has entered the top 40% of the viewport (immediate on
+    subpages; on first scroll for the homepage band); the video, HUD and gauge fade in over
+    the surface cover on `is-playing`, and the last frame IS the surface cover. Telemetry
+    follows `currentTime/duration` via `--dp`; on `ended` the section gets `.is-landed` and
+    the title letter-splits in. **No `autoplay` attribute** — JS-initiated only.
   - **Still mode** (`.descent--still`, Movie List/Jupiter, Publications/Saturn, Grad/Uranus —
     no source videos yet): the surface image, static, title visible immediately, HUD reads
     "SURFACE CAM", no gauge, no `descent.js`. Swap to video mode when Higgsfield descent

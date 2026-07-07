@@ -41,7 +41,7 @@
   --radius: 14px;
   --radius-lg: 20px;
 
-  --measure: 70ch;
+  --measure: 85ch;
   --container: 1120px;
   --nav-height: 60px;
 }
@@ -172,7 +172,7 @@ body.nebula-low .starfield::after { top: auto; bottom: -25vmax; }
 
 /* ---------- 5. Layout ---------- */
 .container { max-width: var(--container); margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2rem); }
-.container--narrow { max-width: 820px; }
+.container--narrow { max-width: 940px; }
 main { display: block; padding: calc(var(--nav-height) + var(--space-5)) 0 var(--space-6); }
 
 .grid { display: grid; gap: var(--space-4); }
@@ -691,6 +691,9 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 .site-nav .planet-link:hover .planet-link__label,
 .site-nav .planet-link:focus-visible .planet-link__label,
 .site-nav .planet-link[aria-current="page"] .planet-link__label { opacity: 1; }
+/* One label at a time: hovering any planet hides the current page's label so
+   adjacent labels never overlap */
+.site-nav ul:has(.planet-link:hover) .planet-link[aria-current="page"]:not(:hover) .planet-link__label { opacity: 0; }
 
 /* Mobile dropdown: planet icon + always-visible label rows */
 @media (max-width: 760px) {
@@ -769,8 +772,8 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 .solar-nav__list li:nth-child(2) { left: 31%;   --planet-size: calc(var(--planet-base) * 0.55); }
 .solar-nav__list li:nth-child(3) { left: 44.5%; --planet-size: calc(var(--planet-base) * 0.75); }
 .solar-nav__list li:nth-child(4) { left: 58.5%; --planet-size: calc(var(--planet-base) * 1.35); }
-.solar-nav__list li:nth-child(5) { left: 72.5%; --planet-size: calc(var(--planet-base) * 1.15); }
-.solar-nav__list li:nth-child(6) { left: 87%;   --planet-size: calc(var(--planet-base) * 0.95); }
+.solar-nav__list li:nth-child(5) { left: 71%;   --planet-size: calc(var(--planet-base) * 1.15); }
+.solar-nav__list li:nth-child(6) { left: 89.5%; --planet-size: calc(var(--planet-base) * 0.95); }
 
 .solar-nav .planet-link {
   padding: 0.4em;
@@ -922,9 +925,9 @@ body.nebula-low  .starfield::before { transform: translateY(-8vh); }
    No-JS / reduced motion: static surface poster/fallback; zero video bytes. */
 .descent {
   position: relative;
-  height: 100vh;
-  height: 100svh;
-  min-height: 480px;
+  height: 56vh;
+  height: 56svh;
+  min-height: 420px;
   overflow: hidden;
   background: var(--bg-0);
   margin-bottom: var(--space-5);
@@ -932,20 +935,29 @@ body.nebula-low  .starfield::before { transform: translateY(-8vh); }
   --font-cine-display: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-cine-body: "DM Sans", var(--font-body);
 }
-.descent--still { height: 92vh; height: 92svh; }
+.descent--still { height: 50vh; height: 50svh; }
 
 .descent__fallback {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
 }
-/* Video sits above the fallback; it renders its poster (same surface art)
-   until playback starts, so there is never a black flash. */
+/* The video sits above the surface cover and fades in once it actually
+   plays — the hero dissolves from the surface still into the descent and
+   lands back on that same surface (no black flash, no hard cut). */
 .descent__video {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
+html.js .descent.is-playing .descent__video { opacity: 1; }
+/* Telemetry only makes sense while descending — fade it in with the video */
+html.js .descent--video .descent__hud,
+html.js .descent--video .descent__gauge { opacity: 0; transition: opacity 0.5s ease; }
+html.js .descent--video.is-playing .descent__hud,
+html.js .descent--video.is-playing .descent__gauge { opacity: 1; }
 
 .descent__overlay {
   position: absolute; left: 0; right: 0; bottom: 0;
@@ -1016,7 +1028,7 @@ html.js .descent__hud { display: block; }
   z-index: 3;
   right: clamp(1rem, 3vw, 2.2rem);
   top: 50%;
-  height: 30vh;
+  height: 20vh;
   width: 2px;
   transform: translateY(-50%);
   background: rgba(148, 163, 184, 0.22);
