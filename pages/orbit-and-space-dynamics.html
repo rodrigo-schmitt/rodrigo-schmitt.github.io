@@ -6,13 +6,13 @@
   <title>Astrodynamics — Rodrigo Schmitt</title>
   <meta name="description" content="Rodrigo Schmitt's astrodynamics work: Artemis-era mission design with Kerbal Space Program + Realism Overhaul, CR3BP mission architectures, orbit determination for Brazilian satellites, and low-thrust transfers through the Van Allen belts.">
   <link rel="canonical" href="https://rodrigo-schmitt.github.io/pages/orbit-and-space-dynamics.html">
-  <link rel="icon" href="/images/astronaut.png">
+  <link rel="icon" href="/images/site/astronaut.png">
   <meta property="og:site_name" content="Rodrigo Schmitt">
   <meta property="og:title" content="Astrodynamics — Rodrigo Schmitt">
   <meta property="og:description" content="Artemis-era mission design, CR3BP architectures, orbit determination, and low-thrust transfer optimization with Van Allen belt radiation modeling.">
   <meta property="og:url" content="https://rodrigo-schmitt.github.io/pages/orbit-and-space-dynamics.html">
   <meta property="og:type" content="article">
-  <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/solar-system.jpg">
+  <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/site/solar-system.jpg">
   <link rel="preload" href="/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
   <script src="/js/site.js" defer></script>
@@ -68,24 +68,24 @@
         <p class="reveal">My project with Dr. Helio Kuga (National Institute for Space Research) aimed at coding methods of preliminary orbit determination in order to qualify them using real data from Brazilian satellites and analyze their numerical performance. I learnt a lot on the basics of Astrodynamics in the process and coded, in Fortran 90, the Gibbs and Gauss methods for orbit determination. These methods take, respectively, three and two position vectors of a spacecraft and use the time between their passage to predict the entire orbit.</p>
         <p class="reveal">I have also worked with satellite orbit integration using Python programming during a few graduate courses. You can find my codes for <a href="https://github.com/rodrigo-schmitt/Artificial-Satellites---Orbital-Movement" target="_blank" rel="noopener">Orbital Movement of Satellites</a>, <a href="https://github.com/rodrigo-schmitt/spacecraft_dynamics" target="_blank" rel="noopener">Spacecraft Dynamics &amp; Control</a> and <a href="https://github.com/rodrigo-schmitt/Periodic-Orbits-in-the-Three-Body-Problem-" target="_blank" rel="noopener">Periodic Orbits</a> in my Github page.</p>
         <figure class="fig--limit reveal">
-          <img src="/images/gibbs.png" alt="Diagram of the Gibbs method for orbit determination" loading="lazy">
+          <img src="/images/content/gibbs.png" alt="Diagram of the Gibbs method for orbit determination" loading="lazy">
           <figcaption>Gibbs method illustration (<a target="_blank" rel="noopener" href="https://sites.google.com/site/asen5050kemble/gibbs-method-orbit-determination">Source</a>).</figcaption>
         </figure>
 
         <h3 class="reveal">Low Thrust Orbit Optimization and Radiation Exposure</h3>
         <p class="reveal">The goal of my work with Dr. Antonio Prado (National Institute for Space Research) was to measure the amount of radiation a spacecraft receives once it leaves the sphere of influence of Earth in a Low Thrust Orbit (LTO). The spacecraft crosses the Van Allen belts many times during the transfer, in which particles such as protons and electrons can damage the onboard electronic equipment. I developed a mathematical model for the density of particles of the belt in space, as can be seen in the figure below, making it possible to integrate the flux of particles in time and compute the total dose of radiation absorbed by the spacecraft according to the chosen trajectory.</p>
         <figure class="fig--limit reveal">
-          <img src="/images/belts.jpg" alt="Contour map model of proton and electron flux in the Van Allen belts" loading="lazy">
+          <img src="/images/content/belts.jpg" alt="Contour map model of proton and electron flux in the Van Allen belts" loading="lazy">
           <figcaption>Contour map model for the flux of: a) protons, b) electrons in the Van Allen Belts; Re = 6378 km.</figcaption>
         </figure>
         <p class="reveal">Then, I incorporated a model for the Moon inclination variation at the time of the transfer. Since the Earth's axis changes with time, as well as the relative inclination of the Moon's orbit, it is important to be able to exploit this in order to choose orbits that pass through the less concentrated parts of the Van Allen Belts.</p>
         <figure class="fig--limit reveal">
-          <img src="/images/graficoimportante.JPG" alt="Plot of lunar orbit inclination relative to Earth's equator over time" loading="lazy">
+          <img src="/images/content/graficoimportante.JPG" alt="Plot of lunar orbit inclination relative to Earth's equator over time" loading="lazy">
           <figcaption>Inclination of the lunar orbit with respect to the Earth's equator according to the considered date. (R. B. Roncoli, 2005)</figcaption>
         </figure>
         <p class="reveal">Finally, different trajectories were computed, varying in initial eccentricity, initial height, transfer date (proxy for the initial Moon orbit inclination) and type of propulsion system, which gave the following final parameters of interest: mission duration, fuel consumption, time in Van Allen belts and fluence of protons and electrons absorbed. Using an optimization algorithm, thousands of trajectories were tested and the best ones with respect to the final parameters can be seen in the plots below.</p>
         <figure class="fig--limit reveal">
-          <img src="/images/radiation_inclinations.png" alt="Plots of particle fluence versus mission time for many lunar orbit inclinations" loading="lazy">
+          <img src="/images/content/radiation_inclinations.png" alt="Plots of particle fluence versus mission time for many lunar orbit inclinations" loading="lazy">
           <figcaption>Fluence of particles as a function of mission time for a myriad of inclinations of the Moon in respect to the Earth's orbit.</figcaption>
         </figure>
       </section>

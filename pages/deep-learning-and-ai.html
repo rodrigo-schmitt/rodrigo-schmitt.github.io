@@ -6,13 +6,13 @@
   <title>Deep Learning &amp; AI — Rodrigo Schmitt</title>
   <meta name="description" content="Rodrigo Schmitt's AI work: generative design of space systems via Reinforcement Learning, Explainable AI for mission architecture trade-offs (X-SMART), computer-vision spacecraft rendezvous, and neural-network surrogates for transfer optimization.">
   <link rel="canonical" href="https://rodrigo-schmitt.github.io/pages/deep-learning-and-ai.html">
-  <link rel="icon" href="/images/astronaut.png">
+  <link rel="icon" href="/images/site/astronaut.png">
   <meta property="og:site_name" content="Rodrigo Schmitt">
   <meta property="og:title" content="Deep Learning &amp; AI — Rodrigo Schmitt">
   <meta property="og:description" content="Generative design via Reinforcement Learning, Explainable AI for mission trade-offs, computer-vision spacecraft navigation, and ANN surrogates.">
   <meta property="og:url" content="https://rodrigo-schmitt.github.io/pages/deep-learning-and-ai.html">
   <meta property="og:type" content="article">
-  <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/ai.jpeg">
+  <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/site/ai.jpeg">
   <link rel="preload" href="/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
   <script src="/js/site.js" defer></script>
@@ -72,42 +72,42 @@
         <h3 class="reveal">Data Scientist at Let's Code Academy</h3>
         <p class="reveal">As a data scientist, I could learn from a team of outstanding computer scientists and engineers. The main project I developed was an Artificial Intelligence for the company's Learning Management System, which aimed at recommending exercises to a student in their learning journey through Reinforcement Learning models. The first step was clustering students into four groups, which we named "genius", "tryhard", "transition" and "beginner". These clusters were made using variables such as the number of exercises the student completes, as well as the difficulty of each exercise and the time he puts into the Learning Management System. Then, another metric is created for the Reinforcement Learning algorithm: the accumulated learning, that merges the students' grade and the difficulty of an exercise in order to measure the reward used in the model.</p>
         <figure class="fig--limit reveal">
-          <img src="/images/clustering.png" alt="Scatter plot of student clusters for the recommendation system" loading="lazy">
+          <img src="/images/content/clustering.png" alt="Scatter plot of student clusters for the recommendation system" loading="lazy">
           <figcaption>Student clustering for the Reinforcement Learning recommendation system project.</figcaption>
         </figure>
         <p class="reveal">The data from each student cluster was then used by a Multi-Armed Bandit Agent (i.e. the Artificial Intelligence) responsible for evaluating which exercise difficulty best fits the student profile. The figure below shows how a test's difficulty (very easy to very hard) can affect the learning outcome for a student (represented in 0-10 scale with 2.5 increments). Here, thicker lines indicate more expressive outcomes:</p>
         <figure class="fig--limit reveal">
-          <img src="/images/learning_obtained.png" alt="Diagram of accumulated learning by test difficulty for the genius cluster" loading="lazy">
+          <img src="/images/content/learning_obtained.png" alt="Diagram of accumulated learning by test difficulty for the genius cluster" loading="lazy">
           <figcaption>Schematization of the accumulated learning obtained according to test difficulty for the "genius" student cluster.</figcaption>
         </figure>
 
         <h3 class="reveal">Neural network regression on Astrodynamics</h3>
         <p class="reveal">My projects on <a href="/pages/orbit-and-space-dynamics.html">Radiation Exposure Optimization in Low Thrust Transfers</a> culminated in the radiation absorption prediction for a spacecraft in a transfer to the Moon, given a set of initial parameters. In other words: a regression. I started modeling a simple Linear Regression, but evolved the model to a Support Vector Machine and, finally, a Neural Network. I cared for optimizing the hyperparameters through a Grid Search, creating a Pipeline and using feature scaling. Once the model was plotted against the simulation results, it was clear that it fitted much better the data than the linear regression.</p>
         <figure class="fig--limit reveal">
-          <img src="/images/model_comparison_1_el.png" alt="Comparison of regression models predicting electron absorption" loading="lazy">
+          <img src="/images/content/model_comparison_1_el.png" alt="Comparison of regression models predicting electron absorption" loading="lazy">
           <figcaption>Regression model comparison for the amount of electrons a spacecraft absorbs given a set of parameters (Propulsion System, initial eccentricity, height, etc).</figcaption>
         </figure>
 
         <h3 class="reveal">Deep Learning Specialization</h3>
         <p class="reveal">Through the 5 courses of the <a href="https://www.coursera.org/account/accomplishments/specialization/certificate/9PBV369FZ2DV" target="_blank" rel="noopener">Deep Learning Specialization</a>, I could build upon my experience with Machine Learning to a more advanced realm: Deep Neural Networks. The near 84-hour courses provided me with a much better technical expertise of the area and were filled with practical assignments that developed deep Neural Network algorithms from scratch together with very interesting applications. I have selected a few of the guided projects from the specialization below in order to show what I learned.</p>
         <figure class="fig--limit reveal">
-          <img src="/images/cat_detection.PNG" alt="Deep neural network architecture for cat detection" loading="lazy">
+          <img src="/images/content/cat_detection.PNG" alt="Deep neural network architecture for cat detection" loading="lazy">
           <figcaption>The architecture behind a deep Neural Network for cat detection.</figcaption>
         </figure>
         <figure class="fig--limit reveal">
-          <img src="/images/autonomous_cars.PNG" alt="Object detection output from an autonomous-car convolutional neural network" loading="lazy">
+          <img src="/images/content/autonomous_cars.PNG" alt="Object detection output from an autonomous-car convolutional neural network" loading="lazy">
           <figcaption>An autonomous car Convolutional Neural Network that detects 80 classes of objects (cars, people, etc).</figcaption>
         </figure>
         <figure class="fig--limit reveal">
-          <img src="/images/football_coach.PNG" alt="Visualization of a regularized neural network recommending football kick positions" loading="lazy">
+          <img src="/images/content/football_coach.PNG" alt="Visualization of a regularized neural network recommending football kick positions" loading="lazy">
           <figcaption>A regularized Neural Network that recommends positions where the goal keeper should kick the ball so the players can advance with it.</figcaption>
         </figure>
         <figure class="fig--limit reveal">
-          <img src="/images/neural_style_transfer.PNG" alt="Neural style transfer example merging a painting with a photo" loading="lazy">
+          <img src="/images/content/neural_style_transfer.PNG" alt="Neural style transfer example merging a painting with a photo" loading="lazy">
           <figcaption>An art generation Convolutional Neural Network that merges a painting's art style with any picture.</figcaption>
         </figure>
         <figure class="fig--limit reveal">
-          <img src="/images/rnn.PNG" alt="Recurrent neural network architecture for date translation" loading="lazy">
+          <img src="/images/content/rnn.PNG" alt="Recurrent neural network architecture for date translation" loading="lazy">
           <figcaption>The architecture behind a Recurrent Neural Network that translates human readable dates into machine readable dates.</figcaption>
         </figure>
       </section>

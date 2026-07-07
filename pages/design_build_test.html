@@ -6,13 +6,13 @@
   <title>Design, Build &amp; Test — Rodrigo Schmitt</title>
   <meta name="description" content="Rodrigo Schmitt's hands-on engineering: LIDAR-drone mapping for Mars EDL at MDRS, the ACECam optical navigation system at Stellerian, and carbon-fiber rocketry with Project Jupiter and RocketPy.">
   <link rel="canonical" href="https://rodrigo-schmitt.github.io/pages/design_build_test.html">
-  <link rel="icon" href="/images/astronaut.png">
+  <link rel="icon" href="/images/site/astronaut.png">
   <meta property="og:site_name" content="Rodrigo Schmitt">
   <meta property="og:title" content="Design, Build &amp; Test — Rodrigo Schmitt">
   <meta property="og:description" content="LIDAR-drone mapping for Mars EDL, ACECam optical navigation, and carbon-fiber rocketry with Project Jupiter and RocketPy.">
   <meta property="og:url" content="https://rodrigo-schmitt.github.io/pages/design_build_test.html">
   <meta property="og:type" content="article">
-  <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/multiphysics.jpg">
+  <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/site/multiphysics.jpg">
   <link rel="preload" href="/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
   <script src="/js/site.js" defer></script>
@@ -64,7 +64,7 @@
         <p class="reveal">The LIDAR module was configured from scratch to ensure optimal data capture. This involved calibrating sensor parameters, adjusting scan frequencies, and implementing custom-made codes to obtain accurate point cloud mappings. Proper alignment of the LIDAR with the drone's center of gravity was also a critical consideration.</p>
         <p class="reveal">To power the LIDAR and auxiliary systems, my team and I carefully integrated LiPo batteries and voltage converters, ensuring a stable power supply without exceeding the drone's 700g maximum payload limit. This was determined through iterative testing to find the optimal weight-power tradeoff.</p>
         <figure class="fig--limit reveal">
-          <img src="/images/lidar-drone.jpg" alt="Drone with mounted LIDAR sensor, battery, and Raspberry Pi" loading="lazy">
+          <img src="/images/content/lidar-drone.jpg" alt="Drone with mounted LIDAR sensor, battery, and Raspberry Pi" loading="lazy">
           <figcaption>(a) Drone assembly with LIDAR sensor and mount; (b) Drone full assembly during an EVA with battery and onboard computing via Raspberry Pi.</figcaption>
         </figure>
 
@@ -76,15 +76,15 @@
         <p class="reveal">Throughout the mission, the drone system underwent iterative refinements based on field testing conducted during multiple EVAs. Early flights revealed mechanical instabilities in the LIDAR mount and electromagnetic interference affecting sensor readings. To address these issues, I reinforced the backup 3D-printed mount for safety and implemented additional radiation shielding for the cables. The Raspberry Pi onboard computer played a key role in managing power distribution and data acquisition, running custom scripts for automated logging and remote SSH control.</p>
         <p class="reveal">Further tests conducted at various MDRS locations demonstrated the enhanced capabilities of the improved system. The combination of LIDAR data, IMU gyroscopic readings, and GPS coordinates allowed the generation of detailed 3D point clouds of the terrain. These high-resolution maps provide valuable insights into potential landing hazards and safe zones, paving the way for future autonomous drone scouts on Mars.</p>
         <figure class="fig--limit reveal">
-          <img src="/images/lidar_mappings.jpg" alt="Point-cloud terrain map generated from LIDAR scans" loading="lazy">
+          <img src="/images/content/lidar_mappings.jpg" alt="Point-cloud terrain map generated from LIDAR scans" loading="lazy">
           <figcaption>Point-cloud mapping of the LIDAR scan using the Raspberry Pi onboard computer.</figcaption>
         </figure>
         <figure class="fig--limit reveal">
-          <img src="/images/gyroscope.jpg" alt="Gyroscope angular velocity plots from the mission" loading="lazy">
+          <img src="/images/content/gyroscope.jpg" alt="Gyroscope angular velocity plots from the mission" loading="lazy">
           <figcaption>Gyroscope angular velocity readings during the mission.</figcaption>
         </figure>
         <figure class="fig--limit reveal">
-          <img src="/images/lidar_ranges.jpg" alt="Plot of mean LIDAR scan ranges" loading="lazy">
+          <img src="/images/content/lidar_ranges.jpg" alt="Plot of mean LIDAR scan ranges" loading="lazy">
           <figcaption>Mean value ranges of the LIDAR scans.</figcaption>
         </figure>
       </section>
@@ -95,12 +95,12 @@
         <p class="reveal">My contributions to this project focus on hardware integration, including assembling the system's Raspberry Pi-based processing unit and calibrating the onboard camera for real-time image acquisition. The goal of ACECam is to enhance autonomy in space missions by enabling precise pose estimation and automated spacecraft docking. This technology is crucial for upcoming satellite servicing missions, constellation coordination, and in-space inspections.</p>
         <p class="reveal">With support from an Air Force STTR Phase I award, ACECam is currently undergoing rigorous testing to validate its capabilities. Future iterations will incorporate more robust AI models for improved object recognition and tracking, ensuring its effectiveness for commercial and military space applications.</p>
         <figure class="fig--limit reveal">
-          <img src="/images/acecam.png" alt="ACECam optical navigation subsystem hardware" loading="lazy">
+          <img src="/images/content/acecam.png" alt="ACECam optical navigation subsystem hardware" loading="lazy">
           <figcaption>ACECam subsystem designed for optical navigation and proximity operations.</figcaption>
         </figure>
         <figure class="fig--limit reveal">
-          <video controls preload="none" poster="/images/acecam.png" width="640">
-            <source src="/images/acecam_video_v3.mp4" type="video/mp4">
+          <video controls preload="none" poster="/images/content/acecam.png" width="640">
+            <source src="/images/content/acecam_video_v3.mp4" type="video/mp4">
             Sorry, your browser doesn't support embedded videos.
           </video>
           <figcaption>ACECam demonstration video.</figcaption>
@@ -116,48 +116,48 @@
         <p class="reveal">I implemented a simple method of optimizing the dimensions of our rockets, such as tail radius, nosecone length and fin parameters, through a merit function that is maximized when a) the static margin (distance from Center of Mass to Center of Pressure) is close to the optimal value of 2.0 and b) the area of the rocket fins is minimal, in order to diminish drag.</p>
         <p class="reveal">This analysis was implemented in our in-house 6 degree-of-freedom rocket trajectory simulator, <a href="https://github.com/RocketPy-Team/RocketPy" target="_blank" rel="noopener">RocketPy</a>, which also makes use of the aerodynamic equations to foresee many characteristics of the rocket path.</p>
         <figure class="fig--limit reveal">
-          <img src="/images/trajectory_rp.png" alt="3D rocket trajectory prediction plotted by RocketPy" loading="lazy">
+          <img src="/images/content/trajectory_rp.png" alt="3D rocket trajectory prediction plotted by RocketPy" loading="lazy">
           <figcaption>Rocket trajectory prediction using RocketPy (Project Jupiter's rocket trajectory simulator).</figcaption>
         </figure>
 
         <h3 class="reveal">Computer Aided Design</h3>
         <p class="reveal">Parallel to preliminary design, it is also necessary to iterate over the project's CAD. After working extensively with extruding, inspecting, defining joints, etc in Fusion 360, I've grown very fond of creating computer-aided designs.</p>
         <figure class="fig--limit reveal">
-          <img src="/images/drawing_imperius.PNG" alt="Technical CAD drawings of the rocket Imperius" loading="lazy">
+          <img src="/images/content/drawing_imperius.PNG" alt="Technical CAD drawings of the rocket Imperius" loading="lazy">
           <figcaption>CAD drawings for the rocket Imperius.</figcaption>
         </figure>
         <figure class="fig--limit reveal">
-          <img src="/images/imperius.png" alt="3D rendering of the rocket Imperius" loading="lazy">
+          <img src="/images/content/imperius.png" alt="3D rendering of the rocket Imperius" loading="lazy">
           <figcaption>CAD 3D rendering for the rocket Imperius.</figcaption>
         </figure>
 
         <h3 class="reveal">Simulation</h3>
         <p class="reveal">Solid mechanics and fluid mechanics are an essential part of simulating an engineered design before actually manufacturing it. Here, I worked mainly with structural analysis of joints using ANSYS Mechanical, even though I have also worked in CFD simulations in ANSYS Fluent.</p>
         <figure class="fig--limit reveal">
-          <img src="/images/disks2.PNG" alt="CAD model with symmetry and force definitions for structural analysis" loading="lazy">
+          <img src="/images/content/disks2.PNG" alt="CAD model with symmetry and force definitions for structural analysis" loading="lazy">
           <figcaption>Exploiting symmetry and defining forces for the structural analysis.</figcaption>
         </figure>
         <figure class="fig--limit reveal">
-          <img src="/images/disks.PNG" alt="Von Mises stress and equivalent strain results" loading="lazy">
+          <img src="/images/content/disks.PNG" alt="Von Mises stress and equivalent strain results" loading="lazy">
           <figcaption>(Left) Von Mises Stress; (Right) Equivalent Strain.</figcaption>
         </figure>
 
         <h3 class="reveal">Manufacturing</h3>
         <p class="reveal">The final step in the design process is Manufacturing. I've had the opportunity of developing a vacuum infusion, carbon fiber laminated structure for three of Project Jupiter's rockets, through a technique that uses vacuum pressure to drive resin into a laminate. Materials are laid dry into the mold and the vacuum is applied before resin is introduced. Vacuum bagging greatly improves the fiber-to-resin ratio, and results in a stronger and lighter product.</p>
         <figure class="fig--limit reveal">
-          <video controls preload="none" poster="/images/fins.jpg" width="640">
-            <source src="/images/vacuum_infusion.mp4" type="video/mp4">
+          <video controls preload="none" poster="/images/content/fins.jpg" width="640">
+            <source src="/images/content/vacuum_infusion.mp4" type="video/mp4">
             Sorry, your browser doesn't support embedded videos.
           </video>
           <figcaption>Vacuum infusion process: Epoxy resin and hardener mixing; Vacuum infusion; Unmold; Final touch of resin.</figcaption>
         </figure>
         <p class="reveal">This process was developed by us and used to build our rockets' tubes and fins, using a carbon/kevlar reinforced hybrid composite for the fins. We also laminated the structure externally for our rocket Callisto, whose launch can be seen <a href="https://clips.twitch.tv/BlushingRoundLadiesOSkomodo" target="_blank" rel="noopener">here</a>. Last but not least, for a few of our rockets we also 3D printed nosecones, using glass fiber reinforcement in the inside to make it more rigid.</p>
         <figure class="fig--limit reveal">
-          <img src="/images/fins.jpg" alt="Carbon fiber fin during vacuum infusion lamination" loading="lazy">
+          <img src="/images/content/fins.jpg" alt="Carbon fiber fin during vacuum infusion lamination" loading="lazy">
           <figcaption>Fin vacuum infusion lamination: the dark part is resin spreading on the carbon fiber piece with the assistance of a vacuum pump, which prevents undesired bubbles.</figcaption>
         </figure>
         <figure class="fig--limit reveal">
-          <img src="/images/carbon-fiber-structure.jpg" alt="Finished carbon fiber rocket structure with tubes, nosecone and fins" loading="lazy">
+          <img src="/images/content/carbon-fiber-structure.jpg" alt="Finished carbon fiber rocket structure with tubes, nosecone and fins" loading="lazy">
           <figcaption>Final carbon fiber structure for the rocket Imperius: 5 carbon fiber tubes, glass fiber reinforced nosecone and 4 carbon fiber/kevlar fins.</figcaption>
         </figure>
       </section>
