@@ -15,9 +15,14 @@
   <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/site/solar-system.jpg">
   <link rel="preload" href="/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
+  <!-- Cinematic hero type only — sanctioned Google Fonts exception (CLAUDE.md) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
   <script src="/js/site.js" defer></script>
+  <script src="/js/descent.js" defer></script>
 </head>
-<body class="nebula-left planet-moon">
+<body class="nebula-left planet-moon has-descent">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="progress-bar" aria-hidden="true"></div>
   <div class="starfield" aria-hidden="true">
@@ -47,10 +52,32 @@
   <!-- ===== /SITE HEADER ===== -->
 
   <main id="main">
+
+    <section class="descent descent--frames" data-descent="moon" data-frames="90" style="--descent-h:300vh">
+      <div class="descent__sticky">
+        <canvas class="descent__canvas" aria-hidden="true"></canvas>
+        <img class="descent__fallback"
+             src="/images/planets/moon_surface-1920.webp"
+             srcset="/images/planets/moon_surface-960.webp 960w, /images/planets/moon_surface-1920.webp 1920w"
+             sizes="100vw" loading="lazy"
+             alt="The cratered lunar surface with Earth rising over the horizon">
+        <div class="descent__hud" aria-hidden="true">
+          <div><strong>&#9678; THE MOON</strong></div>
+          <div>ALT <span data-hud="alt">110</span> KM</div>
+          <div>VEL <span data-hud="vel">1.63</span> KM/S</div>
+        </div>
+        <div class="descent__gauge" aria-hidden="true"><i>ORBIT</i><i>DESCENT</i><i>SURFACE</i></div>
+        <div class="descent__overlay">
+          <p class="descent__caption">One small step, many systems</p>
+          <h1 class="descent__title">Projects</h1>
+        </div>
+        <div class="descent__cue" aria-hidden="true"></div>
+      </div>
+    </section>
+
     <div class="container">
 
       <header class="page-header" data-reveal-group>
-        <h1 class="reveal">Projects</h1>
         <p class="lede reveal">What, how and why? Space exploration is entering a new operational era: the Artemis program is returning humans to the Moon, and commercial ventures are rewriting the economics of cislunar logistics. My work sits at the intersection of these forces — designing mission architectures through <strong>Generative AI</strong> and <strong>Explainable AI</strong>, building <strong>computer vision</strong> navigation systems for spacecraft rendezvous, and contributing to the hardware systems that make it all real. The following pillars define my technical expertise.</p>
       </header>
 

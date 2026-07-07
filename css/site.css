@@ -554,8 +554,9 @@ html.js .reveal.is-visible { opacity: 1; transform: none; }
 
 /* ==========================================================================
    Planetary navigation system (§20+). Append-only from here: new sections
-   get new numbers; §27 (reduced motion) and §28 (print) must stay LAST so
-   their same-specificity overrides win the cascade.
+   get new numbers and are inserted ABOVE §27; §27 (reduced motion) and §28
+   (print) must stay the LAST two blocks so their same-specificity overrides
+   win the cascade.
    ========================================================================== */
 
 /* ---------- 20. Planets: palettes + spheres ---------- */
@@ -937,6 +938,182 @@ body.nebula-low  .starfield::before { transform: translateY(-8vh); }
   to   { transform: rotate(1deg) translateY(-3px); }
 }
 
+/* ---------- 29. Cinematic descent hero (shared shell + frames mode) ---------- */
+/* Scroll-scrubbed "orbit -> surface" cover at the top of hero pages.
+   Markup contract (one per page, direct child of <main>, outside .container):
+     <section class="descent descent--frames" data-descent="moon"
+              data-frames="90" style="--descent-h:300vh"> ...
+   Engine: /js/descent.js. The overlay type (Playfair Display + DM Sans) is
+   Google-Fonts-loaded only on hero pages — sanctioned exception, see CLAUDE.md.
+   No-JS / reduced motion: a static surface cover; no frames are downloaded. */
+.descent {
+  position: relative;
+  margin-bottom: var(--space-5);
+  --dp: 0;
+  --font-cine-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-cine-body: "DM Sans", var(--font-body);
+}
+html.js .descent { height: var(--descent-h, 300vh); }
+.descent__sticky {
+  position: relative;
+  min-height: 72vh;
+  overflow: hidden;
+  background: var(--bg-0);
+}
+html.js .descent__sticky { position: sticky; top: 0; min-height: 0; height: 100vh; height: 100svh; }
+
+.descent__canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+html.js .descent.is-ready .descent__canvas { opacity: 1; }
+.descent__fallback {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+/* In frames mode the canvas is the picture; the surface cover only serves
+   no-JS and reduced-motion (re-shown by §27). */
+html.js .descent--frames .descent__fallback { display: none; }
+
+.descent__overlay {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  z-index: 2;
+  padding: var(--space-6) clamp(1.2rem, 5vw, 4rem) var(--space-5);
+  background: linear-gradient(180deg, transparent, rgba(6, 9, 19, 0.55) 45%, rgba(6, 9, 19, 0.85));
+}
+.descent__caption {
+  font-family: var(--font-cine-body);
+  font-weight: 400;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin: 0 0 var(--space-2);
+  max-width: none;
+  text-shadow: 0 1px 10px rgba(6, 9, 19, 0.9);
+}
+.descent__title {
+  font-family: var(--font-cine-display);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  font-size: clamp(2.4rem, 1.8rem + 3.4vw, 4.6rem);
+  line-height: 1.08;
+  margin: 0;
+  color: var(--text-1);
+  text-shadow: 0 2px 26px rgba(6, 9, 19, 0.85);
+}
+/* Letter-split (spans created by JS only under motion): title assembles on landing */
+.descent__title .lsw { display: inline-block; white-space: nowrap; }
+html.js .descent__title .ls {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.45em);
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--i) * 40ms);
+}
+html.js .descent.is-landed .descent__title .ls { opacity: 1; transform: none; }
+
+/* Scroll cue: fades out as soon as the descent starts */
+.descent__cue {
+  position: absolute; left: 50%; bottom: 0.9rem;
+  z-index: 3;
+  width: 20px; height: 20px;
+  transform: translateX(-50%) rotate(45deg);
+  border-right: 2px solid rgba(230, 234, 242, 0.6);
+  border-bottom: 2px solid rgba(230, 234, 242, 0.6);
+  opacity: calc(1 - var(--dp) * 14);
+  animation: descent-cue 2.2s ease-in-out infinite;
+  pointer-events: none;
+  display: none;
+}
+html.js .descent__cue { display: block; }
+@keyframes descent-cue {
+  50% { transform: translate(-50%, 7px) rotate(45deg); }
+}
+
+/* The hero replaces the page's top padding and the arrival animation
+   (a transform on <main> would break the sticky canvas mid-rise). */
+body.has-descent main { padding-top: 0; }
+html.js body:has(.descent).is-arriving main { animation: none; }
+
+/* ---------- 30. Descent stills mode (no video: orbit -> surface crossfade) ---------- */
+.descent__orbit {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: none;
+}
+html.js .descent__orbit {
+  display: block;
+  opacity: calc(1 - (var(--dp) - 0.32) / 0.3);
+  transform: scale(calc(1 + var(--dp) * 0.22));
+  will-change: opacity, transform;
+}
+html.js .descent--stills .descent__fallback {
+  opacity: calc((var(--dp) - 0.32) / 0.3);
+  transform: scale(calc(1.16 - min(var(--dp), 1) * 0.16));
+  will-change: opacity, transform;
+}
+
+/* ---------- 31. Descent telemetry HUD + progress gauge ---------- */
+.descent__hud {
+  position: absolute;
+  z-index: 3;
+  top: calc(var(--nav-height) + var(--space-3));
+  right: clamp(1rem, 3vw, 2.2rem);
+  text-align: right;
+  font-family: ui-monospace, "Cascadia Mono", Consolas, Menlo, monospace;
+  font-size: var(--fs-xs);
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  color: var(--accent-cyan);
+  text-shadow: 0 1px 8px rgba(6, 9, 19, 0.95);
+  display: none;
+  pointer-events: none;
+}
+html.js .descent__hud { display: block; }
+.descent__hud strong { color: var(--text-1); font-weight: 600; }
+
+.descent__gauge {
+  position: absolute;
+  z-index: 3;
+  right: clamp(1rem, 3vw, 2.2rem);
+  top: 50%;
+  height: 30vh;
+  width: 2px;
+  transform: translateY(-50%);
+  background: rgba(148, 163, 184, 0.22);
+  display: none;
+  pointer-events: none;
+}
+html.js .descent__gauge { display: block; }
+.descent__gauge::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, var(--accent-cyan), var(--accent-violet));
+  transform: scaleY(var(--dp));
+  transform-origin: 50% 0;
+}
+.descent__gauge i {
+  position: absolute; right: 10px;
+  width: max-content;
+  font-family: ui-monospace, "Cascadia Mono", Consolas, Menlo, monospace;
+  font-style: normal;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: var(--text-2);
+}
+.descent__gauge i:nth-child(1) { top: -0.4em; }
+.descent__gauge i:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.descent__gauge i:nth-child(3) { bottom: -0.4em; }
+
+@media (max-width: 760px) {
+  .descent__hud, .descent__gauge { display: none !important; }
+}
+
 /* ---------- 27. Reduced motion (planetary additions — keep after §20-26) ---------- */
 @media (prefers-reduced-motion: reduce) {
   .solar-nav__sun::after,
@@ -956,10 +1133,24 @@ body.nebula-low  .starfield::before { transform: translateY(-8vh); }
   .is-warp-origin .planet { animation: none; }
   html.js body.is-warping::before { content: none; }
   html.js body.is-arriving::after { animation: none; }
+  /* Descent hero (§29-31): static surface cover, no scrub, no frames fetched */
+  html.js .descent { height: auto; }
+  html.js .descent__sticky { position: static; height: auto; min-height: 72vh; }
+  .descent__canvas, .descent__orbit, .descent__cue,
+  .descent__hud, .descent__gauge { display: none !important; }
+  html.js .descent--frames .descent__fallback,
+  html.js .descent--stills .descent__fallback { display: block; opacity: 1; transform: none; }
+  html.js .descent__title .ls { opacity: 1; transform: none; transition: none; }
 }
 
 /* ---------- 28. Print (planetary additions) ---------- */
 @media print {
   .solar-nav, .astro-scene, .aurora { display: none; }
   body[class*="planet-"]::after { content: none; }
+  .descent { height: auto !important; }
+  .descent__sticky { position: static; height: auto; }
+  .descent__canvas, .descent__orbit, .descent__fallback,
+  .descent__cue, .descent__hud, .descent__gauge { display: none; }
+  .descent__overlay { position: static; background: none; }
+  .descent__title .ls { opacity: 1; transform: none; }
 }
