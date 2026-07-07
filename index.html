@@ -6,39 +6,45 @@
   <title>About — Rodrigo Schmitt</title>
   <meta name="description" content="Rodrigo Schmitt — Space Systems Engineer, ML Engineer & Physicist. PhD in Aeronautics & Astronautics (Purdue, 2025). Co-Founder & CCO at Stellerian, building AI-enabled satellite navigation.">
   <link rel="canonical" href="https://rodrigo-schmitt.github.io/">
-  <link rel="icon" href="/images/astronaut.png">
+  <link rel="icon" href="/images/site/astronaut.png">
   <meta property="og:site_name" content="Rodrigo Schmitt">
   <meta property="og:title" content="About — Rodrigo Schmitt">
   <meta property="og:description" content="Space Systems Engineer, ML Engineer & Physicist. PhD in Aeronautics & Astronautics (Purdue, 2025). Co-Founder & CCO at Stellerian.">
   <meta property="og:url" content="https://rodrigo-schmitt.github.io/">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/astrorod.jpg">
+  <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/site/astrorod.jpg">
   <link rel="preload" href="/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
+  <!-- Cinematic hero type only — sanctioned Google Fonts exception (CLAUDE.md) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap">
   <script src="/js/site.js" defer></script>
+  <script src="/js/descent.js" defer></script>
 </head>
-<body>
+<body class="planet-earth">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="progress-bar" aria-hidden="true"></div>
   <div class="starfield" aria-hidden="true">
     <div class="stars stars--s"></div>
     <div class="stars stars--m"></div>
     <div class="stars stars--l"></div>
+    <div class="aurora"></div>
   </div>
 
-  <!-- ===== SITE HEADER v1 ===== -->
+  <!-- ===== SITE HEADER v2 ===== -->
   <header class="site-header">
     <div class="container site-header__inner">
       <a class="site-header__brand" href="/">Rodrigo Schmitt</a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">☰</button>
       <nav class="site-nav" id="site-nav" aria-label="Main">
         <ul>
-          <li><a href="/">About</a></li>
-          <li><a href="/pages/projects_.html">Projects</a></li>
-          <li><a href="/pages/publications-and-cv_.html">Publications &amp; CV</a></li>
-          <li><a href="/pages/book_list_.html">Book List</a></li>
-          <li><a href="/pages/movie_list_.html">Movie List</a></li>
-          <li><a href="/pages/grad-applications_.html">Grad Applications 101</a></li>
+          <li><a class="planet-link" href="/" data-planet="earth"><span class="planet planet--earth" aria-hidden="true"></span><span class="planet-link__label">Home</span></a></li>
+          <li><a class="planet-link" href="/pages/projects_.html" data-planet="moon"><span class="planet planet--moon" aria-hidden="true"></span><span class="planet-link__label">Projects</span></a></li>
+          <li><a class="planet-link" href="/pages/book_list_.html" data-planet="mars"><span class="planet planet--mars" aria-hidden="true"></span><span class="planet-link__label">Book List</span></a></li>
+          <li><a class="planet-link" href="/pages/movie_list_.html" data-planet="jupiter"><span class="planet planet--jupiter" aria-hidden="true"></span><span class="planet-link__label">Movie List</span></a></li>
+          <li><a class="planet-link" href="/pages/publications-and-cv_.html" data-planet="saturn"><span class="planet planet--saturn" aria-hidden="true"></span><span class="planet-link__label">Publications &amp; CV</span></a></li>
+          <li><a class="planet-link" href="/pages/grad-applications_.html" data-planet="uranus"><span class="planet planet--uranus" aria-hidden="true"></span><span class="planet-link__label">Grad Applications 101</span></a></li>
         </ul>
       </nav>
     </div>
@@ -48,7 +54,10 @@
   <main id="main">
     <div class="container">
 
-      <section class="hero" data-reveal-group>
+      <section class="hero hero--cinematic" data-reveal-group>
+        <img class="hero__scene" src="/images/hero/astronaut_hero-1920.webp"
+             srcset="/images/hero/astronaut_hero-960.webp 960w, /images/hero/astronaut_hero-1920.webp 1920w"
+             sizes="100vw" alt="" aria-hidden="true">
         <div class="hero__layout">
           <div class="hero__text reveal">
             <p class="hero__eyebrow">Space Systems Engineer · ML Engineer · Physicist</p>
@@ -60,22 +69,66 @@
               <a class="btn" href="mailto:rodrigo.schmitt@alumni.usp.br">Contact</a>
             </div>
           </div>
-          <img class="hero__portrait reveal" src="/images/astrorod.jpg" alt="Rodrigo Schmitt in astronaut analog gear" width="165" height="200">
+          <img class="hero__portrait reveal" src="/images/site/astrorod.jpg" alt="Rodrigo Schmitt in astronaut analog gear" width="165" height="200">
         </div>
       </section>
+
+
+      <nav class="solar-nav reveal" aria-label="Planetary navigation">
+        <div class="solar-nav__field">
+          <div class="solar-nav__sun" aria-hidden="true"></div>
+          <div class="solar-nav__orbits" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <ul class="solar-nav__list">
+            <li><a class="planet-link" href="/" data-planet="earth"><img class="planet planet-photo planet--earth" src="/images/planets/nav/earth.webp" alt="" aria-hidden="true"><span class="planet-link__label">Home<small class="planet-link__sub">Earth</small></span></a></li>
+            <li><a class="planet-link" href="/pages/projects_.html" data-planet="moon"><img class="planet planet-photo planet--moon" src="/images/planets/nav/moon.webp" alt="" aria-hidden="true"><span class="planet-link__label">Projects<small class="planet-link__sub">Moon</small></span></a></li>
+            <li><a class="planet-link" href="/pages/book_list_.html" data-planet="mars"><img class="planet planet-photo planet--mars" src="/images/planets/nav/mars.webp" alt="" aria-hidden="true"><span class="planet-link__label">Book List<small class="planet-link__sub">Mars</small></span></a></li>
+            <li><a class="planet-link" href="/pages/movie_list_.html" data-planet="jupiter"><img class="planet planet-photo planet--jupiter" src="/images/planets/nav/jupiter.webp" alt="" aria-hidden="true"><span class="planet-link__label">Movie List<small class="planet-link__sub">Jupiter</small></span></a></li>
+            <li><a class="planet-link" href="/pages/publications-and-cv_.html" data-planet="saturn"><img class="planet planet-photo planet--saturn" src="/images/planets/nav/saturn.webp" alt="" aria-hidden="true"><span class="planet-link__label">Publications &amp; CV<small class="planet-link__sub">Saturn</small></span></a></li>
+            <li><a class="planet-link" href="/pages/grad-applications_.html" data-planet="uranus"><img class="planet planet-photo planet--uranus" src="/images/planets/nav/uranus.webp" alt="" aria-hidden="true"><span class="planet-link__label">Grad Applications 101<small class="planet-link__sub">Uranus</small></span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <section class="descent descent--video" data-descent="earth" style="--descent-h:350vh">
+      <div class="descent__sticky">
+        <img class="descent__fallback"
+             src="/images/planets/earth_surface-1600.webp"
+             srcset="/images/planets/earth_surface-960.webp 960w, /images/planets/earth_surface-1600.webp 1600w, /images/planets/earth_surface-2560.webp 2560w"
+             sizes="100vw"
+             alt="Night-side Earth from orbit with city lights tracing the continents">
+        <video class="descent__video" muted playsinline preload="none"
+               poster="/images/planets/earth_surface-1600.webp"
+               src="/images/videos/earth_descent.mp4" aria-hidden="true"></video>
+        <div class="descent__text" data-show="0.08" data-hide="0.40"><p>Advancing space exploration through AI, computational design, and systems engineering.</p></div>
+        <div class="descent__text" data-show="0.48" data-hide="0.78"><p>Co-Founder &amp; CCO at Stellerian &mdash; AI-enabled satellite navigation.</p></div>
+        <div class="descent__hud" aria-hidden="true">
+          <div><strong>&#9678; EARTH</strong></div>
+          <div>ALT <span data-hud="alt">412</span> KM</div>
+          <div>VEL <span data-hud="vel">7.66</span> KM/S</div>
+        </div>
+        <div class="descent__gauge" aria-hidden="true"><i>ORBIT</i><i>DESCENT</i><i>SURFACE</i></div>
+        <div class="descent__overlay">
+          <p class="descent__caption">Welcome home</p>
+          <p class="descent__title">Earth</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
 
       <section class="highlights" data-reveal-group aria-label="Highlights">
         <div class="card highlight reveal">
           <p class="highlight__label">Now</p>
-          <p><strong>Co-Founder &amp; Chief Commercial Officer</strong> at <a href="https://www.stellerian.com/" target="_blank" rel="noopener">Stellerian</a> — AI-enabled satellite navigation. <strong>$108k</strong> USAF STTR win, <strong>$220k</strong> Techstars Space Accelerator, <strong>$55M</strong> in customer LOIs.</p>
+          <p><strong>Co-Founder &amp; Chief Commercial Officer</strong> at <a href="https://www.stellerian.com/" target="_blank" rel="noopener">Stellerian</a> — AI-enabled satellite navigation. <strong>$1.8M</strong> in government contracts, <strong>$600k</strong> in private investment, <strong>$69M</strong> in customer LOIs, Techstars Space Accelerator 2025.</p>
         </div>
         <div class="card highlight reveal">
           <p class="highlight__label">Education</p>
-          <p><strong>PhD, Aeronautics &amp; Astronautics</strong>, Purdue (2025) — Ross &amp; Bilsland Fellowships. MSc Space Engineering (INPE, FAPESP fellowship). BSc Astronomy &amp; BSc Physics, University of São Paulo — #1 in class.</p>
+          <p><strong>PhD, Aeronautics &amp; Astronautics</strong>, Purdue (2025).<br><strong>MSc Space Engineering</strong>, National Institute for Space Research (2021).<br><strong>BSc Astronomy &amp; BSc Physics</strong>, University of São Paulo (2019).</p>
         </div>
         <div class="card highlight reveal">
           <p class="highlight__label">Research</p>
-          <p><strong>Generative design of space systems</strong> with Reinforcement Learning &amp; Explainable AI; computer-vision spacecraft navigation; mission architectures in the CR3BP. Co-founder of <a href="https://github.com/RocketPy-Team/RocketPy" target="_blank" rel="noopener">RocketPy</a>.</p>
+          <p><strong>Generative design of space systems</strong> with Reinforcement Learning &amp; Explainable AI.<br><strong>Computer-vision spacecraft navigation</strong> for precise rendezvous &amp; proximity operations.<br><strong>Drone-LIDAR Mars EDL research</strong> as an analog astronaut at MDRS.<br><strong>Co-founder of <a href="https://github.com/RocketPy-Team/RocketPy" target="_blank" rel="noopener">RocketPy</a></strong>, a 6-DOF rocketry simulator with thousands of users.</p>
         </div>
       </section>
 
@@ -83,7 +136,7 @@
         <h2 class="reveal">About</h2>
         <p class="reveal">Hi! I am <strong>Rodrigo Schmitt</strong>, a Space Systems Engineer, ML Engineer, and Physicist from Brazil, dedicated to advancing space exploration through <strong>AI, computational design, and systems engineering</strong>. I hold a PhD in <a href="https://engineering.purdue.edu/AAE" target="_blank" rel="noopener">Aeronautics &amp; Astronautics</a> from <a href="https://www.purdue.edu/" target="_blank" rel="noopener">Purdue University</a> (2025), where I researched AI-driven space mission design at the <a href="https://engineering.purdue.edu/SoSL" target="_blank" rel="noopener">Center of Integrated Systems in Aerospace</a> under Prof. Daniel DeLaurentis, supported by the Ross PhD Fellowship and Bilsland Dissertation Fellowship.</p>
         <p class="reveal">My doctoral research explored the generative design of space systems using <strong>Kerbal Space Program</strong> with the Realism Overhaul mod to simulate Artemis-era spacecraft and System-of-Systems mission architectures. I applied Reinforcement Learning, Explainable AI, and the Circular Restricted Three-Body Problem to novel mission concepts — producing publications in <em>Acta Astronautica</em> and <em>Aerotecnica Missili &amp; Spazio</em> (2025) and presentations at the IAC, AIAA SciTech, and IEEE Aerospace Conference. My expertise spans <a href="/pages/orbit-and-space-dynamics.html">astrodynamics</a>, <a href="/pages/design_build_test.html">hands-on hardware development</a>, and <a href="/pages/deep-learning-and-ai.html">artificial intelligence</a> for space applications.</p>
-        <p class="reveal">Today I channel that research foundation into building a company: as Co-Founder &amp; <strong>Chief Commercial Officer</strong> at <a href="https://www.stellerian.com/" target="_blank" rel="noopener">Stellerian</a>, I have drafted winning proposals (<strong>$108k USAF STTR</strong>), secured <strong>$220k</strong> through the Techstars Space Accelerator and <strong>$20k</strong> in Purdue's New Venture Challenge, and helped build <strong>$55M</strong> in strategic Letters of Intent for our AI-enabled satellite navigation subsystem. I also co-founded <a href="https://github.com/RocketPy-Team/RocketPy" target="_blank" rel="noopener">RocketPy</a>, a widely used Python rocketry simulation library with thousands of users. My hands-on field experience includes integrating <strong>Drone-LIDAR systems</strong> for Mars terrain mapping as an analog astronaut with MDRS Crew 306 at the <a href="https://mdrs.marssociety.org/" target="_blank" rel="noopener">Mars Desert Research Station</a>. Earlier, I led <a href="https://purduesearch.github.io/" target="_blank" rel="noopener">Purdue SEARCH</a>, the university's first dedicated human space exploration chapter, re-kindling analog astronaut training and fundraising $24k.</p>
+        <p class="reveal">Today I channel that research foundation into building a company: as Co-Founder &amp; <strong>Chief Commercial Officer</strong> at <a href="https://www.stellerian.com/" target="_blank" rel="noopener">Stellerian</a>, I have secured <strong>$1.8M</strong> in government contracts and <strong>$600k</strong> in private investment, helped build <strong>$69M</strong> in strategic Letters of Intent for our AI-enabled satellite navigation subsystem, and completed the Techstars Space Accelerator (2025). I also co-founded <a href="https://github.com/RocketPy-Team/RocketPy" target="_blank" rel="noopener">RocketPy</a>, a widely used Python rocketry simulation library with thousands of users. My hands-on field experience includes integrating <strong>Drone-LIDAR systems</strong> for Mars terrain mapping as an analog astronaut with MDRS Crew 306 at the <a href="https://mdrs.marssociety.org/" target="_blank" rel="noopener">Mars Desert Research Station</a>. Earlier, I led <a href="https://purduesearch.github.io/" target="_blank" rel="noopener">Purdue SEARCH</a>, the university's first dedicated human space exploration chapter, re-kindling analog astronaut training and fundraising $24k.</p>
         <h2 class="reveal">Philosophy</h2>
         <p class="reveal">I believe that a solid foundation in fundamental sciences is key to solving complex engineering challenges. My background integrates <strong>physics, mathematics, coding, and hands-on hardware development</strong> as essential tools for tackling the future of space technology.</p>
       </section>
@@ -92,19 +145,19 @@
         <h2 class="reveal">Featured Projects</h2>
         <div class="grid grid--3">
           <a class="card reveal" href="/pages/orbit-and-space-dynamics.html">
-            <div class="card__media"><img src="/images/solar-system.jpg" alt="Illustration of the solar system" loading="lazy"></div>
+            <div class="card__media"><img src="/images/site/solar-system.jpg" alt="Illustration of the solar system" loading="lazy"></div>
             <h3>Astrodynamics</h3>
             <p>Artemis-era mission design in Kerbal Space Program + Realism Overhaul, trajectory optimization, and multi-body dynamics in the CR3BP.</p>
             <ul class="chips"><li><span class="chip">CR3BP</span></li><li><span class="chip">Trajectory Design</span></li><li><span class="chip chip--cyan">Rendezvous &amp; Prox-Ops</span></li></ul>
           </a>
           <a class="card reveal" href="/pages/deep-learning-and-ai.html">
-            <div class="card__media"><img src="/images/ai.jpeg" alt="Abstract artificial intelligence visualization" loading="lazy"></div>
+            <div class="card__media"><img src="/images/site/ai.jpeg" alt="Abstract artificial intelligence visualization" loading="lazy"></div>
             <h3>Deep Learning &amp; AI</h3>
             <p>Generative design of space systems via Reinforcement Learning, Explainable AI for mission trade-offs, and computer-vision spacecraft navigation.</p>
             <ul class="chips"><li><span class="chip">Reinforcement Learning</span></li><li><span class="chip">XAI</span></li><li><span class="chip chip--cyan">Computer Vision</span></li></ul>
           </a>
           <a class="card reveal" href="/pages/design_build_test.html">
-            <div class="card__media"><img src="/images/multiphysics.jpg" alt="Multiphysics engineering simulation" loading="lazy"></div>
+            <div class="card__media"><img src="/images/site/multiphysics.jpg" alt="Multiphysics engineering simulation" loading="lazy"></div>
             <h3>Design, Build &amp; Test</h3>
             <p>RocketPy, carbon-fiber rocket structures, LIDAR-drone integration for Mars EDL research, and analog astronaut fieldwork at MDRS.</p>
             <ul class="chips"><li><span class="chip">RocketPy</span></li><li><span class="chip">LIDAR</span></li><li><span class="chip chip--cyan">Analog Astronaut</span></li></ul>

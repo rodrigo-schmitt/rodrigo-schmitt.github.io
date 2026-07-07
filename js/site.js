@@ -9,13 +9,20 @@
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---- Mark the current page in the nav ---- */
+  var planetMatch = /(?:^|\s)planet-([a-z]+)/.exec(document.body.className);
   var path = location.pathname.replace(/\/index\.html$/, "/");
-  document.querySelectorAll(".site-nav a").forEach(function (link) {
+  document.querySelectorAll(".site-nav a, .solar-nav a").forEach(function (link) {
     var href = link.getAttribute("href");
     if (href === path || (href === "/" && path === "/")) {
       link.setAttribute("aria-current", "page");
     }
   });
+  /* Pages not in the nav (project sub-pages) highlight their planet instead */
+  if (planetMatch && !document.querySelector(".site-nav a[aria-current]")) {
+    document.querySelectorAll('a[data-planet="' + planetMatch[1] + '"]').forEach(function (link) {
+      link.setAttribute("aria-current", "page");
+    });
+  }
 
   /* ---- Mobile nav toggle ---- */
   var toggle = document.querySelector(".nav-toggle");
@@ -26,6 +33,73 @@
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
     });
   }
+
+  /* ---- Pointer-following glow on the planet navs (mouse only) ---- */
+  if (window.matchMedia("(pointer: fine)").matches && !reducedMotion) {
+    document.querySelectorAll(".site-nav, .solar-nav__field").forEach(function (zone) {
+      var rect = null, raf = 0, lx = 0, ly = 0;
+      function apply() {
+        zone.style.setProperty("--mx", (lx - rect.left) + "px");
+        zone.style.setProperty("--my", (ly - rect.top) + "px");
+        raf = 0;
+      }
+      zone.addEventListener("pointerenter", function () {
+        rect = zone.getBoundingClientRect();
+        zone.style.setProperty("--glow-on", "1");
+      });
+      zone.addEventListener("pointermove", function (e) {
+        lx = e.clientX; ly = e.clientY;
+        if (!raf && rect) raf = requestAnimationFrame(apply);
+      });
+      zone.addEventListener("pointerleave", function () {
+        zone.style.setProperty("--glow-on", "0");
+        rect = null;
+      });
+    });
+  }
+
+  /* ---- Warp navigation: planet click -> animate -> navigate ---- */
+  var warping = false;
+  document.addEventListener("click", function (e) {
+    if (warping || reducedMotion) return;
+    var link = e.target.closest ? e.target.closest("a.planet-link") : null;
+    if (!link || e.defaultPrevented) return;
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (link.target && link.target !== "_self") return;
+    if (link.getAttribute("aria-current") === "page") return;
+    e.preventDefault();
+    warping = true;
+    link.classList.add("is-warp-origin");
+    document.body.classList.add("is-warping");
+    try { sessionStorage.setItem("warp-to", link.getAttribute("data-planet")); } catch (_) {}
+    setTimeout(function () { location.href = link.href; }, 800);
+    setTimeout(function () {
+      /* Escape hatch: if navigation stalled, restore the page */
+      document.body.classList.remove("is-warping");
+      link.classList.remove("is-warp-origin");
+      warping = false;
+    }, 2500);
+  });
+
+  /* ---- Arrival animation when this page was warped to ---- */
+  var warpTo = null;
+  try {
+    warpTo = sessionStorage.getItem("warp-to");
+    sessionStorage.removeItem("warp-to");
+  } catch (_) {}
+  if (planetMatch && warpTo === planetMatch[1] && !reducedMotion) {
+    document.body.classList.add("is-arriving");
+    setTimeout(function () { document.body.classList.remove("is-arriving"); }, 1200);
+  }
+
+  /* ---- bfcache/back-button: never restore a faded-out page ---- */
+  window.addEventListener("pageshow", function () {
+    warping = false;
+    document.body.classList.remove("is-warping");
+    document.querySelectorAll(".is-warp-origin").forEach(function (el) {
+      el.classList.remove("is-warp-origin");
+    });
+  });
 
   /* ---- Header blur bump + scroll progress + parallax (one rAF loop) ---- */
   var header = document.querySelector(".site-header");

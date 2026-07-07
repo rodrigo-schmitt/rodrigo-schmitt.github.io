@@ -6,39 +6,45 @@
   <title>Book List — Rodrigo Schmitt</title>
   <meta name="description" content="Rodrigo Schmitt's favorite books, pulled from his Goodreads favorites and grouped by theme: science fiction, biography, behaviorism, spirituality, futurism, productivity, fantasy, classics, and reference.">
   <link rel="canonical" href="https://rodrigo-schmitt.github.io/pages/book_list_.html">
-  <link rel="icon" href="/images/astronaut.png">
+  <link rel="icon" href="/images/site/astronaut.png">
   <meta property="og:site_name" content="Rodrigo Schmitt">
   <meta property="og:title" content="Book List — Rodrigo Schmitt">
   <meta property="og:description" content="Rodrigo Schmitt's favorite books, pulled from his Goodreads favorites and grouped by theme: science fiction, biography, behaviorism, spirituality, futurism, productivity, fantasy, classics, and reference.">
   <meta property="og:url" content="https://rodrigo-schmitt.github.io/pages/book_list_.html">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/astronaut.png">
+  <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/site/astronaut.png">
   <link rel="preload" href="/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
+  <!-- Cinematic hero type only — sanctioned Google Fonts exception (CLAUDE.md) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap">
   <script src="/js/site.js" defer></script>
+  <script src="/js/descent.js" defer></script>
 </head>
-<body class="nebula-left">
+<body class="nebula-left planet-mars has-descent">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="progress-bar" aria-hidden="true"></div>
   <div class="starfield" aria-hidden="true">
     <div class="stars stars--s"></div>
     <div class="stars stars--m"></div>
     <div class="stars stars--l"></div>
+    <div class="aurora"></div>
   </div>
 
-  <!-- ===== SITE HEADER v1 ===== -->
+  <!-- ===== SITE HEADER v2 ===== -->
   <header class="site-header">
     <div class="container site-header__inner">
       <a class="site-header__brand" href="/">Rodrigo Schmitt</a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">☰</button>
       <nav class="site-nav" id="site-nav" aria-label="Main">
         <ul>
-          <li><a href="/">About</a></li>
-          <li><a href="/pages/projects_.html">Projects</a></li>
-          <li><a href="/pages/publications-and-cv_.html">Publications &amp; CV</a></li>
-          <li><a href="/pages/book_list_.html">Book List</a></li>
-          <li><a href="/pages/movie_list_.html">Movie List</a></li>
-          <li><a href="/pages/grad-applications_.html">Grad Applications 101</a></li>
+          <li><a class="planet-link" href="/" data-planet="earth"><span class="planet planet--earth" aria-hidden="true"></span><span class="planet-link__label">Home</span></a></li>
+          <li><a class="planet-link" href="/pages/projects_.html" data-planet="moon"><span class="planet planet--moon" aria-hidden="true"></span><span class="planet-link__label">Projects</span></a></li>
+          <li><a class="planet-link" href="/pages/book_list_.html" data-planet="mars"><span class="planet planet--mars" aria-hidden="true"></span><span class="planet-link__label">Book List</span></a></li>
+          <li><a class="planet-link" href="/pages/movie_list_.html" data-planet="jupiter"><span class="planet planet--jupiter" aria-hidden="true"></span><span class="planet-link__label">Movie List</span></a></li>
+          <li><a class="planet-link" href="/pages/publications-and-cv_.html" data-planet="saturn"><span class="planet planet--saturn" aria-hidden="true"></span><span class="planet-link__label">Publications &amp; CV</span></a></li>
+          <li><a class="planet-link" href="/pages/grad-applications_.html" data-planet="uranus"><span class="planet planet--uranus" aria-hidden="true"></span><span class="planet-link__label">Grad Applications 101</span></a></li>
         </ul>
       </nav>
     </div>
@@ -46,10 +52,35 @@
   <!-- ===== /SITE HEADER ===== -->
 
   <main id="main">
+
+    <section class="descent descent--video" data-descent="mars" style="--descent-h:350vh">
+      <div class="descent__sticky">
+        <img class="descent__fallback"
+             src="/images/planets/mars_surface-1600.webp"
+             srcset="/images/planets/mars_surface-960.webp 960w, /images/planets/mars_surface-1600.webp 1600w, /images/planets/mars_surface-2560.webp 2560w"
+             sizes="100vw"
+             alt="The rust-red Martian desert with mountain ranges fading into dusty haze">
+        <video class="descent__video" muted playsinline preload="none"
+               poster="/images/planets/mars_surface-1600.webp"
+               src="/images/videos/mars_descent.mp4" aria-hidden="true"></video>
+        <div class="descent__text" data-show="0.08" data-hide="0.40"><p>&ldquo;A mind needs books like a sword needs a whetstone, if it is to keep its edge.&rdquo;<cite>&mdash; Tyrion Lannister, Game of Thrones</cite></p></div>
+        <div class="descent__text" data-show="0.48" data-hide="0.78"><p>&ldquo;Never trust anyone who has not brought a book with them.&rdquo;<cite>&mdash; Lemony Snicket, A Series of Unfortunate Events</cite></p></div>
+        <div class="descent__hud" aria-hidden="true">
+          <div><strong>&#9678; MARS</strong></div>
+          <div>ALT <span data-hud="alt">250</span> KM</div>
+          <div>VEL <span data-hud="vel">3.55</span> KM/S</div>
+        </div>
+        <div class="descent__gauge" aria-hidden="true"><i>ORBIT</i><i>DESCENT</i><i>SURFACE</i></div>
+        <div class="descent__overlay">
+          <p class="descent__caption">Field notes from the red planet</p>
+          <h1 class="descent__title">Book List</h1>
+        </div>
+      </div>
+    </section>
+
     <div class="container">
 
       <header class="page-header">
-        <h1>Book List</h1>
         <div class="lede"><p class="" style="white-space:pre-wrap;">It is said that reading 3 books on a subject makes you smarter than 95% of the people on the topic at hand. As most popular sayings from the internet, this is probably a ballparked, unscientific estimation, but certainly reading 3 books on a subject should most definitely make you more knowledgeable in it.<br><br>As an avid reader, my interest in books comprises a great range of topics, so feel free to pick up some recommendations and also email me with some of your own:</p></div>
       </header>
 

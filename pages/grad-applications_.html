@@ -6,39 +6,44 @@
   <title>Grad Applications 101 — Rodrigo Schmitt</title>
   <meta name="description" content="A practical resource guide for undergraduates applying to graduate school, curated by Rodrigo Schmitt: general resources, contacting professors, statements of purpose, recommendation letters, TOEFL, and interviews.">
   <link rel="canonical" href="https://rodrigo-schmitt.github.io/pages/grad-applications_.html">
-  <link rel="icon" href="/images/astronaut.png">
+  <link rel="icon" href="/images/site/astronaut.png">
   <meta property="og:site_name" content="Rodrigo Schmitt">
   <meta property="og:title" content="Grad Applications 101 — Rodrigo Schmitt">
   <meta property="og:description" content="A curated resource guide for undergraduates applying to graduate school.">
   <meta property="og:url" content="https://rodrigo-schmitt.github.io/pages/grad-applications_.html">
   <meta property="og:type" content="article">
-  <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/astronaut.png">
+  <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/site/astronaut.png">
   <link rel="preload" href="/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
+  <!-- Cinematic hero type only — sanctioned Google Fonts exception (CLAUDE.md) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;700&display=swap">
   <script src="/js/site.js" defer></script>
 </head>
-<body class="nebula-low">
+<body class="nebula-low planet-uranus has-descent">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="progress-bar" aria-hidden="true"></div>
   <div class="starfield" aria-hidden="true">
     <div class="stars stars--s"></div>
     <div class="stars stars--m"></div>
     <div class="stars stars--l"></div>
+    <div class="aurora"></div>
   </div>
 
-  <!-- ===== SITE HEADER v1 ===== -->
+  <!-- ===== SITE HEADER v2 ===== -->
   <header class="site-header">
     <div class="container site-header__inner">
       <a class="site-header__brand" href="/">Rodrigo Schmitt</a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">☰</button>
       <nav class="site-nav" id="site-nav" aria-label="Main">
         <ul>
-          <li><a href="/">About</a></li>
-          <li><a href="/pages/projects_.html">Projects</a></li>
-          <li><a href="/pages/publications-and-cv_.html">Publications &amp; CV</a></li>
-          <li><a href="/pages/book_list_.html">Book List</a></li>
-          <li><a href="/pages/movie_list_.html">Movie List</a></li>
-          <li><a href="/pages/grad-applications_.html">Grad Applications 101</a></li>
+          <li><a class="planet-link" href="/" data-planet="earth"><span class="planet planet--earth" aria-hidden="true"></span><span class="planet-link__label">Home</span></a></li>
+          <li><a class="planet-link" href="/pages/projects_.html" data-planet="moon"><span class="planet planet--moon" aria-hidden="true"></span><span class="planet-link__label">Projects</span></a></li>
+          <li><a class="planet-link" href="/pages/book_list_.html" data-planet="mars"><span class="planet planet--mars" aria-hidden="true"></span><span class="planet-link__label">Book List</span></a></li>
+          <li><a class="planet-link" href="/pages/movie_list_.html" data-planet="jupiter"><span class="planet planet--jupiter" aria-hidden="true"></span><span class="planet-link__label">Movie List</span></a></li>
+          <li><a class="planet-link" href="/pages/publications-and-cv_.html" data-planet="saturn"><span class="planet planet--saturn" aria-hidden="true"></span><span class="planet-link__label">Publications &amp; CV</span></a></li>
+          <li><a class="planet-link" href="/pages/grad-applications_.html" data-planet="uranus"><span class="planet planet--uranus" aria-hidden="true"></span><span class="planet-link__label">Grad Applications 101</span></a></li>
         </ul>
       </nav>
     </div>
@@ -46,10 +51,26 @@
   <!-- ===== /SITE HEADER ===== -->
 
   <main id="main">
+
+    <section class="descent descent--still" data-descent="uranus">
+      <img class="descent__fallback"
+           src="/images/planets/uranus_surface-1600.webp"
+           srcset="/images/planets/uranus_surface-960.webp 960w, /images/planets/uranus_surface-1600.webp 1600w, /images/planets/uranus_surface-2560.webp 2560w"
+           sizes="100vw"
+           alt="Pale cyan cloud plains of Uranus under a hazy sky">
+      <div class="descent__hud" aria-hidden="true">
+        <div><strong>&#9678; URANUS</strong></div>
+        <div>SURFACE CAM</div>
+      </div>
+      <div class="descent__overlay">
+        <p class="descent__caption">Charting the outer path</p>
+        <h1 class="descent__title">Grad Applications 101</h1>
+      </div>
+    </section>
+
     <div class="container">
 
       <header class="page-header" data-reveal-group>
-        <h1 class="reveal">Grad Applications 101</h1>
         <p class="lede reveal">This section is destined to undergraduate students who also wish to apply to graduate school. I've gathered several sources of useful tips here referring to each application part; the most important ones are marked with an asterisk.</p>
       </header>
 
