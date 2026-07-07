@@ -15,9 +15,14 @@
   <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/site/astrorod.jpg">
   <link rel="preload" href="/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
+  <!-- Cinematic hero type only — sanctioned Google Fonts exception (CLAUDE.md) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
   <script src="/js/site.js" defer></script>
+  <script src="/js/descent.js" defer></script>
 </head>
-<body class="planet-saturn">
+<body class="planet-saturn has-descent">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="progress-bar" aria-hidden="true"></div>
   <div class="starfield" aria-hidden="true">
@@ -47,10 +52,34 @@
   <!-- ===== /SITE HEADER ===== -->
 
   <main id="main">
+
+    <section class="descent descent--stills" data-descent="saturn" data-mode="stills" style="--descent-h:180vh">
+      <div class="descent__sticky">
+        <img class="descent__orbit" src="/images/planets/saturn_orbit-1920.webp"
+             srcset="/images/planets/saturn_orbit-960.webp 960w, /images/planets/saturn_orbit-1920.webp 1920w"
+             sizes="100vw" alt="" aria-hidden="true">
+        <img class="descent__fallback"
+             src="/images/planets/saturn_surface-1920.webp"
+             srcset="/images/planets/saturn_surface-960.webp 960w, /images/planets/saturn_surface-1920.webp 1920w"
+             sizes="100vw"
+             alt="Saturn's rings arcing overhead above golden cloud decks">
+        <div class="descent__hud" aria-hidden="true">
+          <div><strong>&#9678; SATURN</strong></div>
+          <div>ALT <span data-hud="alt">2400</span> KM</div>
+          <div>VEL <span data-hud="vel">25.1</span> KM/S</div>
+        </div>
+        <div class="descent__gauge" aria-hidden="true"><i>ORBIT</i><i>DESCENT</i><i>SURFACE</i></div>
+        <div class="descent__overlay">
+          <p class="descent__caption">The rings of the record</p>
+          <h1 class="descent__title">Publications &amp; CV</h1>
+        </div>
+        <div class="descent__cue" aria-hidden="true"></div>
+      </div>
+    </section>
+
     <div class="container container--narrow">
 
       <header class="page-header" data-reveal-group>
-        <h1 class="reveal">Publications &amp; CV</h1>
         <p class="lede reveal">Journal and conference publications spanning space mission design, astrodynamics, artificial intelligence, and rocketry — plus my full curriculum vitae and academic transcripts.</p>
         <div class="btn-row reveal">
           <a class="btn btn--primary" href="/files/CV - Rodrigo Schmitt [L].pdf" download>Download CV (PDF)</a>

@@ -15,9 +15,14 @@
   <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/site/astronaut.png">
   <link rel="preload" href="/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
+  <!-- Cinematic hero type only — sanctioned Google Fonts exception (CLAUDE.md) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
   <script src="/js/site.js" defer></script>
+  <script src="/js/descent.js" defer></script>
 </head>
-<body class="planet-jupiter">
+<body class="planet-jupiter has-descent">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="progress-bar" aria-hidden="true"></div>
   <div class="starfield" aria-hidden="true">
@@ -47,10 +52,34 @@
   <!-- ===== /SITE HEADER ===== -->
 
   <main id="main">
+
+    <section class="descent descent--stills" data-descent="jupiter" data-mode="stills" style="--descent-h:180vh">
+      <div class="descent__sticky">
+        <img class="descent__orbit" src="/images/planets/jupiter_orbit-1920.webp"
+             srcset="/images/planets/jupiter_orbit-960.webp 960w, /images/planets/jupiter_orbit-1920.webp 1920w"
+             sizes="100vw" alt="" aria-hidden="true">
+        <img class="descent__fallback"
+             src="/images/planets/jupiter_surface-1920.webp"
+             srcset="/images/planets/jupiter_surface-960.webp 960w, /images/planets/jupiter_surface-1920.webp 1920w"
+             sizes="100vw"
+             alt="Jupiter's swirling storm clouds seen from above the cloud tops">
+        <div class="descent__hud" aria-hidden="true">
+          <div><strong>&#9678; JUPITER</strong></div>
+          <div>ALT <span data-hud="alt">4200</span> KM</div>
+          <div>VEL <span data-hud="vel">42.1</span> KM/S</div>
+        </div>
+        <div class="descent__gauge" aria-hidden="true"><i>ORBIT</i><i>DESCENT</i><i>SURFACE</i></div>
+        <div class="descent__overlay">
+          <p class="descent__caption">Stories at giant scale</p>
+          <h1 class="descent__title">Favorite Movies</h1>
+        </div>
+        <div class="descent__cue" aria-hidden="true"></div>
+      </div>
+    </section>
+
     <div class="container">
 
       <header class="page-header">
-        <h1>Favorite Movies</h1>
         <div class="lede"><p class="" style="white-space:pre-wrap;">Movies have always been one of my favorite ways to explore ideas, emotions, and worlds I would otherwise never get to visit. Below is a curated selection of my favorite films — the ones I have hearted on <a target="_blank" rel="noopener" href="https://letterboxd.com/ilovepenguins/">Letterboxd</a> — grouped by theme. If I had to name just four all-time favorites, they would be <i>Interstellar</i>, <i>Everything Everywhere All at Once</i>, <i>Captain Fantastic</i>, and <i>Soul</i>. Feel free to pick up some recommendations, and also email me with some of your own:</p></div>
       </header>
 

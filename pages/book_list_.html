@@ -15,9 +15,14 @@
   <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/site/astronaut.png">
   <link rel="preload" href="/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
+  <!-- Cinematic hero type only — sanctioned Google Fonts exception (CLAUDE.md) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
   <script src="/js/site.js" defer></script>
+  <script src="/js/descent.js" defer></script>
 </head>
-<body class="nebula-left planet-mars">
+<body class="nebula-left planet-mars has-descent">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="progress-bar" aria-hidden="true"></div>
   <div class="starfield" aria-hidden="true">
@@ -47,10 +52,32 @@
   <!-- ===== /SITE HEADER ===== -->
 
   <main id="main">
+
+    <section class="descent descent--frames" data-descent="mars" data-frames="90" style="--descent-h:300vh">
+      <div class="descent__sticky">
+        <canvas class="descent__canvas" aria-hidden="true"></canvas>
+        <img class="descent__fallback"
+             src="/images/planets/mars_surface-1920.webp"
+             srcset="/images/planets/mars_surface-960.webp 960w, /images/planets/mars_surface-1920.webp 1920w"
+             sizes="100vw" loading="lazy"
+             alt="The rust-red Martian desert with mountain ranges fading into dusty haze">
+        <div class="descent__hud" aria-hidden="true">
+          <div><strong>&#9678; MARS</strong></div>
+          <div>ALT <span data-hud="alt">250</span> KM</div>
+          <div>VEL <span data-hud="vel">3.55</span> KM/S</div>
+        </div>
+        <div class="descent__gauge" aria-hidden="true"><i>ORBIT</i><i>DESCENT</i><i>SURFACE</i></div>
+        <div class="descent__overlay">
+          <p class="descent__caption">Field notes from the red planet</p>
+          <h1 class="descent__title">Book List</h1>
+        </div>
+        <div class="descent__cue" aria-hidden="true"></div>
+      </div>
+    </section>
+
     <div class="container">
 
       <header class="page-header">
-        <h1>Book List</h1>
         <div class="lede"><p class="" style="white-space:pre-wrap;">It is said that reading 3 books on a subject makes you smarter than 95% of the people on the topic at hand. As most popular sayings from the internet, this is probably a ballparked, unscientific estimation, but certainly reading 3 books on a subject should most definitely make you more knowledgeable in it.<br><br>As an avid reader, my interest in books comprises a great range of topics, so feel free to pick up some recommendations and also email me with some of your own:</p></div>
       </header>
 

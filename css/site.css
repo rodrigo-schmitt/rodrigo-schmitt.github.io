@@ -1114,6 +1114,25 @@ html.js .descent__gauge { display: block; }
   .descent__hud, .descent__gauge { display: none !important; }
 }
 
+/* ---------- 32. Homepage astronaut hero ---------- */
+/* Full-bleed astronaut scene behind the hero text; the image is pre-graded
+   to the Deep Space palette and dissolves into the background via mask. */
+.hero--cinematic { position: relative; }
+.hero__scene {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 100vw; max-width: 100vw;
+  height: 145%;
+  object-fit: cover;
+  object-position: center 30%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  opacity: 0.55;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 16% 80%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 16% 80%, transparent);
+}
+
 /* ---------- 27. Reduced motion (planetary additions — keep after §20-26) ---------- */
 @media (prefers-reduced-motion: reduce) {
   .solar-nav__sun::after,
@@ -1150,7 +1169,7 @@ html.js .descent__gauge { display: block; }
   .descent { height: auto !important; }
   .descent__sticky { position: static; height: auto; }
   .descent__canvas, .descent__orbit, .descent__fallback,
-  .descent__cue, .descent__hud, .descent__gauge { display: none; }
+  .descent__cue, .descent__hud, .descent__gauge, .hero__scene { display: none; }
   .descent__overlay { position: static; background: none; }
   .descent__title .ls { opacity: 1; transform: none; }
 }

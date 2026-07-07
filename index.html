@@ -15,7 +15,12 @@
   <meta property="og:image" content="https://rodrigo-schmitt.github.io/images/site/astrorod.jpg">
   <link rel="preload" href="/fonts/space-grotesk-var-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/site.css">
+  <!-- Cinematic hero type only — sanctioned Google Fonts exception (CLAUDE.md) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap">
   <script src="/js/site.js" defer></script>
+  <script src="/js/descent.js" defer></script>
 </head>
 <body class="planet-earth">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -49,7 +54,10 @@
   <main id="main">
     <div class="container">
 
-      <section class="hero" data-reveal-group>
+      <section class="hero hero--cinematic" data-reveal-group>
+        <img class="hero__scene" src="/images/hero/astronaut_hero-1920.webp"
+             srcset="/images/hero/astronaut_hero-960.webp 960w, /images/hero/astronaut_hero-1920.webp 1920w"
+             sizes="100vw" alt="" aria-hidden="true">
         <div class="hero__layout">
           <div class="hero__text reveal">
             <p class="hero__eyebrow">Space Systems Engineer · ML Engineer · Physicist</p>
@@ -64,6 +72,32 @@
           <img class="hero__portrait reveal" src="/images/site/astrorod.jpg" alt="Rodrigo Schmitt in astronaut analog gear" width="165" height="200">
         </div>
       </section>
+
+    </div>
+
+    <section class="descent descent--frames" data-descent="earth" data-frames="90" style="--descent-h:300vh">
+      <div class="descent__sticky">
+        <canvas class="descent__canvas" aria-hidden="true"></canvas>
+        <img class="descent__fallback"
+             src="/images/planets/earth_surface-1920.webp"
+             srcset="/images/planets/earth_surface-960.webp 960w, /images/planets/earth_surface-1920.webp 1920w"
+             sizes="100vw" loading="lazy"
+             alt="Night-side Earth from orbit with city lights tracing the continents">
+        <div class="descent__hud" aria-hidden="true">
+          <div><strong>&#9678; EARTH</strong></div>
+          <div>ALT <span data-hud="alt">412</span> KM</div>
+          <div>VEL <span data-hud="vel">7.66</span> KM/S</div>
+        </div>
+        <div class="descent__gauge" aria-hidden="true"><i>ORBIT</i><i>DESCENT</i><i>SURFACE</i></div>
+        <div class="descent__overlay">
+          <p class="descent__caption">Welcome home</p>
+          <p class="descent__title">Earth</p>
+        </div>
+        <div class="descent__cue" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <div class="container">
 
       <nav class="solar-nav reveal" aria-label="Planetary navigation">
         <div class="solar-nav__field">
