@@ -71,8 +71,15 @@ covers + `nav/` circular planet sprites), `images/videos/` (web-encoded descent 
 - **Surface covers**: `/images/planets/{planet}_surface-{960,1600,2560}.webp`
   (`srcset`/`sizes=100vw`); the 1600w doubles as the video `poster`. The `.descent__fallback`
   img carries the real `alt` and is the reduced-motion / no-JS cover.
+- **Orbit covers** (video pages, §34): `/images/planets/{planet}_orbit-{960,source-width}.webp`
+  = the video's first frame (extracted from `sources/cinematic/{p}_rotating.mp4`). Under
+  JS+motion the surface fallback is hidden until `is-ready`/`is-landed` and the
+  `.descent__orbit` img covers the MP4 load instead, so the hero opens on the planet from
+  space, not the surface. Its `src`/`srcset` live in `data-src`/`data-srcset` and are
+  injected by `descent.js` `arm()` — no-JS / reduced-motion visitors fetch zero orbit bytes.
 - **Markup contract** (see `pages/projects_.html` as reference): section carries
   `data-descent="{planet}"`; children are `.descent__fallback` img, (video pages)
+  `.descent__orbit` img (empty `alt`, `data-src`/`data-srcset`), (video pages)
   `.descent__video`, `.descent__hud`, (video pages) `.descent__gauge`, `.descent__overlay`
   (caption + the page **`<h1 class="descent__title">`** — moved out of `.page-header`; home
   uses a `<p>` title to keep its hero `<h1>`). Hero subpages add body class `has-descent`
