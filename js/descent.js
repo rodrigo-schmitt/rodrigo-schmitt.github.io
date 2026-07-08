@@ -12,6 +12,9 @@
      <section class="descent descent--video" data-descent="moon" style="--descent-h:350vh">
        <div class="descent__sticky">
          <img class="descent__fallback" ...>   (surface cover, real alt)
+         <img class="descent__orbit" data-src=... data-srcset=...>
+           (first video frame; src injected here so no-JS/reduced-motion
+            visitors never fetch it — covers the hero while the MP4 loads)
          <video class="descent__video" muted playsinline preload="none" ...>
          <div class="descent__text" data-show="0.08" data-hide="0.40">...</div>
          ... HUD / gauge / overlay (caption + title) ... */
@@ -98,7 +101,14 @@
 
   /* ---- Load the video once the hero approaches the viewport ---- */
   var ready = false;
+  var orbit = section.querySelector(".descent__orbit");
   function arm() {
+    /* Show the orbital first-frame still while the MP4 downloads (it matches
+       frame 0, so the video fading in over it is seamless) */
+    if (orbit && orbit.dataset.src) {
+      if (orbit.dataset.srcset) orbit.setAttribute("srcset", orbit.dataset.srcset);
+      orbit.setAttribute("src", orbit.dataset.src);
+    }
     video.preload = "auto";
     video.addEventListener("seeked", function onFirstSeek() {
       video.removeEventListener("seeked", onFirstSeek);
