@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#171719" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f7f8" media="(prefers-color-scheme: light)">
+<meta name="description" content="Show Me The Money: a monthly briefing, risk analytics and a deploy planner for your own portfolio.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Money">
+<title>Show Me The Money</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="preload" href="vendor/fonts/public-sans-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="vendor/fonts/plex-mono-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="vendor/fonts/fonts.css">
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-mark" viewBox="0 0 32 32"><rect x="1.5" y="1.5" width="29" height="29" rx="7" fill="var(--accent)"/><path d="M8 22h5v-5h5v-5h6" fill="none" stroke="var(--primary-ink)" stroke-width="2.6" stroke-linecap="square"/></symbol>
+  <symbol id="i-briefing" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 16h7"/></symbol>
+  <symbol id="i-trends" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></symbol>
+  <symbol id="i-risk" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></symbol>
+  <symbol id="i-models" viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></symbol>
+  <symbol id="i-optimizer" viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></symbol>
+  <symbol id="i-builder" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+  <symbol id="i-deploy" viewBox="0 0 24 24"><path d="M12 21V11M12 11L5 4M12 11l7-7M5 4v5M5 4h5M19 4v5M19 4h-5"/></symbol>
+  <symbol id="i-ledger" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></symbol>
+  <symbol id="i-learn" viewBox="0 0 24 24"><path d="M3 5h6a3 3 0 013 3v12a2 2 0 00-2-2H3zM21 5h-6a3 3 0 00-3 3v12a2 2 0 012-2h7z"/></symbol>
+  <symbol id="i-pricing" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/></symbol>
+  <symbol id="i-theme" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 000 16z" fill="currentColor"/></symbol>
+  <symbol id="i-portfolio" viewBox="0 0 24 24"><path d="M12 3a9 9 0 109 9h-9z"/><path d="M15 3.5A9 9 0 0120.5 9H15z"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/></symbol>
+</svg>
+
+<div class="shell">
+  <!-- Desktop nav rail -->
+  <nav class="rail" aria-label="Primary">
+    <a href="#/briefing" class="rail-brand" title="Show Me The Money" aria-label="Show Me The Money, briefing">
+      <svg class="brand-mark" width="30" height="30" aria-hidden="true"><use href="#i-mark"/></svg>
+    </a>
+    <a href="#/briefing" data-view="briefing" class="rail-item" title="Monthly briefing">
+      <svg class="ico" aria-hidden="true"><use href="#i-briefing"/></svg><span class="rail-label">Briefing</span></a>
+    <a href="#/trends" data-view="trends" class="rail-item" title="Trends">
+      <svg class="ico" aria-hidden="true"><use href="#i-trends"/></svg><span class="rail-label">Trends</span></a>
+    <a href="#/risk" data-view="risk" class="rail-item" title="Risk analytics">
+      <svg class="ico" aria-hidden="true"><use href="#i-risk"/></svg><span class="rail-label">Risk</span></a>
+    <a href="#/models" data-view="models" class="rail-item" title="Models and signals">
+      <svg class="ico" aria-hidden="true"><use href="#i-models"/></svg><span class="rail-label">Models</span></a>
+    <a href="#/optimizer" data-view="optimizer" class="rail-item" title="Optimizer">
+      <svg class="ico" aria-hidden="true"><use href="#i-optimizer"/></svg><span class="rail-label">Optimizer</span></a>
+    <a href="#/builder" data-view="builder" class="rail-item" title="Portfolio builder: compare compositions">
+      <svg class="ico" aria-hidden="true"><use href="#i-builder"/></svg><span class="rail-label">Builder</span></a>
+    <a href="#/deploy" data-view="deploy" class="rail-item" title="Deploy planner: where a lump sum should go">
+      <svg class="ico" aria-hidden="true"><use href="#i-deploy"/></svg><span class="rail-label">Deploy</span></a>
+    <a href="#/ledger" data-view="ledger" class="rail-item" title="Ledger">
+      <svg class="ico" aria-hidden="true"><use href="#i-ledger"/></svg><span class="rail-label">Ledger</span></a>
+    <a href="#/settings" data-view="settings" class="rail-item" title="Settings">
+      <svg class="ico" aria-hidden="true"><use href="#i-settings"/></svg><span class="rail-label">Settings</span></a>
+    <a href="#/learn" data-view="learn" class="rail-item" title="Learn: models, math, accounts">
+      <svg class="ico" aria-hidden="true"><use href="#i-learn"/></svg><span class="rail-label">Learn</span></a>
+    <div class="rail-spacer"></div>
+    <a href="/pages/pricing.html#portfolio-mission-control" data-view="pricing" class="rail-item" title="Plans and pricing">
+      <svg class="ico" aria-hidden="true"><use href="#i-pricing"/></svg><span class="rail-label">Pricing</span></a>
+    <button id="theme-toggle" class="rail-item as-button" title="Switch light or dark">
+      <svg class="ico" aria-hidden="true"><use href="#i-theme"/></svg><span class="rail-label">Theme</span></button>
+  </nav>
+
+  <main class="content">
+    <header class="topbar">
+      <a href="#/briefing" class="mobile-mark" aria-label="Show Me The Money, briefing">
+        <svg width="26" height="26" aria-hidden="true"><use href="#i-mark"/></svg></a>
+      <div>
+        <h1 id="page-title">Briefing</h1>
+        <div id="data-banner" class="data-banner" hidden></div>
+      </div>
+      <div class="topbar-actions">
+        <div id="compute-pill" class="compute-pill" hidden>
+          <span class="spinner"></span><span id="compute-msg">Computing…</span>
+          <span id="compute-pct"></span>
+        </div>
+        <a href="#/learn" class="help-btn" title="Learn: every model, acronym and how to customise" aria-label="Help">?</a>
+      </div>
+    </header>
+    <div id="demo-banner" class="demo-banner" hidden></div>
+    <div id="view" class="view" aria-live="polite"></div>
+    <p id="disclaimer" class="disclaimer">Education and analysis only. Not investment advice.
+      Past returns and simulations do not predict future results.</p>
+  </main>
+</div>
+
+<!-- Mobile bottom nav: five destinations, the rest under More -->
+<nav class="bottombar" aria-label="Primary mobile">
+  <a href="#/briefing" data-view="briefing"><svg class="ico" aria-hidden="true"><use href="#i-briefing"/></svg><span class="lbl">Briefing</span></a>
+  <a href="#/risk" data-view="risk" data-group="portfolio"><svg class="ico" aria-hidden="true"><use href="#i-portfolio"/></svg><span class="lbl">Portfolio</span></a>
+  <a href="#/deploy" data-view="deploy"><svg class="ico" aria-hidden="true"><use href="#i-deploy"/></svg><span class="lbl">Deploy</span></a>
+  <a href="#/ledger" data-view="ledger"><svg class="ico" aria-hidden="true"><use href="#i-ledger"/></svg><span class="lbl">Ledger</span></a>
+  <button type="button" id="more-btn" aria-haspopup="dialog" aria-controls="more-sheet"><svg class="ico" aria-hidden="true"><use href="#i-more"/></svg><span class="lbl">More</span></button>
+</nav>
+
+<dialog id="more-sheet" class="more-sheet" aria-label="More pages">
+  <div class="more-panel">
+    <div class="sheet-head"><h2>More</h2><button type="button" id="more-close">Close</button></div>
+    <a href="#/trends" data-view="trends"><svg class="ico" aria-hidden="true"><use href="#i-trends"/></svg>Trends</a>
+    <a href="#/models" data-view="models"><svg class="ico" aria-hidden="true"><use href="#i-models"/></svg>Models and signals</a>
+    <a href="#/optimizer" data-view="optimizer"><svg class="ico" aria-hidden="true"><use href="#i-optimizer"/></svg>Optimizer</a>
+    <a href="#/builder" data-view="builder"><svg class="ico" aria-hidden="true"><use href="#i-builder"/></svg>Portfolio builder</a>
+    <a href="#/settings" data-view="settings"><svg class="ico" aria-hidden="true"><use href="#i-settings"/></svg>Settings</a>
+    <a href="#/learn" data-view="learn"><svg class="ico" aria-hidden="true"><use href="#i-learn"/></svg>Learn</a>
+    <a href="/pages/pricing.html#portfolio-mission-control" data-view="pricing"><svg class="ico" aria-hidden="true"><use href="#i-pricing"/></svg>Plans and pricing</a>
+    <button type="button" class="row-btn" id="theme-toggle-m"><svg class="ico" aria-hidden="true"><use href="#i-theme"/></svg>Switch light or dark</button>
+  </div>
+</dialog>
+
+<div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+
+<script src="vendor/plotly.min.js"></script>
+<script src="vendor/katex/katex.min.js"></script>
+<script src="js/fmt.js"></script>
+<script>window.SMTM_STATIC_DEMO = true;</script>
+<script src="js/api.js"></script>
+<script src="js/tooltip.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+<script src="js/deploy.js"></script>
+<script src="js/pricing.js"></script>
+</body>
+</html>

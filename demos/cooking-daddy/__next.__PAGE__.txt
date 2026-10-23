@@ -1,0 +1,130 @@
+1:"$Sreact.fragment"
+2:I[1784,["36","static/chunks/36-e900d4cf0dc8e02d.js","974","static/chunks/app/page-c24c0512866e9568.js"],"DemoViewer"]
+5:X
+0:{"buildId":"vm4H4EmGEkQKJPErfAJvf","data":[{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"mkt","children":[["$","header",null,{"className":"mkt-head","children":[["$","a",null,{"href":"/pages/vibe-cooking-daddy.html","className":"brand-link","children":[["$","span",null,{"className":"mark","aria-hidden":"true","children":"CD"}],"Cooking Daddy"]}],["$","nav",null,{"className":"mkt-links","aria-label":"Site","children":["$","a",null,{"href":"/pages/pricing.html#cooking-daddy","children":"Pricing"}]}],["$","a",null,{"className":"btn btn-primary","href":"/pages/pricing.html#cooking-daddy","children":"Open the app"}]]}],["$","main",null,{"children":["$","$L2",null,{"samples":[{"slug":"salmon-temaki","title":"SALMON TEMAKI","subtitle":"with Sushi Rice, Crunchy Veg & Spicy Mayo","cuisine":"Japanese","hfServings":4,"prepMinutes":20,"cookMinutes":25,"backdrop":"slate","heroPrompt":"Overhead of two salmon temaki cones on a dark slate plate: glossy sushi rice, ruby salmon batons, cucumber and scallion peeking from the nori, sesame sprinkled. Small ramekins of tamari and spicy mayo on the side, extra nori sheets stacked, chopsticks, cool natural light.","tags":[{"id":"pescatarian","label":"Pescatarian"},{"id":"high-protein","label":"High Protein"},{"id":"quick","label":"Quick"},{"id":"no-cook-protein","label":"No-Cook Protein"},{"id":"sushi-night","label":"Sushi Night"}],"spotlight":{"ingredient":"SUSHI-GRADE SALMON","blurb":"Look for salmon labeled sushi- or sashimi-grade—flash-frozen at sea for quality and safety, then thawed under refrigeration. Its rich, buttery texture shines against cool rice and crisp veg. Keep it well-chilled and slice with a very sharp knife for clean, gorgeous batons."},"tip":{"punTitle":"ROLL WITH IT","body":"Temaki are all about momentum: keep **nori sheets** crisp, **sushi rice** warm-but-not-hot, and fillings ready. Work one roll at a time so the nori stays snappy. If you like, (swap)**tuna**(/swap) or **cooked shrimp** for variety. Light, even pressure makes tidy cones."},"bustOut":{"equipment":["Medium saucepan with lid","Fine-mesh strainer","Small bowl","Large wide bowl","Rubber spatula or rice paddle","Small dry pan","Sharp knife","Cutting board","Damp kitchen towel"]},"ingredients":[{"slug":"sushi-rice","name":"Sushi Rice","amount2":0.75,"amount4":1.5,"unit":"Cup","grams2":150,"grams4":300,"pantry":false,"spicy":false,"allergens":[],"per100g":{"kcal":365,"protein":7.1,"carbs":80,"sugars":0.1,"fat":0.7,"satFat":0.2,"fibre":1.3,"sodium":0},"imagePath":"/demos/cooking-daddy/generated/ingredients/sushi-rice.webp"},{"slug":"salmon-fillet","name":"Sushi-Grade Salmon","amount2":14,"amount4":28,"unit":"oz","grams2":400,"grams4":800,"pantry":false,"spicy":false,"allergens":["Fish"],"per100g":{"kcal":208,"protein":20,"carbs":0,"sugars":0,"fat":13,"satFat":3.1,"fibre":0,"sodium":59},"imagePath":"/demos/cooking-daddy/generated/ingredients/salmon-fillet.webp"},{"slug":"nori-sheets","name":"Nori Sheets","amount2":4,"amount4":8,"unit":"","grams2":10,"grams4":20,"pantry":false,"spicy":false,"allergens":[],"per100g":{"kcal":306,"protein":41,"carbs":40,"sugars":0.4,"fat":4,"satFat":1,"fibre":7,"sodium":300},"imagePath":"/demos/cooking-daddy/generated/ingredients/nori-sheets.webp"},{"slug":"english-cucumber","name":"English Cucumber","amount2":0.5,"amount4":1,"unit":"","grams2":150,"grams4":300,"pantry":false,"spicy":false,"allergens":[],"per100g":{"kcal":15,"protein":0.7,"carbs":3.6,"sugars":1.7,"fat":0.1,"satFat":0,"fibre":0.5,"sodium":2},"imagePath":"/demos/cooking-daddy/generated/ingredients/english-cucumber.webp"},{"slug":"avocado","name":"Avocado","amount2":0.5,"amount4":1,"unit":"","grams2":75,"grams4":150,"pantry":false,"spicy":false,"allergens":[],"per100g":{"kcal":160,"protein":2,"carbs":9,"sugars":0.7,"fat":15,"satFat":2.1,"fibre":7,"sodium":7},"imagePath":"/demos/cooking-daddy/generated/ingredients/avocado.webp"},{"slug":"scallions","name":"Scallions","amount2":1,"amount4":2,"unit":"","grams2":15,"grams4":30,"pantry":false,"spicy":false,"allergens":[],"per100g":{"kcal":32,"protein":1.8,"carbs":7.3,"sugars":2.3,"fat":0.2,"satFat":0,"fibre":2.6,"sodium":16},"imagePath":"/demos/cooking-daddy/generated/ingredients/scallions.webp"},{"slug":"edamame-shelled","name":"Shelled Edamame","amount2":4,"amount4":8,"unit":"oz","grams2":113,"grams4":227,"pantry":false,"spicy":false,"allergens":["Soy"],"per100g":{"kcal":121,"protein":12,"carbs":8.9,"sugars":2.2,"fat":5.2,"satFat":0.6,"fibre":5.2,"sodium":6},"imagePath":"/demos/cooking-daddy/generated/ingredients/edamame-shelled.webp"},{"slug":"sesame-seeds","name":"Sesame Seeds","amount2":1,"amount4":2,"unit":"TBSP","grams2":9,"grams4":18,"pantry":false,"spicy":false,"allergens":["Sesame"],"per100g":{"kcal":573,"protein":17,"carbs":23,"sugars":0.3,"fat":50,"satFat":7,"fibre":12,"sodium":11},"imagePath":"/demos/cooking-daddy/generated/ingredients/sesame-seeds.webp"},{"slug":"mayonnaise","name":"Mayonnaise","amount2":2,"amount4":4,"unit":"TBSP","grams2":30,"grams4":60,"pantry":false,"spicy":false,"allergens":["Eggs"],"per100g":{"kcal":680,"protein":1,"carbs":1,"sugars":1,"fat":75,"satFat":11,"fibre":0,"sodium":730},"imagePath":"/demos/cooking-daddy/generated/ingredients/mayonnaise.webp"},{"slug":"sriracha","name":"Sriracha","amount2":1,"amount4":2,"unit":"tsp","grams2":5,"grams4":10,"pantry":false,"spicy":true,"allergens":[],"per100g":{"kcal":93,"protein":1.3,"carbs":20,"sugars":13,"fat":0.7,"satFat":0.1,"fibre":1.4,"sodium":2000},"imagePath":"/demos/cooking-daddy/generated/ingredients/sriracha.webp"},{"slug":"tamari","name":"Tamari","amount2":2,"amount4":4,"unit":"TBSP","grams2":30,"grams4":60,"pantry":false,"spicy":false,"allergens":["Soy"],"per100g":{"kcal":60,"protein":10,"carbs":5.6,"sugars":0.6,"fat":0.1,"satFat":0,"fibre":0,"sodium":5660},"imagePath":"/demos/cooking-daddy/generated/ingredients/tamari.webp"},{"slug":"rice-vinegar","name":"Rice Vinegar","amount2":2,"amount4":4,"unit":"TBSP","grams2":30,"grams4":60,"pantry":true,"spicy":false,"allergens":[],"per100g":{"kcal":18,"protein":0,"carbs":0.9,"sugars":0.4,"fat":0,"satFat":0,"fibre":0,"sodium":5},"imagePath":null},{"slug":"sugar","name":"Sugar","amount2":1,"amount4":2,"unit":"TBSP","grams2":12.5,"grams4":25,"pantry":true,"spicy":false,"allergens":[],"per100g":{"kcal":387,"protein":0,"carbs":100,"sugars":100,"fat":0,"satFat":0,"fibre":0,"sodium":0},"imagePath":null},{"slug":"kosher-salt","name":"Kosher Salt","amount2":0.5,"amount4":1,"unit":"tsp","grams2":2.5,"grams4":5,"pantry":true,"spicy":false,"allergens":[],"per100g":{"kcal":0,"protein":0,"carbs":0,"sugars":0,"fat":0,"satFat":0,"fibre":0,"sodium":38700},"imagePath":null}],"steps":[{"n":1,"title":"COOK RICE","bullets":["Rinse **3/4 Cup** **sushi rice** (green)(1 1/2 Cups for 4)(/green) in a fine-mesh strainer until water runs clear; drain 1 minute to dry.","Bring **1 Cup** water (green)(2 Cups for 4)(/green) and rinsed **sushi rice** to a boil in a saucepan. Cover, reduce heat to low, and cook 15 minutes. Remove from heat; rest 10 minutes, covered, for tender, separate grains."],"imagePrompt":"Sushi rice being rinsed in a strainer, then a lidded saucepan gently steaming on the stove.","imagePath":"/demos/cooking-daddy/generated/steps/salmon-temaki-1.webp"},{"n":2,"title":"SEASON RICE","bullets":["In a small bowl, dissolve **1 TBSP** **sugar** (green)(2 TBSP for 4)(/green) in **2 TBSP** **rice vinegar** (green)(4 TBSP for 4)(/green) with **1/4 tsp** **kosher salt** (green)(1/2 tsp for 4)(/green).","Transfer hot **sushi rice** to a wide bowl; fold in vinegar mixture with a spatula until glossy. Fan to cool 5–10 minutes, then cover with a damp towel so the rice stays supple for rolling."],"imagePrompt":"Cooked rice in a wide bowl being folded with vinegar-sugar mixture; steam rising, a hand fanning.","imagePath":"/demos/cooking-daddy/generated/steps/salmon-temaki-2.webp"},{"n":3,"title":"PREP FILLINGS","bullets":["Keep **Salmon** cold; slice **14 oz** (green)(28 oz for 4)(/green) into 1/2-inch batons with a very sharp knife. Pat dry and return to the fridge until rolling.","Cut **1/2** **cucumber** (green)(1 for 4)(/green) into matchsticks; thinly slice **1** **scallion** (green)(2 for 4)(/green); slice **1/2** **avocado** (green)(1 for 4)(/green). Thaw **4 oz** **edamame** (green)(8 oz for 4)(/green). Season lightly with **kosher salt**.","Keep seafood chilled and work clean; use a separate board for **Salmon** if preferred."],"imagePrompt":"Neatly arranged batons of salmon, cucumber matchsticks, sliced scallions, avocado slivers, and a small bowl of edamame on a cutting board.","imagePath":"/demos/cooking-daddy/generated/steps/salmon-temaki-3.webp"},{"n":4,"title":"MIX SAUCE","bullets":["Stir **2 TBSP** **mayonnaise** (green)(4 TBSP for 4)(/green) with **1 tsp** (hot)**sriracha**(/hot) (green)(2 tsp for 4)(/green) in a small bowl; add more (hot)**sriracha**(/hot) to taste.","Toast **1 TBSP** **sesame seeds** (green)(2 TBSP for 4)(/green) in a dry pan over medium until fragrant, 2–3 minutes; transfer to cool."],"imagePrompt":"Small bowl of orange-tinted spicy mayo beside a dry skillet toasting sesame seeds until golden.","imagePath":"/demos/cooking-daddy/generated/steps/salmon-temaki-4.webp"},{"n":5,"title":"SET UP","bullets":["Halve **4** **nori sheets** (green)(8 for 4)(/green) crosswise to make rectangles. Keep a damp towel over the warm **sushi rice**.","Arrange **Salmon**, veg, **edamame**, spicy **mayonnaise**, toasted **sesame seeds**, and **tamari** for dipping within reach. Keep unused **nori sheets** sealed so they stay crisp."],"imagePrompt":"A neat mise en place: halved nori sheets, bowl of rice with damp towel, trays of salmon and veg, ramekins of sauces and seeds.","imagePath":"/demos/cooking-daddy/generated/steps/salmon-temaki-5.webp"},{"n":6,"title":"ROLL & SERVE","bullets":["Place a **nori sheet** half rough-side up on your palm. Press a small mound of **sushi rice** on the left third; top with **Salmon**, **cucumber**, **edamame**, **scallion**, and a smear of spicy **mayonnaise**. Sprinkle **sesame seeds**; fold into a cone. Serve immediately with **tamari**."],"imagePrompt":"Hands forming a temaki cone: rice and fillings on a nori half, then folded into a crisp cone, sesame sprinkled, tamari nearby.","imagePath":"/demos/cooking-daddy/generated/steps/salmon-temaki-6.webp"}],"footnote":"*Fish is fully cooked when internal temperature reaches 145°.","heroPath":"/demos/cooking-daddy/generated/heroes/salmon-temaki.webp","weekCode":"WK 39-26","createdAt":"2026-09-20"},{"slug":"baja-barramundi","title":"BAJA BARRAMUNDI","subtitle":"with Yellow Rice, Salsa Fresca & Zesty Crema","cuisine":"Mexican-inspired","hfServings":4,"prepMinutes":5,"cookMinutes":25,"backdrop":"red","heroPrompt":"Crispy-skinned barramundi fillets over turmeric yellow rice, scattered with halved grape tomatoes, sliced red chilli and coriander, drizzled with white crema, in a matte cream bowl","heroPath":null,"weekCode":"WK 16-13","createdAt":"2026-09-19","tags":[{"id":"protein-rich","label":"Protein-Rich"},{"id":"quick","label":"Under 30 Min"}],"spotlight":{"ingredient":"TURMERIC","blurb":"This warming spice, related to ginger, adds a subtle peppery heat and beautiful golden hue to barramundi and rice."},"tip":{"punTitle":"FIL-LET IT BE","body":"Nonstick pan or not, we understand if you've had an incident (or two) involving fish skin, scraping, and your pan. The key to a clean release? Leave the fillets alone! Once the skin crisps up, the fish will separate from the pan on its own and be ready to flip."},"bustOut":{"equipment":["Zester","Small pot","Medium bowl","2 Small bowls","Paper towels","Large pan"]},"footnote":"*Barramundi is fully cooked when internal temperature reaches 145°.","ingredients":[{"slug":"scallions","name":"Scallions","amount2":2,"amount4":4,"unit":"","grams2":25,"grams4":50,"pantry":false,"spicy":false,"allergens":[],"per100g":{"kcal":32,"protein":1.8,"carbs":7.3,"sugars":2.3,"fat":0.2,"satFat":0,"fibre":2.6,"sodium":16},"imagePath":null},{"slug":"grape-tomatoes","name":"Grape Tomatoes","amount2":4,"amount4":8,"unit":"oz","grams2":113,"grams4":226,"pantry":false,"spicy":false,"allergens":[],"per100g":{"kcal":18,"protein":0.9,"carbs":3.9,"sugars":2.6,"fat":0.2,"satFat":0,"fibre":1.2,"sodium":5},"imagePath":null},{"slug":"cilantro","name":"Cilantro","amount2":0.25,"amount4":0.5,"unit":"oz","grams2":7,"grams4":14,"pantry":false,"spicy":false,"allergens":[],"per100g":{"kcal":23,"protein":2.1,"carbs":3.7,"sugars":0.9,"fat":0.5,"satFat":0,"fibre":2.8,"sodium":46},"imagePath":null},{"slug":"lime","name":"Lime","amount2":1,"amount4":2,"unit":"","grams2":40,"grams4":80,"pantry":false,"spicy":false,"allergens":[],"per100g":{"kcal":30,"protein":0.7,"carbs":10.5,"sugars":1.7,"fat":0.2,"satFat":0,"fibre":2.8,"sodium":2},"imagePath":null},{"slug":"chili-pepper","name":"Chili Pepper","amount2":1,"amount4":1,"unit":"","grams2":15,"grams4":15,"pantry":false,"spicy":true,"allergens":[],"per100g":{"kcal":40,"protein":1.9,"carbs":8.8,"sugars":5.3,"fat":0.4,"satFat":0,"fibre":1.5,"sodium":9},"imagePath":null},{"slug":"turmeric","name":"Turmeric","amount2":1,"amount4":2,"unit":"tsp","grams2":3,"grams4":6,"pantry":false,"spicy":false,"allergens":[],"per100g":{"kcal":312,"protein":9.7,"carbs":67,"sugars":3.2,"fat":3.3,"satFat":1.8,"fibre":22.7,"sodium":27},"imagePath":null},{"slug":"jasmine-rice","name":"Jasmine Rice","amount2":0.75,"amount4":1.5,"unit":"Cup","grams2":140,"grams4":280,"pantry":false,"spicy":false,"allergens":[],"per100g":{"kcal":360,"protein":7,"carbs":79,"sugars":0.1,"fat":0.6,"satFat":0.2,"fibre":1.3,"sodium":1},"imagePath":null},{"slug":"mushroom-stock-concentrate","name":"Mushroom Stock Concentrate","amount2":1,"amount4":2,"unit":"","grams2":10,"grams4":20,"pantry":false,"spicy":false,"allergens":[],"per100g":{"kcal":200,"protein":5,"carbs":35,"sugars":12,"fat":3,"satFat":0.5,"fibre":1,"sodium":8000},"imagePath":null},{"slug":"sour-cream","name":"Sour Cream","amount2":2,"amount4":4,"unit":"TBSP","grams2":30,"grams4":60,"pantry":false,"spicy":false,"allergens":["Milk"],"per100g":{"kcal":193,"protein":2.4,"carbs":4.6,"sugars":3.5,"fat":19.4,"satFat":11.5,"fibre":0,"sodium":46},"imagePath":null},{"slug":"cumin","name":"Cumin","amount2":1,"amount4":2,"unit":"tsp","grams2":2,"grams4":4,"pantry":false,"spicy":false,"allergens":[],"per100g":{"kcal":375,"protein":17.8,"carbs":44.2,"sugars":2.3,"fat":22.3,"satFat":1.5,"fibre":10.5,"sodium":168},"imagePath":null},{"slug":"barramundi","name":"Barramundi","amount2":10,"amount4":20,"unit":"oz","grams2":283,"grams4":566,"pantry":false,"spicy":false,"allergens":["Fish"],"per100g":{"kcal":110,"protein":20,"carbs":0,"sugars":0,"fat":3.2,"satFat":0.9,"fibre":0,"sodium":78},"imagePath":null},{"slug":"butter","name":"Butter","amount2":2,"amount4":3,"unit":"TBSP","grams2":28,"grams4":42,"pantry":true,"spicy":false,"allergens":["Milk"],"per100g":{"kcal":717,"protein":0.9,"carbs":0.1,"sugars":0.1,"fat":81,"satFat":51,"fibre":0,"sodium":11},"imagePath":null},{"slug":"cooking-oil","name":"Cooking Oil","amount2":2,"amount4":2,"unit":"tsp","grams2":9,"grams4":9,"pantry":true,"spicy":false,"allergens":[],"per100g":{"kcal":884,"protein":0,"carbs":0,"sugars":0,"fat":100,"satFat":14,"fibre":0,"sodium":0},"imagePath":null},{"slug":"kosher-salt","name":"Kosher Salt","amount2":0,"amount4":0,"unit":"","grams2":0,"grams4":0,"pantry":true,"spicy":false,"allergens":[],"per100g":{"kcal":0,"protein":0,"carbs":0,"sugars":0,"fat":0,"satFat":0,"fibre":0,"sodium":38758},"imagePath":null},{"slug":"black-pepper","name":"Black Pepper","amount2":0,"amount4":0,"unit":"","grams2":0,"grams4":0,"pantry":true,"spicy":false,"allergens":[],"per100g":{"kcal":251,"protein":10.4,"carbs":64,"sugars":0.6,"fat":3.3,"satFat":1.4,"fibre":25.3,"sodium":20},"imagePath":null}],"steps":[{"n":1,"title":"PREP","bullets":["**Wash and dry produce.**","Trim and thinly slice **scallions**, separating whites from greens. Halve **tomatoes**. Mince **cilantro**. Zest and quarter **lime**. Mince (hot)chili(/hot)."],"imagePrompt":"Chopped scallions, halved grape tomatoes, minced cilantro, lime wedges and sliced chilli arranged on a wooden board","imagePath":null},{"n":2,"title":"COOK RICE","bullets":["Melt **1 TBSP butter** in a small pot over medium-high heat. Add **half the scallion whites** and **¼ tsp turmeric** (green)(½ tsp for 4 servings)(/green); cook until fragrant, 1 minute. (green)(You'll use more turmeric later.)(/green)","Stir in **rice**, **stock concentrate**, **¾ cup water** (green)(1½ cups for 4)(/green), and a **big pinch of salt**. Bring to a boil, then cover and reduce to a low simmer. Cook until rice is tender, 15-18 minutes.","Keep covered off heat until ready to serve."],"imagePrompt":"Melted butter and turmeric swirling in a small steel pot, turning golden","imagePath":null},{"n":3,"title":"MAKE SALSA FRESCA","bullets":["While rice cooks, in a medium bowl, combine **tomatoes**, **cilantro**, **juice from half the lime**, and **remaining scallion whites**. Season with **salt** and **pepper**. If you like spicy salsa, stir in (hot)chili(/hot) to taste."],"imagePrompt":"A glass bowl of halved tomatoes and herbs being tossed with a wooden spoon","imagePath":null},{"n":4,"title":"MAKE CREMA","bullets":["In a small bowl, combine **sour cream**, a **big squeeze of lime juice**, and as much **lime zest** as you like. Stir in **water** 1 tsp at a time until mixture reaches a drizzling consistency. Season with **salt** and **pepper**."],"imagePrompt":"A small glass bowl of pale crema on a marble surface","imagePath":null},{"n":5,"title":"COOK FISH","bullets":["In a second small bowl, combine **cumin** and **¼ tsp turmeric** (green)(½ tsp for 4 servings)(/green). (green)(Be sure to measure the turmeric.)(/green)","Pat **barramundi*** dry with paper towels; season all over with **salt** and **pepper**. Season flesh sides with **spice mixture**.","Heat a **large drizzle of oil** in a large, preferably nonstick, pan over medium-high heat. Add barramundi, skin sides down, and cook until skin is crispy, 4-5 minutes. Flip and cook until fish is opaque and cooked through, 2-3 minutes more."],"imagePrompt":"Two spice-rubbed barramundi fillets searing skin-side down in a black pan","imagePath":null},{"n":6,"title":"FINISH & SERVE","bullets":["Fluff **rice** with a fork; stir in **scallion greens** and **1 TBSP butter** (green)(2 TBSP for 4 servings)(/green). Season with **salt** and **pepper**.","Divide rice between plates; top with **barramundi**. Garnish with **salsa fresca** and **crema** and serve."],"imagePrompt":"A hand garnishing the finished plate of yellow rice and fish with salsa","imagePath":null}]}]}]}]]}],null,"$L3"]}],"isPartial":"$@4","staleTime":"$5","varyParams":null},{"rsc":"$L6","isPartial":"$@7","staleTime":"$5","varyParams":null},{"rsc":"$L8","isPartial":"$@9","staleTime":"$5","varyParams":null}],"isUpgradeableISRFallback":false,"a":"$@a","rootVaryParams":null,"needsRuntimeRequest":"$@b"}
+c:I[4904,[],"OutletBoundary"]
+d:"$Sreact.suspense"
+f:I[4904,[],"ViewportBoundary"]
+10:I[4904,[],"MetadataBoundary"]
+11:I[7873,[],"IconMark"]
+:HL["/demos/cooking-daddy/_next/static/css/3eb31a9c233997c4.css","style"]
+3:["$","$Lc",null,{"children":["$","$d",null,{"name":"Next.MetadataOutlet","children":"$@e"}]}]
+6:["$","$1","h",{"children":[null,["$","$Lf",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1, viewport-fit=cover"}],["$","meta","2",{"name":"theme-color","content":"#EDEDE7"}]]}],["$","div",null,{"hidden":true,"children":["$","$L10",null,{"children":["$","$d",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Demo · Cooking Daddy"}],["$","meta","1",{"name":"description","content":"Two finished recipe cards, all three pages, with no account."}],["$","meta","2",{"name":"application-name","content":"Cooking Daddy"}],["$","meta","3",{"name":"format-detection","content":"telephone=no"}],["$","meta","4",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","5",{"name":"apple-mobile-web-app-title","content":"Cooking Daddy"}],["$","meta","6",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","link","7",{"rel":"icon","href":"/demos/cooking-daddy/icon.png?c5956c064d7da5d8","type":"image/png","sizes":"64x64"}],["$","link","8",{"rel":"apple-touch-icon","href":"/demos/cooking-daddy/apple-icon.png?97fe43adccb0e0ff","type":"image/png","sizes":"180x180"}],["$","$L11","9",{}]]}]}]}],null]}]
+12:Tc16,:root{
+--color-green: #2F6F3E;
+--color-green-dark: #2F6F3E;
+--color-green-text: #3E7A4C;
+--color-green-border: #C9D8C4;
+--color-green-wash: #EEF4EC;
+--color-ingredient: #2F6F3E;
+--color-tool: #A85D0A;
+--color-ink: #2D2D2D;
+--color-ink-soft: #454545;
+--color-ink-muted: #6B6B6B;
+--color-crimson: #C1272D;
+--color-blue: #1B75BC;
+--color-blue-wash: #EAF3FB;
+--color-paper: #FFFFFF;
+--color-app-bg: #EDEDE7;
+--color-rule: #E2E2E2;
+--color-rule-soft: #EFEFE9;
+--color-placeholder: #F0EFE9;
+--color-placeholder-ink: #6E6B60;
+--color-track: #EEEEE8;
+--color-backdrop-red: #B23B34;
+--color-backdrop-blue: #2E5C8A;
+--color-backdrop-green: #7BA05B;
+--color-backdrop-olive: #8A9A5B;
+--color-backdrop-terracotta: #C4704F;
+--color-backdrop-slate: #5A6B7B;
+--color-macro-protein: #4A7C2F;
+--color-macro-carbs: #D98A2B;
+--color-macro-fat: #3E6FA8;
+--font-stack: var(--font-plex), "IBM Plex Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+--font-condensed: var(--font-plex-condensed), "IBM Plex Sans Condensed", "Arial Narrow", sans-serif;
+--font-title-size: 32pt;
+--font-title-weight: 700;
+--font-title-spacing: -0.01em;
+--font-title-transform: none;
+--font-subtitle-size: 13pt;
+--font-subtitle-weight: 400;
+--font-subtitle-spacing: 0;
+--font-hero-bar-size: 9.5pt;
+--font-hero-bar-weight: 600;
+--font-hero-bar-spacing: 0;
+--font-hero-bar-transform: none;
+--font-bar-heading-size: 10.5pt;
+--font-bar-heading-weight: 600;
+--font-bar-heading-spacing: 0;
+--font-bar-heading-transform: none;
+--font-step-title-size: 10pt;
+--font-step-title-weight: 600;
+--font-step-title-spacing: 0;
+--font-step-title-transform: none;
+--font-body-size: 8.3pt;
+--font-body-weight: 400;
+--font-body-line-height: 1.38;
+--font-tile-name-size: 7.4pt;
+--font-tile-name-weight: 400;
+--font-tile-name-line-height: 1.25;
+--font-tile-qty-size: 7.6pt;
+--font-tile-qty-weight: 700;
+--font-allergen-size: 6.2pt;
+--font-allergen-weight: 400;
+--font-micro-size: 6pt;
+--font-micro-weight: 400;
+--page-width: 11in;
+--page-height: 8.5in;
+--page-margin: 0.34in;
+--page-gap: 0.28in;
+--layout-front-hero-width: 62%;
+--layout-front-panel-width: 38%;
+--layout-back-rail-width: 27%;
+--layout-bar-height: 0.26in;
+--layout-tile-diameter: 0.62in;
+--layout-tile-gap: 0.13in;
+--layout-step-photo-ratio: 4 / 1.85;
+--layout-border-width: 1.2px;
+--layout-box-radius: 2px;
+--layout-box-padding: 0.13in;
+--app-toolbar-width: 320px;
+--app-top-bar-height: 56px;
+--app-tab-bar-height: 60px;
+--app-radius: 10px;
+--app-frame: #EDEDE7;
+--app-surface: #FFFFFF;
+--app-raised: #F3F5F0;
+--app-active: #E2E3DB;
+--app-border: #DEDFD6;
+--app-rule: #F0F2EE;
+--app-control: #C9CFC4;
+--app-text: #131416;
+--app-muted: #5D5F60;
+--app-primary: #8CC63F;
+--app-primary-text: #17310B;
+--app-secondary: #E2E3DB;
+--app-accent: #3D7A1C;
+--app-accent-wash: #EAF4DC;
+--app-brand: #8CC63F;
+--app-brand-ink: #17310B;
+--app-on-photo: #FFFFFF;
+--app-track: #DFE3D6;
+--app-placeholder: #F0EFE9;
+--app-placeholder-ink: #9C998E;
+--app-error-bg: #FDECED;
+--app-error-text: #93231F;
+--app-notice-bg: #FFF6E0;
+--app-notice-text: #7A5712;
+--app-scrim: rgba(19, 20, 22, 0.32);
+}8:["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/demos/cooking-daddy/_next/static/css/3eb31a9c233997c4.css","precedence":"next"}]],["$","html",null,{"lang":"en","className":"__variable_eb119e __variable_c4c706","children":[["$","head",null,{"children":["$","style",null,{"dangerouslySetInnerHTML":{"__html":"$12"}}]}],"$L13"]}]]}]
+14:I[1045,[],""]
+15:I[2161,[],""]
+e:null
+13:["$","body",null,{"children":["$","$L14",null,{"parallelRouterKey":"children","template":["$","$L15",null,{}],"notFound":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],[]]}]}]
+b:true
+5:300
+5:C
+a:0
+7:"$undefined"
+9:"$undefined"
+4:"$undefined"

@@ -1177,6 +1177,145 @@ html.js .descent--video.is-landed .descent__orbit[src] {
   transition-delay: 0.4s; /* linger until the video has faded in over it */
 }
 
+/* ---------- 35. Vibe-coding lattice + project pages ---------- */
+/* Projects hub: a 2×2 lattice of square-image tiles (.card.tile), one per
+   side project, each linking to /pages/vibe-{slug}.html. Project pages reuse
+   the article layout; snapshots sit in .shot figures wrapped in a link to the
+   full-size image (no lightbox JS). Images live in /images/content/vibe/{slug}/. */
+.vibe__intro { max-width: 72ch; color: var(--text-2); }
+.lattice {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  max-width: 860px;
+  margin: var(--space-4) auto 0;
+}
+@media (max-width: 620px) { .lattice { grid-template-columns: 1fr; } }
+.tile .card__media img {
+  aspect-ratio: 1 / 1;
+  transition: transform 0.5s ease;
+}
+.tile:hover .card__media img,
+.tile:focus-visible .card__media img { transform: scale(1.04); }
+.tile h3 { font-size: var(--fs-md); margin: 0 0 var(--space-1); }
+.tile p { color: var(--text-2); font-size: var(--fs-sm); line-height: 1.6; }
+.tile__more {
+  display: inline-block; margin-top: var(--space-2);
+  font-family: var(--font-display); font-size: var(--fs-xs); font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-cyan);
+}
+
+/* Project page: stack chips + action buttons under the lede */
+.page-header .chips { margin-top: 0; }
+.page-header .btn-row { margin-bottom: 0; }
+
+/* Snapshots: click-through to the full-size image */
+figure.shot a { display: block; background-image: none; }
+figure.shot img { width: 100%; }
+figure.shot a:hover img,
+figure.shot a:focus-visible img { border-color: var(--border-strong); box-shadow: 0 0 24px var(--glow-cyan); }
+.shot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  align-items: start;
+  margin: var(--space-4) 0;
+}
+.shot-grid figure { margin: 0; }
+@media (max-width: 620px) { .shot-grid { grid-template-columns: 1fr; } }
+/* Phone captures: centred, never wider than a phone */
+figure.shot--phone img { max-width: 320px; margin: 0 auto; }
+
+/* Callout (e.g. "not a diagnosis" disclaimers) */
+.callout {
+  background: var(--panel);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-violet);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  margin: var(--space-4) 0;
+}
+.callout p:last-child { margin-bottom: 0; }
+
+/* ---------- 36. Vibe pages: five-tile lattice, pricing, legal drafts ---------- */
+/* Projects hub lattice grows to five tiles: 3 + 2 on desktop, 2 + 2 + 1 on
+   tablets, with the short last row centred (flex instead of the §35 grid). */
+.lattice {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1080px;
+}
+.lattice > .tile { flex: 0 1 calc((100% - var(--space-4)) / 2); }
+@media (min-width: 900px) { .lattice > .tile { flex-basis: calc((100% - 2 * var(--space-4)) / 3); } }
+@media (max-width: 620px) { .lattice > .tile { flex-basis: 100%; } }
+
+/* Action links that wait for hosting: visibly inert, still readable. */
+.btn.btn--soon {
+  border-style: dashed;
+  color: var(--text-2);
+  background: transparent none;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.btn__note { font-weight: 400; }
+.action-note { font-size: var(--fs-sm); color: var(--text-2); margin-top: 0; }
+.muted { color: var(--text-2); }
+.page-header .btn-row { margin-top: var(--space-3); }
+
+/* Pricing: one card per app, then wide cards for the bundle and the free app. */
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+@media (max-width: 700px) { .plan-grid { grid-template-columns: 1fr; } }
+.plan { display: flex; flex-direction: column; gap: var(--space-2); scroll-margin-top: 80px; }
+.plan:hover { transform: none; }
+.plan--wide { margin-bottom: var(--space-4); }
+.plan h3 { margin: 0; font-size: var(--fs-md); }
+.plan h3 a { color: var(--text-1); }
+.plan p { margin: 0; }
+.plan__name { color: var(--accent-cyan); font-family: var(--font-display); font-weight: 600; }
+.plan__price { color: var(--text-1); }
+.plan__amount { font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 650; font-variant-numeric: tabular-nums; }
+.plan__alt, .plan__fine { color: var(--text-2); font-size: var(--fs-sm); }
+.plan__list { margin: 0; padding-left: 1.2em; font-size: var(--fs-sm); }
+.plan__list li { margin: 0.2em 0; }
+.plan .btn { align-self: flex-start; margin-top: auto; }
+
+/* Comparison table: scrolls sideways inside its own box on narrow screens. */
+.table-scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+table.compare { width: 100%; min-width: 640px; border-collapse: collapse; font-size: var(--fs-sm); }
+table.compare th, table.compare td {
+  text-align: left; vertical-align: top;
+  padding: 0.7em 0.9em;
+  border-bottom: 1px solid var(--border);
+}
+table.compare thead th { color: var(--text-2); font-weight: 600; font-family: var(--font-display); }
+table.compare tbody tr:last-child th, table.compare tbody tr:last-child td { border-bottom: 0; }
+table.compare td { color: var(--text-2); }
+table.compare .num { text-align: right; white-space: nowrap; color: var(--text-1); font-variant-numeric: tabular-nums; }
+
+/* FAQ disclosures, styled like details.course */
+details.faq { border-bottom: 1px solid var(--border); padding: var(--space-3) 0; max-width: var(--measure); }
+details.faq summary { cursor: pointer; font-weight: 600; color: var(--text-1); }
+details.faq summary:hover { color: var(--accent-cyan); }
+details.faq p { margin: var(--space-2) 0 0; color: var(--text-2); }
+
+/* Legal drafts: amber edge so the "not yet in effect" note can't be missed. */
+.callout--draft { border-left-color: #F5B759; }
+
 /* ---------- 27. Reduced motion (planetary additions — keep after §20-26) ---------- */
 @media (prefers-reduced-motion: reduce) {
   .solar-nav__sun::after,
@@ -1204,6 +1343,10 @@ html.js .descent--video.is-landed .descent__orbit[src] {
   html.js .descent--video { height: 56vh; height: 56svh; }
   html.js .descent--video .descent__sticky { position: relative; height: 100%; }
   html.js .descent__title .ls { opacity: 1; transform: none; transition: none; }
+  /* Vibe lattice (§35): no image zoom on tile hover. */
+  .tile .card__media img { transition: none; }
+  .tile:hover .card__media img,
+  .tile:focus-visible .card__media img { transform: none; }
 }
 
 /* ---------- 28. Print (planetary additions) ---------- */

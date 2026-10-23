@@ -1,0 +1,129 @@
+1:"$Sreact.fragment"
+2:I[4904,[],"OutletBoundary"]
+3:"$Sreact.suspense"
+7:I[4904,[],"ViewportBoundary"]
+8:I[4904,[],"MetadataBoundary"]
+9:I[7873,[],"IconMark"]
+b:I[1045,[],""]
+c:I[2161,[],""]
+:HL["/demos/cooking-daddy/_next/static/css/3eb31a9c233997c4.css","style"]
+6:X
+e:X
+e:C
+f:Tc16,:root{
+--color-green: #2F6F3E;
+--color-green-dark: #2F6F3E;
+--color-green-text: #3E7A4C;
+--color-green-border: #C9D8C4;
+--color-green-wash: #EEF4EC;
+--color-ingredient: #2F6F3E;
+--color-tool: #A85D0A;
+--color-ink: #2D2D2D;
+--color-ink-soft: #454545;
+--color-ink-muted: #6B6B6B;
+--color-crimson: #C1272D;
+--color-blue: #1B75BC;
+--color-blue-wash: #EAF3FB;
+--color-paper: #FFFFFF;
+--color-app-bg: #EDEDE7;
+--color-rule: #E2E2E2;
+--color-rule-soft: #EFEFE9;
+--color-placeholder: #F0EFE9;
+--color-placeholder-ink: #6E6B60;
+--color-track: #EEEEE8;
+--color-backdrop-red: #B23B34;
+--color-backdrop-blue: #2E5C8A;
+--color-backdrop-green: #7BA05B;
+--color-backdrop-olive: #8A9A5B;
+--color-backdrop-terracotta: #C4704F;
+--color-backdrop-slate: #5A6B7B;
+--color-macro-protein: #4A7C2F;
+--color-macro-carbs: #D98A2B;
+--color-macro-fat: #3E6FA8;
+--font-stack: var(--font-plex), "IBM Plex Sans", "Segoe UI", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+--font-condensed: var(--font-plex-condensed), "IBM Plex Sans Condensed", "Arial Narrow", sans-serif;
+--font-title-size: 32pt;
+--font-title-weight: 700;
+--font-title-spacing: -0.01em;
+--font-title-transform: none;
+--font-subtitle-size: 13pt;
+--font-subtitle-weight: 400;
+--font-subtitle-spacing: 0;
+--font-hero-bar-size: 9.5pt;
+--font-hero-bar-weight: 600;
+--font-hero-bar-spacing: 0;
+--font-hero-bar-transform: none;
+--font-bar-heading-size: 10.5pt;
+--font-bar-heading-weight: 600;
+--font-bar-heading-spacing: 0;
+--font-bar-heading-transform: none;
+--font-step-title-size: 10pt;
+--font-step-title-weight: 600;
+--font-step-title-spacing: 0;
+--font-step-title-transform: none;
+--font-body-size: 8.3pt;
+--font-body-weight: 400;
+--font-body-line-height: 1.38;
+--font-tile-name-size: 7.4pt;
+--font-tile-name-weight: 400;
+--font-tile-name-line-height: 1.25;
+--font-tile-qty-size: 7.6pt;
+--font-tile-qty-weight: 700;
+--font-allergen-size: 6.2pt;
+--font-allergen-weight: 400;
+--font-micro-size: 6pt;
+--font-micro-weight: 400;
+--page-width: 11in;
+--page-height: 8.5in;
+--page-margin: 0.34in;
+--page-gap: 0.28in;
+--layout-front-hero-width: 62%;
+--layout-front-panel-width: 38%;
+--layout-back-rail-width: 27%;
+--layout-bar-height: 0.26in;
+--layout-tile-diameter: 0.62in;
+--layout-tile-gap: 0.13in;
+--layout-step-photo-ratio: 4 / 1.85;
+--layout-border-width: 1.2px;
+--layout-box-radius: 2px;
+--layout-box-padding: 0.13in;
+--app-toolbar-width: 320px;
+--app-top-bar-height: 56px;
+--app-tab-bar-height: 60px;
+--app-radius: 10px;
+--app-frame: #EDEDE7;
+--app-surface: #FFFFFF;
+--app-raised: #F3F5F0;
+--app-active: #E2E3DB;
+--app-border: #DEDFD6;
+--app-rule: #F0F2EE;
+--app-control: #C9CFC4;
+--app-text: #131416;
+--app-muted: #5D5F60;
+--app-primary: #8CC63F;
+--app-primary-text: #17310B;
+--app-secondary: #E2E3DB;
+--app-accent: #3D7A1C;
+--app-accent-wash: #EAF4DC;
+--app-brand: #8CC63F;
+--app-brand-ink: #17310B;
+--app-on-photo: #FFFFFF;
+--app-track: #DFE3D6;
+--app-placeholder: #F0EFE9;
+--app-placeholder-ink: #9C998E;
+--app-error-bg: #FDECED;
+--app-error-text: #93231F;
+--app-notice-bg: #FFF6E0;
+--app-notice-text: #7A5712;
+--app-scrim: rgba(19, 20, 22, 0.32);
+}0:{"buildId":"vm4H4EmGEkQKJPErfAJvf","data":[{"rsc":["$","$1","c",{"children":[[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":404}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"isPartial":"$@5","staleTime":"$6","varyParams":null},{"rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L7",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1, viewport-fit=cover"}],["$","meta","2",{"name":"theme-color","content":"#EDEDE7"}]]}],["$","div",null,{"hidden":true,"children":["$","$L8",null,{"children":["$","$3",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Cooking Daddy"}],["$","meta","1",{"name":"description","content":"Recipe cards sized to how you actually eat."}],["$","meta","2",{"name":"application-name","content":"Cooking Daddy"}],["$","meta","3",{"name":"format-detection","content":"telephone=no"}],["$","meta","4",{"name":"mobile-web-app-capable","content":"yes"}],["$","meta","5",{"name":"apple-mobile-web-app-title","content":"Cooking Daddy"}],["$","meta","6",{"name":"apple-mobile-web-app-status-bar-style","content":"default"}],["$","link","7",{"rel":"icon","href":"/demos/cooking-daddy/icon.png?c5956c064d7da5d8","type":"image/png","sizes":"64x64"}],["$","link","8",{"rel":"apple-touch-icon","href":"/demos/cooking-daddy/apple-icon.png?97fe43adccb0e0ff","type":"image/png","sizes":"180x180"}],["$","$L9","9",{}]]}]}]}],null]}],"isPartial":"$@a","staleTime":"$6","varyParams":null},{"rsc":["$","$1","c",{"children":[null,["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}]}]]}],"isPartial":"$@d","staleTime":"$6","varyParams":"$e"},{"rsc":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/demos/cooking-daddy/_next/static/css/3eb31a9c233997c4.css","precedence":"next"}]],["$","html",null,{"lang":"en","className":"__variable_eb119e __variable_c4c706","children":[["$","head",null,{"children":["$","style",null,{"dangerouslySetInnerHTML":{"__html":"$f"}}]}],"$L10"]}]]}],"isPartial":"$@11","staleTime":"$6","varyParams":null}],"isUpgradeableISRFallback":false,"a":"$@12","rootVaryParams":null,"needsRuntimeRequest":"$@13"}
+4:null
+10:["$","body",null,{"children":["$","$Lb",null,{"parallelRouterKey":"children","template":["$","$Lc",null,{}]}]}]
+6:300
+13:true
+6:C
+12:0
+a:"$undefined"
+d:"$undefined"
+5:"$undefined"
+11:"$undefined"

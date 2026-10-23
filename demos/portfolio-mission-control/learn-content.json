@@ -1,0 +1,317 @@
+{
+  "_meta": {
+    "sources": "GUIDE.md (audited formulas), Investment Sources Mastersheet.csv (transformed 2026-07-09)",
+    "disclaimer": "Educational reference, not tax or investment advice. Verify tax rules for your situation."
+  },
+
+  "overview": {
+    "what": "Mission Control is a quantitative decision system for one portfolio: yours. It downloads market data, fits a battery of statistical models, aggregates their signals in a fixed priority order, and tells you — every month, before DCA day — exactly how to adjust your contributions. Every number on every page carries its own explanation (hover it), every formula was verified against theory in AUDIT.md, and every threshold traces to GUIDE.md.",
+    "pipeline": [
+      {"step": "config.py + Settings overlay", "does": "your profile: tickers, target weights, monthly DCA split, risk thresholds, dates"},
+      {"step": "data_fetcher", "does": "daily prices from Yahoo Finance, cached locally, auto-refreshed when stale"},
+      {"step": "models", "does": "GARCH & EGARCH (volatility), Markov regimes, ARIMA, XGBoost ML, Monte Carlo, Fama-French — fitted per ticker, in parallel, disk-cached"},
+      {"step": "optimizer", "does": "efficient frontier, risk parity, CPPI backtest, glidepath, drawdown triggers"},
+      {"step": "signal engine", "does": "merges everything by priority: Regime > GARCH > ML (accuracy-gated) > ARIMA > Fama-French"},
+      {"step": "Mission Briefing / monthly report", "does": "this month's moves, scenario matrix, spotlight — on screen and in your inbox on the 10th"}
+    ],
+    "cadence": [
+      {"when": "Monthly (automatic, 10th @ 8am)", "what": "briefing report: refreshed data, fast models, DCA instructions"},
+      {"when": "Quarterly or after big moves", "what": "Full recompute in Settings (adds ARIMA + ML, ~2 min)"},
+      {"when": "When diversification ratio < 1.2", "what": "screener run / composition review for replacement candidates"},
+      {"when": "After any crash", "what": "open the Briefing — regime, GARCH and drawdown triggers react within a day"}
+    ]
+  },
+
+  "models": [
+    {
+      "id": "returns", "name": "Annualized Return & Volatility", "acronym": "—",
+      "topic": "ann_return",
+      "tldr": "Compound growth rate scaled to one year, and how much the ride wobbles. Compounding matters: −50% then +50% is a 25% loss, not zero.",
+      "equations": [
+        {"latex": "R_{ann} = \\Big(\\prod_{i=1}^{n}(1+r_i)\\Big)^{252/n} - 1", "caption": "compound annual return from n daily returns"},
+        {"latex": "\\sigma_{ann} = \\sigma_{daily}\\sqrt{252}", "caption": "volatility scales with the square root of time"}
+      ],
+      "how": "Computed for every holding and the whole portfolio (Risk page). Your target band: 6–10% return, 15–20% volatility; below the 5.5% car-APR hurdle, prepaying the loan wins."
+    },
+    {
+      "id": "sharpe", "name": "Sharpe & Sortino Ratios", "acronym": "SR",
+      "topic": "sharpe",
+      "tldr": "Return earned per unit of risk taken, above what T-bills pay. Sortino only counts downside wobble — you shouldn't be punished for upside surprises.",
+      "equations": [
+        {"latex": "\\text{Sharpe} = \\frac{R_p - R_f}{\\sigma_p} \\qquad \\text{Sortino} = \\frac{R_p - R_f}{\\sigma_{downside}}", "caption": "risk-free rate R_f ≈ 4.5% (SGOV proxy)"}
+      ],
+      "how": "The single most important pair of numbers on the Risk page. > 0.5 is a healthy portfolio; < 0.3 means shift toward your defensive holdings (VGIT/VTIP/SGOV)."
+    },
+    {
+      "id": "var", "name": "Value at Risk & Expected Shortfall", "acronym": "VaR / CVaR",
+      "topic": "var_hist",
+      "tldr": "VaR: on a 1-in-20 bad day, how much could you lose? CVaR: once you're past that line, how bad is it on average? VaR marks where the danger zone starts; CVaR says how deep it goes.",
+      "equations": [
+        {"latex": "\\text{VaR}_{5\\%} = -\\,Q_{0.05}(r) \\qquad \\text{CVaR}_{5\\%} = -\\,\\mathbb{E}[\\,r \\mid r \\le -\\text{VaR}\\,]", "caption": "5th percentile of daily returns; mean of everything beyond it"}
+      ],
+      "how": "CVaR is the position-sizing number: weight × CVaR = that ticker's contribution to your worst days."
+    },
+    {
+      "id": "cornish-fisher", "name": "Cornish-Fisher (Modified) VaR", "acronym": "CF VaR",
+      "topic": "cf_var",
+      "tldr": "VaR that respects your actual return distribution instead of a perfect bell curve.",
+      "analogy": "A tailor adjusting an off-the-rack suit: the normal distribution is the standard cut, and Cornish-Fisher pins it at the shoulders (skew) and lets out the seams (fat tails) until it fits your portfolio's real shape.",
+      "equations": [
+        {"latex": "z_{cf} = z + \\frac{(z^2-1)S}{6} + \\frac{(z^3-3z)(K-3)}{24} - \\frac{(2z^3-5z)S^2}{36}", "caption": "the normal quantile z bent by skewness S and kurtosis K"}
+      ],
+      "how": "Shown next to plain VaR on the Risk page. Subtlety (audit-verified): at the 5% level fat tails can make CF smaller than Gaussian VaR — the fat-tail penalty lives deeper in the tail (1%)."
+    },
+    {
+      "id": "drawdown", "name": "Drawdown & Triggers", "acronym": "DD",
+      "topic": "max_drawdown",
+      "tldr": "How far below its all-time peak your wealth sits. The framework's circuit breakers fire on it: satellites at −10% (sell half), the portfolio at −15% (de-risk fully).",
+      "equations": [
+        {"latex": "DD_t = \\frac{W_t - \\max_{s\\le t} W_s}{\\max_{s\\le t} W_s}", "caption": "wealth vs its running peak"}
+      ],
+      "how": "Live on the Optimizer page. Your portfolio's worst: −23.3% in the 2022 bear market."
+    },
+    {
+      "id": "garch", "name": "GARCH(1,1) Volatility Forecast", "acronym": "GARCH",
+      "topic": "garch_signal",
+      "tldr": "Tomorrow's volatility predicted from today's volatility and today's surprise. Volatility clusters — turbulence begets turbulence.",
+      "analogy": "Storms cluster at sea: if the water was rough today, it will more likely be rough tomorrow. GARCH measures how hard today's shock hits (α) and how long the waves take to calm back down (β).",
+      "equations": [
+        {"latex": "\\sigma^2_{t+1} = \\omega + \\alpha\\,\\varepsilon_t^2 + \\beta\\,\\sigma_t^2", "caption": "ω long-run level · α shock reaction · β persistence"}
+      ],
+      "how": "Fitted on the last year per ticker. Signal: REDUCE when forecast vol > 2× realized — historically catches crash onsets without crying wolf. REDUCE pauses that ticker's DCA into SGOV."
+    },
+    {
+      "id": "egarch", "name": "EGARCH — Asymmetric Volatility", "acronym": "EGARCH",
+      "topic": "egarch_alpha",
+      "tldr": "GARCH plus the leverage effect: bad news raises volatility more than good news of the same size.",
+      "analogy": "A market that panics faster than it celebrates: a −3% day whips up bigger waves than a +3% day. The α term measures exactly how lopsided that reaction is.",
+      "equations": [
+        {"latex": "\\log \\sigma^2_{t+1} = \\omega + \\alpha\\, g(z_t) + \\beta \\log \\sigma^2_t", "caption": "log-variance form; α < 0 ⇒ downside shocks amplify vol"}
+      ],
+      "how": "Models page. Fits that fail to converge are flagged UNSTABLE instead of showing garbage (a real 503% forecast triggered that guard). Decisions use GARCH; EGARCH is the asymmetry check."
+    },
+    {
+      "id": "regime", "name": "Markov Regime Switching", "acronym": "MRS",
+      "topic": "regime",
+      "tldr": "The market moves between hidden states — Bull, Neutral, Bear — each with its own average return and volatility. The model infers which state you're in now. Highest-priority signal in the whole framework.",
+      "analogy": "The market has moods it never announces. You can't ask it, but from how it's been behaving you can infer the mood — knowing that moods are sticky (≈85% chance tomorrow's mood equals today's).",
+      "equations": [
+        {"latex": "r_t \\mid s_t \\sim \\mathcal{N}(\\mu_{s_t},\\, \\sigma^2_{s_t}) \\qquad P_{ij} = P(s_{t+1}{=}j \\mid s_t{=}i)", "caption": "state-dependent returns; sticky transition matrix"}
+      ],
+      "how": "Fitted on 3 years per ticker + the whole portfolio. Bear on a satellite pauses its DCA; portfolio-level Bear is the strongest danger signal there is."
+    },
+    {
+      "id": "arima", "name": "ARIMA Direction Forecast", "acronym": "ARIMA",
+      "topic": "arima_signal",
+      "tldr": "A classical time-series model that extrapolates short-term return momentum and mean-reversion 5 days out. The weakest model here — barely better than a coin flip, so its actions are deliberately small.",
+      "equations": [
+        {"latex": "\\Big(1-\\sum_{i=1}^{p}\\phi_i L^i\\Big)(1-L)^d\\, r_t = \\Big(1+\\sum_{j=1}^{q}\\theta_j L^j\\Big)\\varepsilon_t", "caption": "AR(p) memory of returns · I(d) differencing · MA(q) memory of shocks; order picked by AIC"}
+      ],
+      "how": "Full recompute only. BUY/SELL beyond ±0.2% cumulative 5-day forecast fine-tunes DCA amounts — never emergency-sells."
+    },
+    {
+      "id": "ml", "name": "ML Ensemble (Walk-Forward XGBoost)", "acronym": "XGB",
+      "topic": "ml_signal",
+      "tldr": "A gradient-boosted tree classifier predicting whether each ticker beats its own median return over the next 20 trading days, from 16 technical features.",
+      "analogy": "A student graded only on exams written after their study period ended — train on the past, test on the immediate future, slide forward, repeat — with a 20-day quarantine between study and exam so no answers can leak backwards.",
+      "equations": [
+        {"latex": "y_t = \\mathbf{1}\\Big[\\textstyle\\sum_{k=1}^{20} r_{t+k} > \\tilde{m}_t\\Big]", "caption": "label: next-month return above its running median"}
+      ],
+      "how": "Full recompute only. Signals gated on out-of-fold accuracy > 55% — below that the model is coin-flipping and is ignored. The embargo gap was an audit fix (D8): accuracies are honest now."
+    },
+    {
+      "id": "montecarlo", "name": "Monte Carlo Simulation", "acronym": "GBM MC",
+      "topic": "p_beat_hurdle",
+      "tldr": "Thousands of simulated futures for your portfolio, each following your historical drift plus random shocks. Count the endings: P(loss), P(beating the car APR), P(breaching the floor).",
+      "analogy": "Living the next three years five thousand times in parallel universes and keeping score — not to predict THE future, but to see the odds spread across all of them.",
+      "equations": [
+        {"latex": "S_{t+\\Delta t} = S_t\\, e^{(\\mu - \\sigma^2/2)\\Delta t + \\sigma\\sqrt{\\Delta t}\\, Z}", "caption": "geometric Brownian motion (the app uses the audited arithmetic discretization; means agree)"}
+      ],
+      "how": "Seeded (reproducible) since the audit. Powers the Briefing's risk×horizon scenario matrix: three allocations × 1m/1y/3y. Hard tripwire: P(breach 15% floor) > 5% ⇒ cut satellites."
+    },
+    {
+      "id": "famafrench", "name": "Fama-French 3-Factor Model", "acronym": "FF3",
+      "topic": "ff_signal",
+      "tldr": "Explains each holding's return by three known exposures — market, size (SMB), value (HML). Whatever is left over is alpha: your genuine edge, if it's statistically real.",
+      "analogy": "A nutrition label for returns: how many calories came from plain market exposure, the small-cap ingredient, the value ingredient — whatever the label can't account for is the chef's secret (alpha), and most dishes have none.",
+      "equations": [
+        {"latex": "R_i - R_f = \\alpha + \\beta_1 (R_m - R_f) + \\beta_2\\, SMB + \\beta_3\\, HML + \\varepsilon", "caption": "daily OLS on Ken French's factor data"}
+      ],
+      "how": "Post-audit, a signal needs |t| > 2 AND |α| > 2%/yr — otherwise NEUTRAL (the sign of an insignificant alpha is noise). Currently only RKLB clears the bar."
+    },
+    {
+      "id": "frontier", "name": "Efficient Frontier, MSR & GMV", "acronym": "MSR / GMV",
+      "topic": "drift",
+      "tldr": "All portfolios you could build from your tickers, mapped by risk vs return. The upper edge is efficient; MSR is the max-Sharpe point, GMV the minimum-volatility point.",
+      "equations": [
+        {"latex": "\\max_{w}\\; \\frac{w^{\\top}\\mu - r_f}{\\sqrt{w^{\\top}\\Sigma w}} \\quad \\text{s.t. } \\textstyle\\sum_i w_i = 1,\\; w_i \\ge 0", "caption": "MSR: maximize Sharpe, long-only"}
+      ],
+      "how": "Optimizer page plots your plan, MSR, GMV and the Conservative/Aggressive blends on the frontier. The app never goes pure-MSR — it blends 50/50 with your plan (math optimizes the past; your weights encode the thesis)."
+    },
+    {
+      "id": "riskparity", "name": "Risk Parity (Equal Risk Contribution)", "acronym": "ERC / RP",
+      "topic": "risk_contribution",
+      "tldr": "Don't split the money equally — split the RISK equally, so no single holding dominates your fate.",
+      "analogy": "Balancing a seesaw where every kid weighs differently: heavier (more volatile) kids sit closer to the middle (smaller weights) so each contributes the same tilt.",
+      "equations": [
+        {"latex": "w_i(\\Sigma w)_i = \\frac{\\sigma_p^2}{n}\\;\\forall i \\qquad \\min_{w>0}\\; \\tfrac{1}{2}w^{\\top}\\Sigma w - \\tfrac{1}{n}\\textstyle\\sum_i \\ln w_i", "caption": "the ERC condition, solved via the convex Spinu formulation (audit fix D13)"}
+      ],
+      "how": "Cash (SGOV) is excluded — a T-bill fund makes ERC degenerate to ~94% cash. The RP column on the Optimizer page shows how a risk-balanced version of your book would look."
+    },
+    {
+      "id": "cppi", "name": "CPPI — Portfolio Insurance", "acronym": "CPPI",
+      "topic": "cppi_floor",
+      "tldr": "A rule that automatically de-risks as you approach a floor you refuse to fall through, and re-risks as your cushion grows.",
+      "analogy": "A self-tightening seatbelt: loose while you cruise (more equities), it cinches as you brake toward the floor (shifts to cash) and eases off when the road clears — and the floor itself ratchets UP as you set new highs, locking gains in.",
+      "equations": [
+        {"latex": "F_t = 0.85 \\max_{s \\le t} V_s \\qquad E_t = m\\,(V_t - F_t)", "caption": "ratcheting floor at 85% of the running peak; risky allocation = multiplier m (=3) × cushion"}
+      ],
+      "how": "Backtest on the Optimizer page: max drawdown −8.5% with CPPI vs −23.3% buy-and-hold, floor never breached. Chase can't run it automatically — in a real crash, compute your cushion and sell down to m × cushion."
+    },
+    {
+      "id": "glidepath", "name": "Glidepath DCA", "acronym": "—",
+      "topic": "glide_equity",
+      "tldr": "Equity allocation glides linearly from 85% to 60% over the 36 months to your horizon — a custom target-date fund.",
+      "equations": [
+        {"latex": "e(m) = e_0 + (e_T - e_0)\\,\\min(m/T,\\,1)", "caption": "e₀=85%, e_T=60%, T=36 months, anchored at invest_start_date (2026-07-10)"}
+      ],
+      "how": "Sets the monthly equity/bond split of your DCA. You're at month 0: 85% equity."
+    },
+    {
+      "id": "diversification", "name": "Diversification Ratio & Effective Bets", "acronym": "DR / ENB",
+      "topic": "diversification_ratio",
+      "tldr": "DR: how much risk mixing actually cancels (1.0 = none). ENB: how many independent equal-size bets your weights amount to.",
+      "equations": [
+        {"latex": "DR = \\frac{\\sum_i w_i \\sigma_i}{\\sigma_p} \\qquad ENB = \\frac{1}{\\sum_i w_i^2}", "caption": "your thresholds: DR ≥ 1.2, watch ENB drifting down"}
+      ],
+      "how": "Risk page. The 2026-07 composition review raised DR to 1.29 by replacing PPA (ρ=0.97 with ITA) with DBMF."
+    },
+    {
+      "id": "screener", "name": "Diversification Screener", "acronym": "—",
+      "topic": "div_score",
+      "tldr": "Scans 30+ ETFs across 9 asset classes for holdings that would genuinely diversify you — low correlation first, returns second.",
+      "equations": [
+        {"latex": "score = 0.5\\,(1-|\\bar{\\rho}|) + 0.3\\,\\frac{\\text{clip}(SR,-1,3)+1}{4} + 0.2\\,(1-|DD|)", "caption": "50% low correlation · 30% Sharpe · 20% shallow drawdowns"}
+      ],
+      "how": "Opt-in (downloads data). It found DBMF (score winner) and ROKT (space category) in the composition review."
+    },
+    {
+      "id": "deploy", "name": "Deploy Planner", "acronym": "—",
+      "topic": "deploy_return_range",
+      "tldr": "Compares unlike things — a fund, a flip, a rental, a private deal — by reducing each to the same outputs: a return range per year, a timeline, a risk level, how fast you can get the cash back, and how much of your time it takes.",
+      "equations": [
+        {"latex": "r = \\left(\\frac{\\text{cash back}}{\\text{cash in}}\\right)^{1/\\text{years}} - 1", "caption": "Annualizing: what makes a 6-month flip comparable to a 5-year deal"},
+        {"latex": "r_{flip} = \\left(1 + \\frac{\\text{sale}(1-c) - \\text{purchase} - \\text{rehab} - \\text{carry}}{\\text{cash in}}\\right)^{12/m} - 1", "caption": "Flip: profit on your own cash, annualized over m months"},
+        {"latex": "r_{rental} = \\frac{\\text{NOI} - \\text{debt service} + \\text{appreciation} + \\text{paydown}}{\\text{cash in}}", "caption": "Rental: first-year total return on the cash you put in"},
+        {"latex": "V_H = A\\,(1+r)^{t}\\,(1+r_{re})^{H-t}", "caption": "Value at the horizon: the deal's rate until it ends, then the reinvest rate"}
+      ],
+      "how": "Open Deploy, enter the amount, add a bucket per option. Compare on the base number, then look at how far the low case falls and how long the money is tied up. Every figure is your own assumption — the page does the arithmetic, not the forecasting."
+    }
+  ],
+
+  "glossary": [
+    {"term": "ADF", "def": "Augmented Dickey-Fuller test — checks whether a series is stationary (no trend) before ARIMA fitting.", "model": "arima"},
+    {"term": "AIC", "def": "Akaike Information Criterion — model-fit score that penalizes complexity; lower is better.", "model": "arima"},
+    {"term": "APR", "def": "Annual Percentage Rate — your 5.5% car loan; the hurdle every investment must beat.", "model": "returns"},
+    {"term": "ARIMA", "def": "AutoRegressive Integrated Moving Average — classical short-horizon forecast model.", "model": "arima"},
+    {"term": "CF", "def": "Cornish-Fisher — the skew/fat-tail correction applied to VaR.", "model": "cornish-fisher"},
+    {"term": "CPPI", "def": "Constant Proportion Portfolio Insurance — the ratcheting-floor de-risking rule.", "model": "cppi"},
+    {"term": "CVaR", "def": "Conditional VaR / Expected Shortfall — average loss on days beyond the VaR line.", "model": "var"},
+    {"term": "DCA", "def": "Dollar-Cost Averaging — investing a fixed amount monthly regardless of price.", "model": "glidepath"},
+    {"term": "DD", "def": "Drawdown — decline from the all-time peak.", "model": "drawdown"},
+    {"term": "DR", "def": "Diversification Ratio — weighted average of individual vols over portfolio vol.", "model": "diversification"},
+    {"term": "ENB", "def": "Effective Number of Bets — 1/Σw²; how many independent bets your weights equal.", "model": "diversification"},
+    {"term": "ER", "def": "Expense Ratio — a fund's annual fee, quietly deducted from returns.", "model": "screener"},
+    {"term": "ERC", "def": "Equal Risk Contribution — the risk-parity condition.", "model": "riskparity"},
+    {"term": "ETF", "def": "Exchange-Traded Fund — a basket of assets trading like a single stock."},
+    {"term": "EGARCH", "def": "Exponential GARCH — volatility model with the bad-news asymmetry term.", "model": "egarch"},
+    {"term": "FF / FF3", "def": "Fama-French 3-factor model — market, size, value decomposition of returns.", "model": "famafrench"},
+    {"term": "GARCH", "def": "Generalized AutoRegressive Conditional Heteroskedasticity — volatility clustering model.", "model": "garch"},
+    {"term": "GBM", "def": "Geometric Brownian Motion — the random-walk-with-drift process behind the Monte Carlo.", "model": "montecarlo"},
+    {"term": "GMV", "def": "Global Minimum Volatility portfolio — the least-wobbly mix of your tickers.", "model": "frontier"},
+    {"term": "HML", "def": "High-Minus-Low — the value factor: cheap stocks minus expensive ones.", "model": "famafrench"},
+    {"term": "MACD", "def": "Moving Average Convergence/Divergence — momentum oscillator (ML feature).", "model": "ml"},
+    {"term": "MC", "def": "Monte Carlo — estimating odds by simulating thousands of random futures.", "model": "montecarlo"},
+    {"term": "MLE", "def": "Maximum Likelihood Estimation — how GARCH/EGARCH/regime parameters get fitted.", "model": "garch"},
+    {"term": "MSR", "def": "Maximum Sharpe Ratio portfolio — the mathematically optimal risk/return mix (of the past).", "model": "frontier"},
+    {"term": "OLS", "def": "Ordinary Least Squares — plain linear regression, used for Fama-French.", "model": "famafrench"},
+    {"term": "OOF", "def": "Out-Of-Fold — accuracy measured only on data the ML model never trained on.", "model": "ml"},
+    {"term": "%B", "def": "Bollinger %B — where price sits inside its volatility bands (ML feature).", "model": "ml"},
+    {"term": "R²", "def": "Share of variance explained by a regression; FF R² > 0.7 means 'mostly a market bet'.", "model": "famafrench"},
+    {"term": "RP", "def": "Risk Parity — allocating so each asset contributes equal risk.", "model": "riskparity"},
+    {"term": "RSI", "def": "Relative Strength Index — overbought/oversold oscillator (ML feature).", "model": "ml"},
+    {"term": "SMA", "def": "Simple Moving Average — the 20d/50d trend lines on the Trends page.", "model": "ml"},
+    {"term": "SMB", "def": "Small-Minus-Big — the size factor: small caps minus large caps.", "model": "famafrench"},
+    {"term": "SR", "def": "Sharpe Ratio — excess return per unit of risk.", "model": "sharpe"},
+    {"term": "t-stat", "def": "Estimate divided by its uncertainty; |t| > 2 ≈ statistically real, not noise.", "model": "famafrench"},
+    {"term": "VaR", "def": "Value at Risk — the loss threshold your worst 5% of days cross.", "model": "var"},
+    {"term": "XGBoost", "def": "Extreme Gradient Boosting — the tree-ensemble classifier behind the ML signals.", "model": "ml"}
+  ],
+
+  "accounts": {
+    "disclaimer": "Transformed from your Investment Sources Mastersheet (2026-07-09). Educational guidance, not tax advice.",
+    "wrappers": [
+      {"type": "Cash & equivalents", "wrapper": "High-yield savings", "when": "Emergency fund (3–6+ months), purchases < 1–2 yrs", "liquidity": "Very high (same day)", "fees": "Usually none", "taxes": "Interest = ordinary income", "horizon": "0–2 yrs"},
+      {"type": "Cash & equivalents", "wrapper": "CDs", "when": "Money needed on a known date; attractive fixed rates", "liquidity": "Low–medium (early-withdrawal penalty)", "fees": "Penalty if broken early", "taxes": "Interest = ordinary income", "horizon": "3 mo–5 yrs"},
+      {"type": "Cash & equivalents", "wrapper": "Money market funds", "when": "Parking cash at the broker", "liquidity": "High (T+0/T+1)", "fees": "Expense ratio", "taxes": "Mostly ordinary income; some state-efficient", "horizon": "0–2 yrs"},
+      {"type": "Bonds", "wrapper": "U.S. Treasuries / T-Bills", "when": "Stability, income, stock diversifier", "liquidity": "High", "fees": "Spreads; $0 commissions common", "taxes": "Federal yes, STATE/LOCAL EXEMPT", "horizon": "1–10+ yrs"},
+      {"type": "Bonds", "wrapper": "Investment-grade corporates", "when": "More yield than Treasuries, via diversified funds", "liquidity": "Medium (funds daily)", "fees": "Expense ratios", "taxes": "Interest = ordinary income", "horizon": "3–10+ yrs"},
+      {"type": "Bonds", "wrapper": "Municipal bonds", "when": "High tax bracket, taxable account", "liquidity": "Medium", "fees": "Expense ratios", "taxes": "Usually federal-tax-free; maybe state too", "horizon": "3–10+ yrs"},
+      {"type": "Stocks", "wrapper": "Total US market index", "when": "Long-term core growth", "liquidity": "High (intraday ETFs)", "fees": "Very low ERs", "taxes": "Qualified dividends / cap-gains rates", "horizon": "5–10+ yrs, ideally decades"},
+      {"type": "Stocks", "wrapper": "Total international index", "when": "Reduce home-country concentration", "liquidity": "High", "fees": "Low ERs; foreign withholding", "taxes": "Foreign tax credit in taxable", "horizon": "5–10+ yrs"},
+      {"type": "Stocks", "wrapper": "Small-cap value tilt", "when": "Optional factor satellite", "liquidity": "High", "fees": "Slightly higher ERs", "taxes": "Higher turnover → more distributions", "horizon": "10+ yrs"},
+      {"type": "Balanced", "wrapper": "Target-date / balanced funds", "when": "Set-and-forget retirement in IRAs/401(k)s", "liquidity": "High (daily)", "fees": "Single ER", "taxes": "Best in tax-advantaged (rebalancing distributions)", "horizon": "5–30+ yrs"},
+      {"type": "Real estate", "wrapper": "REIT index funds", "when": "Diversifier with income", "liquidity": "High", "fees": "Expense ratio", "taxes": "Dividends often ORDINARY income → shelter if possible", "horizon": "5–10+ yrs"},
+      {"type": "Real estate", "wrapper": "Direct rental property", "when": "Time, skill, local knowledge, stable finances", "liquidity": "Low (months)", "fees": "Closing, maintenance, taxes, management", "taxes": "Rental income; depreciation; 1031 exchanges", "horizon": "7–10+ yrs"},
+      {"type": "Business", "wrapper": "Start/buy a business", "when": "Strong plan + risk tolerance, after emergency fund", "liquidity": "Very low", "fees": "Startup + operating costs", "taxes": "Pass-through or corporate", "horizon": "7–10+ yrs"},
+      {"type": "Speculative", "wrapper": "Commodities / crypto / options", "when": "Only after the core plan is funded; small satellite", "liquidity": "High for listed funds", "fees": "Higher expenses & spreads", "taxes": "Complex / less favorable", "horizon": "Long-term with discipline, or not at all"},
+      {"type": "Account wrapper", "wrapper": "401(k) / 403(b) / 457", "when": "At least to the full employer match, then to the limit", "liquidity": "Low before 59½", "fees": "Fund + plan admin fees", "taxes": "Pre-tax (traditional) or tax-free growth (Roth)", "horizon": "Until retirement"},
+      {"type": "Account wrapper", "wrapper": "Traditional & Roth IRA", "when": "After the match; for control + low costs", "liquidity": "Low before 59½ (Roth contributions accessible)", "fees": "Fund ERs", "taxes": "Deductible now vs tax-free later", "horizon": "Until retirement"},
+      {"type": "Account wrapper", "wrapper": "HSA", "when": "With a high-deductible health plan", "liquidity": "Tax-free anytime for medical", "fees": "Provider-dependent", "taxes": "TRIPLE advantage: deductible, tax-deferred, tax-free medical", "horizon": "Flexible — 'stealth IRA'"},
+      {"type": "Account wrapper", "wrapper": "529 / Coverdell", "when": "Education savings", "liquidity": "Qualified expenses", "fees": "Plan + fund fees", "taxes": "Tax-free growth for education; state perks", "horizon": "Until education"},
+      {"type": "Account wrapper", "wrapper": "Taxable brokerage", "when": "After tax-advantaged space, or medium-term goals", "liquidity": "High (T+1/T+2)", "fees": "ERs + spreads", "taxes": "Dividends yearly; cap gains when sold", "horizon": "Any"}
+    ],
+    "holdings_fit": [
+      {"ticker": "VTI", "fit": "Taxable-efficient", "note": "Broad index, low turnover, qualified dividends — ideal for your Chase taxable account."},
+      {"ticker": "AVUV", "fit": "Taxable-OK", "note": "Small-cap value rebalances more than a total-market index, so turnover is higher — still an ETF, so capital-gains distributions are rare."},
+      {"ticker": "SCHD", "fit": "Taxable-OK", "note": "Dividends are mostly qualified (favorable rates), but it pays ~3.5% yield yearly — a small annual tax drag vs VTI."},
+      {"ticker": "VXUS", "fit": "Taxable-efficient", "note": "In taxable you can claim the foreign tax credit on withheld dividends — that credit is LOST inside an IRA."},
+      {"ticker": "AVDV", "fit": "Taxable-efficient", "note": "Also foreign — the same foreign tax credit applies, and it is only claimable in taxable."},
+      {"ticker": "VGIT", "fit": "Taxable-friendly", "note": "Treasury interest is exempt from STATE/local tax. Unlike BND (which it replaced), there is no corporate credit here — so the whole coupon gets that exemption."},
+      {"ticker": "VTIP", "fit": "Shelter when possible", "note": "TIPS have 'phantom income': the inflation adjustment to principal is TAXED each year even though you don't receive it until maturity. The ETF wrapper distributes it, so it is manageable — but IRA space is better if you get it."},
+      {"ticker": "SGOV", "fit": "Taxable-friendly", "note": "Treasury interest is exempt from STATE/local tax — check your state return picks that up."},
+      {"ticker": "ITA", "fit": "Taxable-OK", "note": "Sector ETF, modest yield; fine in taxable at your bracket."},
+      {"ticker": "ROKT", "fit": "Taxable-OK", "note": "Space-economy index ETF (replaced ARKX). Low yield, ETF wrapper — capital-gains distributions are rare."},
+      {"ticker": "RKLB", "fit": "Taxable-fine", "note": "Single stock, no dividend — you only owe tax when YOU sell. Losses harvestable."},
+      {"ticker": "DBMF", "fit": "Shelter when possible", "note": "Managed-futures gains distribute largely as ordinary income — tax-inefficient in taxable; prioritize for IRA space if you open one."},
+      {"ticker": "GLDM", "fit": "Watch the rate", "note": "Physical-gold ETFs are taxed as COLLECTIBLES: long-term gains are capped at 28%, not the 15% you'd pay on stocks. Holding it in an IRA sidesteps that entirely — the single best use of IRA space in this book after DBMF."}
+    ]
+  },
+
+  "customize": [
+    {
+      "title": "Your profile lives in two places",
+      "body": "config.py holds the defaults (who you are, tickers, weights, thresholds). The Settings page writes user_config.json — an overlay that wins over config.py for the analysis without touching code. Change → Save → Recompute; the whole pipeline re-runs on your new profile in seconds (model cache)."
+    },
+    {
+      "title": "The fields that actually move the needle",
+      "body": "invest_start_date anchors the glidepath (your equity % declines from 85% to 60% over 36 months from this date). monthly_investable sets the DCA pool. car_apr is the hurdle every probability is measured against — if you pay the loan off, lower it to your next-best alternative. The DCA split table is your monthly order sheet."
+    },
+    {
+      "title": "Risk tolerance presets",
+      "body": "Conservative: max_drawdown 0.15, cppi_floor 0.90, glide_end_equity 0.50 — triggers fire earlier, floor sits higher. Your current (moderate): 0.20 / 0.85 / 0.60. Aggressive: 0.25 / 0.80 / 0.70 and consider 65/25/10 split (option G2 from the composition review) for opportunistic cash."
+    },
+    {
+      "title": "Changing holdings the disciplined way",
+      "body": "Don't just swap tickers in config.py. Run 'python composition_review.py' — it evaluates candidate compositions on the identical seeded grid (diversification, Sharpe, Monte Carlo odds, expense ratios) and writes a decision memo. That's how PPA→DBMF was decided. After applying: recompute, and regenerate test goldens (documented in AUDIT.md)."
+    },
+    {
+      "title": "Reading a month's briefing in 60 seconds",
+      "body": "1) Regime badge — Bear anywhere means read carefully. 2) This month's moves — the DCA amounts are already adjusted by the signal priority (Regime > GARCH > ML > ARIMA > FF); struck-through numbers show what changed and why. 3) Scenario matrix — what more/less risk would buy you at each horizon. 4) Triggers — if PARTIAL_SELL appears, that's the one action to take the same day."
+    },
+    {
+      "title": "When numbers look wrong",
+      "body": "Hover them — the tooltip cites the GUIDE section and thresholds. Cross-check AUDIT.md: every formula's verification status lives there. Data stale? Settings → Refresh market data. Model looks off? UNSTABLE flags mean the fit didn't converge (honest) — and 118 offline tests guard the math on every change."
+    }
+  ]
+}
